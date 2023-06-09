@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
-import { Home, Menu } from 'tabler-icons-react'
+import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, DeviceLaptop } from 'tabler-icons-react'
 
 const Navbar = () => {
     const navLinks = [
         { title: 'Home', href: '#home', icon: <Home /> },
-        { title: 'About Me', href: '#about' },
-        { title: 'Projects', href: '#project' },
-        { title: 'Works', href: '#works' },
+        { title: 'About', href: '#about', icon: <ChevronsUpLeft /> },
+        { title: 'Projects', href: '#project', icon: <ThreeDCubeSphere /> },
+        { title: 'Works', href: '#project', icon: <DeviceLaptop /> },
     ]
 
     const navbarRef = useRef(null);
