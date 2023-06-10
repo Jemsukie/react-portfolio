@@ -44,7 +44,7 @@ const Card = () => {
     },
     ]
 
-    return (<div className='flex items-center mx-auto'>
+    return (<div className='flex items-center mx-auto my-4'>
         <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
                 <h2 className="card-title">Let's get in touch!</h2>
@@ -122,7 +122,7 @@ const Form = () => {
 
 
     return (
-        <form className="form-control w-full max-w-sm p-2 mx-auto" onSubmit={submitHandler} ref={form}>
+        <form className="form-control w-full max-w-sm p-2 mx-auto my-4" onSubmit={submitHandler} ref={form}>
 
             {viewToast && (<div className="toast">
                 <div className={`alert alert-${toastMessage.type}`}>
