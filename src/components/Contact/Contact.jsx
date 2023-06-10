@@ -1,4 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
 import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
 
@@ -46,20 +48,20 @@ const Card = () => {
         <div className="card w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
                 <h2 className="card-title">Let's get in touch!</h2>
-                <p>
+                <div>
                     Send me a message now
                     <ul className='my-4'>
                         <li className='flex'><Mail />Email : <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
                         <li className='flex'><Phone />Phone : <span className='text-success mx-auto'>(+63) 909 051 1103</span></li>
                     </ul>
 
-                    <div className='flex justify-center'>
+                    <span className='flex justify-center'>
                         <ul className="menu menu-horizontal bg-slate-800 rounded-box text-slate-200">
                             {links.map((l, idx) => <li key={idx} className='hover:bg-warning hover:text-slate-800'><a href={l.link} target='_blank' rel="noreferrer">{l.icon}</a></li>)}
                         </ul>
-                    </div>
+                    </span>
 
-                </p>
+                </div>
 
             </div>
         </div>
@@ -67,27 +69,105 @@ const Card = () => {
 }
 
 const Form = () => {
+    const [viewToast, setViewToast] = useState(false)
+    const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
+    const form = useRef()
+
+    useEffect(() => {
+        if (toastMessage.message !== '') toastNotify()
+    }, [toastMessage])
+
+    const validateEmail = (email) => {
+        // Regular expression pattern for validating email addresses
+        const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+        // Test the email against the pattern
+        return pattern.test(email)
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        const formRef = form.current
+        const name = formRef.name.value
+        const email = formRef.email.value
+        const message = formRef.message.value
+
+        if (name && email && message) {
+            if (validateEmail(email)) sendMail()
+            else setToastMessage({ message: 'Invalid Email!', type: 'error' })
+        } else {
+            setToastMessage({ message: 'Please complete all fields!', type: 'error' })
+        }
+    }
+
+    const toastNotify = () => {
+        setViewToast(true)
+        setTimeout(() => setViewToast(false), 5000)
+    }
+
+    const sendMail = () => {
+        const config = {
+            serviceId: process.env.REACT_APP_SERVICE_ID,
+            templateId: process.env.REACT_APP_TEMPLATE_ID,
+            publicKey: process.env.REACT_APP_PUBLIC_KEY,
+        }
+
+        emailjs.sendForm(config.serviceId, config.templateId, form.current, config.publicKey)
+            .then((_result) =>
+                setToastMessage({ message: 'Email sent!', type: 'success' }),
+                (_error) =>
+                    setToastMessage({ message: 'Email sending failed!', type: 'error' })
+            )
+    }
+
+
     return (
-        <div className="form-control w-full max-w-sm p-2 mx-auto">
+        <form className="form-control w-full max-w-sm p-2 mx-auto" onSubmit={submitHandler} ref={form}>
+
+            {viewToast && (<div className="toast">
+                <div className={`alert alert-${toastMessage.type}`}>
+                    <span>{toastMessage.message}</span>
+                </div>
+            </div>)}
+
+
             <label className="label" htmlFor="input-name">
                 <span className="label-text text-slate-200">Name</span>
             </label>
-            <input id="input-name" type="text" placeholder="Yepp! Your name" className="input input-bordered input-primary w-full max-w-sm text-neutral" />
+            <input
+                id="input-name"
+                name="name"
+                type="text"
+                placeholder="Yepp! Your name"
+                className="input input-bordered input-primary w-full max-w-sm text-neutral"
+            />
 
             <label className="label" htmlFor="input-email">
                 <span className="label-text text-slate-200">Email</span>
             </label>
-            <input id="input-email" type="email" placeholder="Then enter your email" className="input input-bordered input-primary w-full max-w-sm text-neutral" />
+            <input
+                id="input-email"
+                name="email"
+                type="email"
+                placeholder="Then enter your email"
+                className="input input-bordered input-primary w-full max-w-sm text-neutral"
+            />
 
             <label className="label" htmlFor="input-message">
                 <span className="label-text text-slate-200">Message</span>
             </label>
-            <textarea id="input-message" className="textarea textarea-info" placeholder="Hi there! Anything you wanna tell me?"></textarea>
+            <textarea
+                id="input-message"
+                name="message"
+                className="textarea textarea-info"
+                placeholder="Hi there! Anything you wanna tell me?"
+            >
+            </textarea>
 
             <div className="flex justify-center mt-2">
                 <input type="submit" className="btn btn-outline btn-primary w-1/2" />
             </div>
-        </div>)
+        </form>)
 }
 
 export default Contact
