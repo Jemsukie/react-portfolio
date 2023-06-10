@@ -1,4 +1,4 @@
-import { BrandFacebook, BrandGithub, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
+import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
 
 const Contact = () => {
 
@@ -7,7 +7,7 @@ const Contact = () => {
         <section className="bg-neutral pattern py-20" id="contact" >
             <div className="max-w-5xl px-6 mx-auto text-center flex justify-center">
                 <h2 className="text-2xl font-semibold text-slate-200 border-b-2 border-success w-fit flex">
-                    Contact Me
+                    <BrandHipchat /> Contact Me
                 </h2>
             </div>
             <div className="container w-full md:w-3/4 mx-auto w-xs mt-4 flex-col lg:flex-row-reverse rounded-tr-lg rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
@@ -16,11 +16,10 @@ const Contact = () => {
                     borderRight: '4px solid #FBAF3A'
                 }}
             >
-                {/* <div className='text-white flex justify-between p-10'> */}
                 <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center p-10">
                     <Card />
-                    <Form /></div>
-                {/* </div> */}
+                    <Form />
+                </div>
 
             </div>
 
@@ -48,7 +47,7 @@ const Card = () => {
             <div className="card-body">
                 <h2 className="card-title">Let's get in touch!</h2>
                 <p>
-                    Send me a message now.
+                    Send me a message now
                     <ul className='my-4'>
                         <li className='flex'><Mail />Email : <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
                         <li className='flex'><Phone />Phone : <span className='text-success mx-auto'>(+63) 909 051 1103</span></li>
