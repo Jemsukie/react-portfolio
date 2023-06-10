@@ -1,8 +1,9 @@
-import bg from '../../assets/hero/bg.jpg'
-import hero from '../../assets/hero/jem.png'
+import assets from '../../lib/Assets'
 import { Download } from 'tabler-icons-react'
 
 const Hero = () => {
+    const { bg, hero } = assets
+
     return (
         <div id='home' className="hero min-h-screen bg-cover bg-gradient-to-bl"
             style={{
