@@ -28,7 +28,7 @@ const SkillSet = () => {
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">
-                        <div className="tooltip tooltip-open tooltip-right tooltip-info" data-tip="Check these out!"><span>My Skills and Techs</span></div>
+                        <div className="tooltip md:tooltip-open md:tooltip-right tooltip-info" data-tip="Check these out!"><span>My Skills and Techs</span></div>
                     </h2>
                     <Techs />
                 </div>

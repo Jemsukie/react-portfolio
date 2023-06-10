@@ -18,7 +18,7 @@ const Contact = () => {
                     borderRight: '4px solid #FBAF3A'
                 }}
             >
-                <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center p-10">
+                <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center md:p-10">
                     <Card />
                     <Form />
                 </div>
@@ -45,14 +45,14 @@ const Card = () => {
     ]
 
     return (<div className='flex items-center mx-auto'>
-        <div className="card w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
+        <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
                 <h2 className="card-title">Let's get in touch!</h2>
                 <div>
                     Send me a message now
                     <ul className='my-4'>
-                        <li className='flex'><Mail />Email : <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
-                        <li className='flex'><Phone />Phone : <span className='text-success mx-auto'>(+63) 909 051 1103</span></li>
+                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Mail />Email:</div> <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
+                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Phone />Phone:</div> <span className='text-success mx-auto'>(+63) 909 051 1103</span></li>
                     </ul>
 
                     <span className='flex justify-center'>
