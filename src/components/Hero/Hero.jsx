@@ -2,7 +2,7 @@ import assets from '../../lib/Assets'
 import { Download } from 'tabler-icons-react'
 
 const Hero = () => {
-    const { bg, hero } = assets
+    const { bg, hero, cv } = assets
 
     return (
         <div id='home' className="hero min-h-screen bg-cover bg-gradient-to-bl"
@@ -21,10 +21,10 @@ const Hero = () => {
                     <p className="mt-6 text-success text-2xl">Fullstack Web Developer</p>
                     <p className="mt-2 text-white text-md">I will develop your Web Application and Websites</p>
                     <div className='mt-2'>
-                        <button className="btn btn-info">
+                        <a className="btn btn-info" href={cv} download="resume.pdf">
                             Download CV
                             <Download />
-                        </button>
+                        </a>
                     </div>
 
                 </div>

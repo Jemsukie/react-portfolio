@@ -29,6 +29,7 @@ import php from '../assets/logo/php.png'
 import graphql from '../assets/logo/graphql.png'
 import expressjs from '../assets/logo/expressjs.png'
 import nodejs from '../assets/logo/nodejs.png'
+import cv from '../assets/resume/cv.pdf'
 
 const assets = {
     img1,
@@ -61,7 +62,8 @@ const assets = {
     php,
     graphql,
     expressjs,
-    nodejs
+    nodejs,
+    cv
 }
 
 export default assets
