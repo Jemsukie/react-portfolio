@@ -4,7 +4,7 @@ import assets from "../../lib/Assets"
 
 const About = () => {
     return (
-        <section className="bg-gray-800 pattern py-20" id="about">
+        <section className="bg-slate-800 pattern py-20" id="about">
             <div className="max-w-5xl px-6 mx-auto text-center flex justify-center md:justify-start">
                 <h2 className="text-2xl font-semibold text-slate-200 border-b-2 border-warning w-fit flex">
                     <ChevronsUpLeft />
@@ -12,7 +12,7 @@ const About = () => {
                 </h2>
             </div>
 
-            <div className="flex container mx-auto my-4 flex-col lg:flex-row">
+            <div className="flex container w-full xl:w-4/5 mx-auto my-4 flex-col lg:flex-row">
                 <SkillSet />
                 <Divider up={<Par />} down={<Stat />} />
             </div>
