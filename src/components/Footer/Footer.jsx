@@ -9,7 +9,7 @@ const Footer = () => {
                 <p>Copyright ©2023 - Jemuel Lupo</p>
                 <div className="avatar mr-2">
                     <div className="w-16 rounded-full border-slate-200 border-2">
-                        <img src={hero} alt="No img" />
+                        <a href="#home"><img src={hero} alt="No img" /></a>
                     </div>
                 </div>
             </div>
