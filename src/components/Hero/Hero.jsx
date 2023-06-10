@@ -21,7 +21,7 @@ const Hero = () => {
                     <p className="mt-6 text-success text-2xl">Fullstack Web Developer</p>
                     <p className="mt-2 text-white text-md">I will develop your Web Application and Websites</p>
                     <div className='mt-2'>
-                        <a className="btn btn-info" href={cv} download="resume.pdf">
+                        <a className="btn btn-info btn-outline bg-neutral" href={cv} download="resume.pdf">
                             Download CV
                             <Download />
                         </a>
