@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, HandStop } from 'tabler-icons-react'
+import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, BrandHipchat } from 'tabler-icons-react'
 import { goToSection } from "../../lib/link-helper"
 
 const Navbar = ({ children, referenceLinks }) => {
@@ -8,7 +8,7 @@ const Navbar = ({ children, referenceLinks }) => {
         { title: 'Home', link: hero, icon: <Home /> },
         { title: 'About', link: about, icon: <ChevronsUpLeft /> },
         { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
-        { title: 'Say Hi', link: contact, icon: <HandStop /> },
+        { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
     ]
 
     const navbarRef = useRef(null)
