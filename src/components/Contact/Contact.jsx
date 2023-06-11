@@ -165,7 +165,7 @@ const Form = () => {
             </textarea>
 
             <div className="flex justify-center mt-4">
-                <input type="submit" className="btn btn-outline btn-info w-1/2" />
+                <input type="submit" className="btn btn-outline bg-neutral btn-info w-1/2" />
             </div>
         </form>)
 }

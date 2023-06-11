@@ -36,7 +36,7 @@ const WebMenu = ({ navLinks }) => {
     return (<div className="sm:inline-flex hidden p-4">
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
             {navLinks.map(n => (
-                <a key={n.title} href={n.href} className="md:mx-2 mx-px font-bold hover:border-accent"><span className={`hover:text-info flex btn ${n.title === 'Say Hi' ? 'text-info btn-outline' : 'text-slate-200'}`}>{n.icon}{n.title}</span></a>
+                <a key={n.title} href={n.href} className="md:mx-2 mx-px font-bold hover:border-accent"><span className={`hover:text-info flex btn ${n.title === 'Say Hi' ? 'bg-neutral text-info btn-outline' : 'text-slate-200'}`}>{n.icon}{n.title}</span></a>
             ))}
         </nav>
     </div>)

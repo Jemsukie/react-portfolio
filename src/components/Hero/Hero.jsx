@@ -17,13 +17,12 @@ const Hero = () => {
             >
                 <img src={hero} className="w-full max-w-xs" alt='No img' />
                 <div className='p-4'>
-                    <h1 className="text-5xl font-bold text-slate-200">Hi I'm <span className='text-warning border-b-2 border-info'>Jemuel Lupo</span></h1>
+                    <h1 className="text-5xl font-bold text-slate-200 flex flex-col md:flex-row">Hi I'm&nbsp;<span className='text-warning border-b-2 border-info w-fit'>Jemuel Lupo</span></h1>
                     <p className="mt-6 text-success text-2xl">Fullstack Web Developer</p>
                     <p className="mt-2 text-white text-md">I will develop your Web Application and Websites</p>
                     <div className='mt-2'>
                         <a className="btn btn-info btn-outline bg-neutral" href={cv} download="resume.pdf">
-                            Download CV
-                            <Download />
+                            Download CV <Download />
                         </a>
                     </div>
 
