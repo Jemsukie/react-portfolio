@@ -31,7 +31,7 @@ import expressjs from '../assets/logo/expressjs.png'
 import nodejs from '../assets/logo/nodejs.png'
 import cv from '../assets/resume/cv.pdf'
 
-const assets = {
+export const assets = {
     img1,
     img2,
     img3,
@@ -66,4 +66,54 @@ const assets = {
     cv
 }
 
-export default assets
+export const menuLinks = {
+    'frontend': {
+        title: 'Frontend Development',
+        swap: [
+            { brand: 'HTML', image: html },
+            { brand: 'CSS', image: css },
+            { brand: 'JavaScript', image: js },
+            { brand: 'Bootstrap', image: bootstrap },
+            { brand: 'Tailwind', image: tailwind },
+            { brand: 'React JS', image: reactjs },
+            { brand: 'Webflow', image: webflow },
+        ]
+    },
+    'backend': {
+        title: 'Backend Development',
+        swap: [
+            { brand: 'JavaScript', image: js },
+            { brand: 'PHP', image: php },
+            { brand: 'GraphQL', image: graphql },
+            { brand: 'Express JS', image: expressjs },
+            { brand: 'Node JS', image: nodejs },
+        ]
+    },
+    'database': {
+        title: 'Database Administration',
+        swap: [
+            { brand: 'MongoDB', image: mongodb },
+            { brand: 'Firebase', image: firebase },
+            { brand: 'PostgreSQL', image: postgresql },
+            { brand: 'CubeJS', image: cubejs },
+        ]
+    },
+    'testing': {
+        title: 'QA Testing',
+        swap: [
+            { brand: 'Playwright', image: playwright },
+            { brand: 'Jest', image: jest },
+            { brand: 'Storybook', image: storybook },
+            { brand: 'Testproject', image: testproject },
+            { brand: 'Chrome Devtools and Extensions', image: devtools },
+        ]
+    },
+    'automation': {
+        title: 'Workflow Automation',
+        swap: [
+            { brand: 'HubSpot', image: hubspot },
+            { brand: 'Zapier', image: zapier },
+            { brand: 'Temporal IO', image: temporal },
+        ]
+    },
+}

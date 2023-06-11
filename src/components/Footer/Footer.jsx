@@ -1,6 +1,7 @@
-import assets from "../../lib/Assets"
+import { assets } from "../../lib/asset-helper"
+import { goToSection } from "../../lib/link-helper"
 
-const Footer = () => {
+const Footer = ({ reference }) => {
     const { hero } = assets
 
     return (
@@ -9,7 +10,7 @@ const Footer = () => {
                 <p>Copyright ©2023 - Jemuel Lupo</p>
                 <div className="avatar mr-2">
                     <div className="w-16 rounded-full border-slate-200 border-2">
-                        <a href="#home"><img src={hero} alt="No img" /></a>
+                        <img onClick={() => goToSection(reference)} src={hero} className="cursor-pointer" alt="No img" />
                     </div>
                 </div>
             </div>

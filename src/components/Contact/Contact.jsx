@@ -2,11 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
 import emailjs from '@emailjs/browser'
 
-const Contact = () => {
-
+const Contact = ({ reference }) => {
     return (
-
-        <section className="bg-neutral pattern py-20" id="contact" >
+        <section ref={reference} className="bg-neutral pattern py-20" >
             <div className="max-w-5xl px-6 mx-auto text-center flex justify-center">
                 <h2 className="text-2xl font-semibold text-slate-200 border-b-2 border-success w-fit flex">
                     <BrandHipchat /> Contact Me

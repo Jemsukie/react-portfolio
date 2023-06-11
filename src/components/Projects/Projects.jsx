@@ -1,7 +1,7 @@
 import { ThreeDCubeSphere } from "tabler-icons-react"
-import assets from "../../lib/Assets"
+import { assets } from "../../lib/asset-helper"
 
-const Projects = () => {
+const Projects = ({ reference }) => {
     const { img1, img2, img3, img4, img5, img6 } = assets
 
     const cards = [
@@ -14,7 +14,7 @@ const Projects = () => {
     ]
 
     return (
-        <>
+        <section ref={reference}>
             <div className="shadow-lg py-10">
 
                 <div className="max-w-5xl px-6 mx-auto text-center flex justify-center md:justify-end" id="project">
@@ -26,19 +26,20 @@ const Projects = () => {
                 {cards.map((i, idx) => {
                     const prevIdx = idx === 0 ? (cards.length - 1) : (idx - 1)
                     const nextIdx = idx === cards.length - 1 ? 0 : (idx + 1)
+                    const btnClassName = 'btn btn-circle text-success border-2 border-success bg-neutral hover:text-neutral hover:border-neutral hover:bg-success'
                     return (
                         <div id={`slide${idx + 1}`} className="carousel-item relative w-full" key={idx}>
                             <Cards details={i} />
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href={`#slide${prevIdx + 1}`} className="btn btn-circle text-white">❮</a>
-                                <a href={`#slide${nextIdx + 1}`} className="btn btn-circle text-white">❯</a>
+                            <div className="flex absolute justify-between transform -translate-y-1/2 left-5 right-5 top-1/3 md:top-1/2">
+                                <a href={`#slide${prevIdx + 1}`} className={btnClassName}>❮</a>
+                                <a href={`#slide${nextIdx + 1}`} className={btnClassName}>❯</a>
                             </div>
                         </div>
 
                     )
                 })}
             </div>
-        </>
+        </section>
     )
 }
 
@@ -50,9 +51,7 @@ const Cards = ({ details }) => {
             <img src={img} className="h-fit sm:h-full md:h-full w-full" alt="Album" />
             <div className="card-body bg-secondary text-slate-200">
                 <h2 className="card-title text-2xl mb-2">{title}</h2>
-                <p className="text-slate-400 text-lg" style={{
-                    // maxWidth: '300px'
-                }}>{description}</p>
+                <p className="text-slate-400 text-lg">{description}</p>
                 {sourceCode !== '' && (<div className="card-actions justify-end">
                     <a className="badge badge-primary badge-outline cursor-pointer" target="_blank" href={sourceCode} rel="noreferrer">Source Code</a>
                 </div>)}
