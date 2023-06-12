@@ -1,9 +1,9 @@
-import img1 from "../assets/projects/1.png"
-import img2 from "../assets/projects/2.png"
-import img3 from "../assets/projects/3.png"
-import img4 from "../assets/projects/4.png"
-import img5 from "../assets/projects/5.png"
-import img6 from "../assets/projects/6.png"
+import img1 from '../assets/projects/1.png'
+import img2 from '../assets/projects/2.png'
+import img3 from '../assets/projects/3.png'
+import img4 from '../assets/projects/4.png'
+import img5 from '../assets/projects/5.png'
+import img6 from '../assets/projects/6.png'
 import bg from '../assets/hero/bg.jpg'
 import hero from '../assets/hero/jem.png'
 import storybook from '../assets/logo/storybook.png'
@@ -30,6 +30,7 @@ import graphql from '../assets/logo/graphql.png'
 import expressjs from '../assets/logo/expressjs.png'
 import nodejs from '../assets/logo/nodejs.png'
 import cv from '../assets/resume/cv.pdf'
+import { TMenuLinks } from './props-types'
 
 export const assets = {
     img1,
@@ -66,7 +67,7 @@ export const assets = {
     cv
 }
 
-export const menuLinks = {
+export const menuLinks: TMenuLinks = {
     'frontend': {
         title: 'Frontend Development',
         swap: [

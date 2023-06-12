@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
 import emailjs from '@emailjs/browser'
+import { TReferenceProps } from '../../lib/props-types'
 
-const Contact = ({ reference }) => {
+const Contact = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-neutral pattern py-20" >
             <div className="max-w-5xl px-6 mx-auto text-center flex justify-center">
@@ -45,7 +46,7 @@ const Card = () => {
     return (<div className='flex items-center mx-auto my-4'>
         <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
-                <h2 className="card-title">Let's get in touch!</h2>
+                <h2 className="card-title">Let&apos;s get in touch!</h2>
                 <div>
                     Send me a message now
                     <ul className='my-4'>
@@ -69,13 +70,14 @@ const Card = () => {
 const Form = () => {
     const [viewToast, setViewToast] = useState(false)
     const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
-    const form = useRef()
+    const form = useRef(null)
+    
 
     useEffect(() => {
         if (toastMessage.message !== '') toastNotify()
     }, [toastMessage])
 
-    const validateEmail = (email) => {
+    const validateEmail = (email: string) => {
         // Regular expression pattern for validating email addresses
         const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
@@ -83,16 +85,15 @@ const Form = () => {
         return pattern.test(email)
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        const formRef = form.current
-        const name = formRef.name.value
-        const email = formRef.email.value
-        const message = formRef.message.value
+        const formRef = form.current 
+        const name = formRef?.['name']['value']
+        const email = formRef?.['email']['value']
+        const message = formRef?.['message']['value']
 
         if (name && email && message) {
-            if (validateEmail(email)) sendMail()
-            else setToastMessage({ message: 'Invalid Email!', type: 'error' })
+            validateEmail(email) ? sendMail() : setToastMessage({ message: 'Invalid Email!', type: 'error' })
         } else {
             setToastMessage({ message: 'Please complete all fields!', type: 'error' })
         }
@@ -105,15 +106,15 @@ const Form = () => {
 
     const sendMail = () => {
         const config = {
-            serviceId: process.env.REACT_APP_SERVICE_ID,
-            templateId: process.env.REACT_APP_TEMPLATE_ID,
-            publicKey: process.env.REACT_APP_PUBLIC_KEY,
+            serviceId: process.env.REACT_APP_SERVICE_ID || '',
+            templateId: process.env.REACT_APP_TEMPLATE_ID || '',
+            publicKey: process.env.REACT_APP_PUBLIC_KEY || '',
         }
 
-        emailjs.sendForm(config.serviceId, config.templateId, form.current, config.publicKey)
-            .then((_result) =>
+        emailjs.sendForm(config.serviceId, config.templateId, form.current || '', config.publicKey)
+            .then(() =>
                 setToastMessage({ message: 'Email sent!', type: 'success' }),
-                (_error) =>
+                () =>
                     setToastMessage({ message: 'Email sending failed!', type: 'error' })
             )
     }

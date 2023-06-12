@@ -1,7 +1,9 @@
 import { assets } from '../../lib/asset-helper'
 import { Download } from 'tabler-icons-react'
+import { TReferenceProps } from '../../lib/props-types'
+import React from 'react'
 
-const Hero = ({ reference }) => {
+const Hero = ({ reference }: TReferenceProps) => {
     const { bg, hero, cv } = assets
 
     return (
@@ -17,7 +19,7 @@ const Hero = ({ reference }) => {
             >
                 <img src={hero} className="w-full max-w-xs" alt='No img' />
                 <div className='p-4'>
-                    <h1 className="text-5xl font-bold text-slate-200 flex flex-col md:flex-row">Hi I'm&nbsp;<span className='text-warning border-b-2 border-info w-fit'>Jemuel Lupo</span></h1>
+                    <h1 className="text-5xl font-bold text-slate-200 flex flex-col md:flex-row">Hi I&apos;m&nbsp;<span className='text-warning border-b-2 border-info w-fit'>Jemuel Lupo</span></h1>
                     <p className="mt-6 text-success text-2xl">Fullstack Web Developer</p>
                     <p className="mt-2 text-white text-md">I will develop your Web Application and Websites</p>
                     <div className='mt-2 flex justify-center md:justify-start'>

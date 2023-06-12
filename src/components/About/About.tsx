@@ -1,8 +1,9 @@
-import { useState } from "react"
-import { ChevronsUpLeft } from "tabler-icons-react"
+import React, { ReactNode, useState } from 'react'
+import { ChevronsUpLeft } from 'tabler-icons-react'
 import { menuLinks } from '../../lib/asset-helper'
+import { TReferenceProps } from '../../lib/props-types'
 
-const About = ({ reference }) => {
+const About = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-slate-800 pattern py-20">
             <div className="max-w-5xl px-6 mx-auto text-center flex justify-center md:justify-start">
@@ -40,7 +41,7 @@ const SkillSet = () => {
     )
 }
 
-const Divider = ({ up, down }) => {
+const Divider = ({ up, down }: {up: ReactNode, down: ReactNode}) => {
     return (
         <div className="flex flex-col w-full border-opacity-50">
             <div className="grid h-fit card rounded-box place-items-center">{up}</div>
@@ -54,9 +55,9 @@ const Par = () => {
     return (
         <div className="max-w-5xl px-6 mx-auto text-center">
             <p className="mt-4 text-slate-100">
-                I'm a <span className="text-warning">Fullstack Web Developer</span> from Sariaya Quezon (Philippines).
+                I&apos;m a <span className="text-warning">Fullstack Web Developer</span> from Sariaya Quezon (Philippines).
                 Turning <span className="text-error">complex</span> problem into a <span className="text-success">simple</span> and <span className="text-info">manageable</span> Web Information System is my forte.
-                I earned my Bachelor's degree in <span className="text-success">Information Technology</span> in the year of <span className="text-warning">2021</span>.
+                I earned my Bachelor&apos;s degree in <span className="text-success">Information Technology</span> in the year of <span className="text-warning">2021</span>.
             </p>
         </div>
     )
@@ -90,7 +91,7 @@ const Stat = () => {
 
 const Techs = () => {
     const [swapOn, setSwapOn] = useState(<></>)
-    const changeSwapOn = (item) => setSwapOn(
+    const changeSwapOn = (item: string) => setSwapOn(
         <ul className="text-slate-800">
             {menuLinks[item].swap.map((s, idx) => <li key={idx}><ItemAvatars image={s.image} />{s.brand}</li>)}
         </ul>
@@ -116,7 +117,7 @@ const Techs = () => {
     )
 }
 
-const ItemAvatars = ({ image }) => {
+const ItemAvatars = ({ image }: {image: string}) => {
     return (
         <div className="avatar mr-2">
             <div className="w-4 rounded">

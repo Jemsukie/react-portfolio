@@ -1,20 +1,33 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import React, { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, BrandHipchat } from 'tabler-icons-react'
-import { goToSection } from "../../lib/link-helper"
+import { goToSection } from '../../lib/link-helper'
 
-const Navbar = ({ children, referenceLinks }) => {
+type TReferenceLinksProps = {
+    [key: string]: MutableRefObject<null>
+}
+
+type TNavLinksProps = {
+    title: string
+    link: React.MutableRefObject<null>
+    icon: JSX.Element
+}
+
+const Navbar = ({ children, referenceLinks }: {
+    children?: ReactNode
+    referenceLinks: TReferenceLinksProps
+}) => {
     const { hero, about, projects, contact } = referenceLinks
-    const navLinks = [
+    const navLinks: TNavLinksProps[] = [
         { title: 'Home', link: hero, icon: <Home /> },
         { title: 'About', link: about, icon: <ChevronsUpLeft /> },
         { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
         { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
     ]
 
-    const navbarRef = useRef(null)
-    const childrenRef = useRef(null)
-    const [bodyPadding, setBodyPadding] = useState(null)
-    const [childPosition, setChildPosition] = useState(null)
+    const navbarRef = useRef<HTMLDivElement | null>(null)
+    const childrenRef = useRef<HTMLDivElement | null>(null)
+    const [bodyPadding, setBodyPadding] = useState(0)
+    const [childPosition, setChildPosition] = useState(0)
     const [scrollDir, setScrollDir] = useState({ from: 0, to: 0 })
 
     const childrenComponent = (
@@ -25,8 +38,9 @@ const Navbar = ({ children, referenceLinks }) => {
 
     useEffect(() => {
         // Add padding to the body to offset the fixed navbar
-        setBodyPadding(navbarRef.current.offsetHeight)
-    }, [])
+        setBodyPadding(navbarRef.current?.offsetHeight || 0)
+        
+    }, [navbarRef])
 
     useEffect(() => {
         setScrollDir({
@@ -45,7 +59,7 @@ const Navbar = ({ children, referenceLinks }) => {
 
     // Attach scroll event listener to window
     window.addEventListener('scroll', () =>
-        childrenRef.current && setChildPosition(childrenRef.current.getBoundingClientRect().top * -1)
+        childrenRef.current && setChildPosition(childrenRef.current?.getBoundingClientRect().top * -1)
     )
 
     return (
@@ -65,7 +79,7 @@ const Navbar = ({ children, referenceLinks }) => {
     )
 }
 
-const WebMenu = ({ navLinks }) => {
+const WebMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
     return (<div className="sm:inline-flex hidden p-4">
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
             {navLinks.map(n => (
@@ -75,13 +89,13 @@ const WebMenu = ({ navLinks }) => {
     </div>)
 }
 
-const MobileMenu = ({ navLinks }) => {
+const MobileMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
     return (<div className="md:hidden sm:hidden inline-flex p-4">
         <div className="dropdown dropdown-end">
             <label tabIndex={0} className="mx-2 btn btn-outline btn-info font-bold border-b-2 border-primary hover:border-accent"><Menu /></label>
             <ul id="navitem" tabIndex={0} className="dropdown-content menu shadow bg-base-100 rounded-box w-40 border-2 border-primary">
                 {navLinks.map(n => (
-                    <li key={n.title}><a className="btn btn-ghost" onClick={() => goToSection(n.link)} href={n.href}>{n.icon}{n.title}</a> </li>
+                    <li key={n.title}><div className="btn btn-ghost" onClick={() => goToSection(n.link)}>{n.icon}{n.title}</div> </li>
                 ))}
             </ul>
         </div>
