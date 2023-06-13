@@ -1,7 +1,6 @@
 import { assets } from '../../lib/asset-helper'
 import { goToSection } from '../../lib/link-helper'
 import { TReferenceProps } from '../../lib/props-types'
-import React from 'react'
 
 const Footer = ({ reference }: TReferenceProps) => {
     const { hero } = assets

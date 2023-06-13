@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
 import emailjs from '@emailjs/browser'
 import { TReferenceProps } from '../../lib/props-types'
@@ -71,7 +71,7 @@ const Form = () => {
     const [viewToast, setViewToast] = useState(false)
     const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
     const form = useRef(null)
-    
+
 
     useEffect(() => {
         if (toastMessage.message !== '') toastNotify()
@@ -87,7 +87,7 @@ const Form = () => {
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        const formRef = form.current 
+        const formRef = form.current
         const name = formRef?.['name']['value']
         const email = formRef?.['email']['value']
         const message = formRef?.['message']['value']

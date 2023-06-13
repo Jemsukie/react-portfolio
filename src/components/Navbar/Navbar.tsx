@@ -1,4 +1,4 @@
-import React, { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
+import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, BrandHipchat } from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
 
@@ -39,7 +39,6 @@ const Navbar = ({ children, referenceLinks }: {
     useEffect(() => {
         // Add padding to the body to offset the fixed navbar
         setBodyPadding(navbarRef.current?.offsetHeight || 0)
-        
     }, [navbarRef])
 
     useEffect(() => {

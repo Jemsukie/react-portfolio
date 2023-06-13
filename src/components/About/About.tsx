@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { ChevronsUpLeft } from 'tabler-icons-react'
 import { menuLinks } from '../../lib/asset-helper'
 import { TReferenceProps } from '../../lib/props-types'

@@ -1,6 +1,6 @@
 import { ThreeDCubeSphere } from 'tabler-icons-react'
 import { assets } from '../../lib/asset-helper'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { TReferenceProps } from '../../lib/props-types'
 
 type TCards = {
