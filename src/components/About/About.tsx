@@ -99,10 +99,10 @@ const Techs = () => {
 
     const menu = (
         <ul className="text-slate-800">
-            {Object.keys(menuLinks).map(m => <li key={m}
-                onClick={() => { changeSwapOn(m) }}
+            {Object.entries(menuLinks).map(([key, value]) => <li key={key}
+                onClick={() => { changeSwapOn(key) }}
                 className="hover:border-success border-b-2 border-transparent"
-            >{menuLinks[m].title}</li>)}
+            >{value.title}</li>)}
         </ul>
     )
 
