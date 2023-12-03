@@ -21,11 +21,11 @@ const Hero = ({ reference }: TReferenceProps) => {
                     <h1 className="text-5xl font-bold text-slate-200 flex flex-col md:flex-row">Hi I&apos;m&nbsp;<span className='text-warning border-b-2 border-info w-fit'>Jemuel Lupo</span></h1>
                     <p className="mt-6 text-success text-2xl">Fullstack Web Developer</p>
                     <p className="mt-2 text-white text-md">I will develop your Web Application and Websites</p>
-                    <div className='mt-2 flex justify-center md:justify-start'>
+                    {/* <div className='mt-2 flex justify-center md:justify-start'>
                         <a className="btn btn-info btn-outline bg-neutral" href={cv} download="resume.pdf">
                             Download CV <Download />
                         </a>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
