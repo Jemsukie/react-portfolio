@@ -1,5 +1,5 @@
 import { assets } from '../../lib/asset-helper'
-import { Download } from 'tabler-icons-react'
+// import { Download } from 'tabler-icons-react'
 import { TReferenceProps } from '../../lib/props-types'
 
 const Hero = ({ reference }: TReferenceProps) => {
