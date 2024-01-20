@@ -1,4 +1,4 @@
-const daisyui = require('daisyui');
+const daisyui = require('daisyui')
 
 module.exports = {
   style: {
@@ -10,4 +10,4 @@ module.exports = {
       ],
     },
   },
-};
+}

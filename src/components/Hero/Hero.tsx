@@ -3,7 +3,7 @@ import { assets } from '../../lib/asset-helper'
 import { TReferenceProps } from '../../lib/props-types'
 
 const Hero = ({ reference }: TReferenceProps) => {
-    const { bg, hero, cv } = assets
+    const { bg, hero } = assets
 
     return (
         <section ref={reference} className="hero min-h-screen bg-cover bg-gradient-to-bl"
