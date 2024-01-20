@@ -82,7 +82,9 @@ const WebMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
     return (<div className="sm:inline-flex hidden p-4">
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
             {navLinks.map(n => (
-                <div key={n.title} onClick={() => goToSection(n.link)} className="md:mx-2 mx-px font-bold hover:border-accent"><span className={`hover:text-info flex btn ${n.title === 'Say Hi' ? 'bg-neutral text-info btn-outline' : 'text-slate-200'}`}>{n.icon}{n.title}</span></div>
+                <div key={n.title} onClick={() => goToSection(n.link)} className="md:mx-2 mx-px font-bold hover:border-accent">
+                    <span className={`hover:text-info flex cursor-pointer ${n.title === 'Say Hi' ? 'btn bg-neutral text-info btn-outline' : 'text-slate-200 mx-2'}`}>{n.icon}{n.title}</span>
+                </div>
             ))}
         </nav>
     </div>)

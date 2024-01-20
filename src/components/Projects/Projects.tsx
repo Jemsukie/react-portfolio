@@ -27,12 +27,14 @@ const Projects = ({ reference }: TReferenceProps) => {
 		<section ref={reference}>
 			<div className="shadow-lg py-10">
 
-				<div className="max-w-5xl px-6 mx-auto text-center flex justify-center md:justify-end" id="project">
-					<h2 className="text-2xl font-semibold border-b-2 border-primary w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
+				<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-end flex-col" id="project">
+					<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
+					<progress className="progress w-56 progress-primary bg-transparent" />
 				</div>
+
 			</div>
 
-			<div className="carousel w-full container mx-auto">
+			<div className="carousel w-full container mx-auto flex max-w-6xl">
 				{cards.map((i, idx) => {
 					const prevIdx = idx === 0 ? (cards.length - 1) : (idx - 1)
 					const nextIdx = idx === cards.length - 1 ? 0 : (idx + 1)

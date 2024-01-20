@@ -6,25 +6,28 @@ import { TReferenceProps } from '../../lib/props-types'
 const Contact = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-neutral pattern py-20" >
-            <div className="max-w-5xl px-6 mx-auto text-center flex justify-center">
-                <h2 className="text-2xl font-semibold text-slate-200 border-b-2 border-success w-fit flex">
+            <div className="max-w-6xl px-6 mx-auto text-center flex items-center flex-col">
+                <h2 className="text-2xl font-semibold text-slate-200 w-fit flex">
                     <BrandHipchat /> Contact Me
                 </h2>
+                <progress className="progress w-56 progress-success bg-transparent" />
             </div>
-            <div className="container w-full md:w-3/4 mx-auto w-xs mt-4 flex-col lg:flex-row-reverse rounded-tr-lg rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
+            <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs mt-4 flex-col lg:flex-row-reverse rounded-tr-lg rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
                 style={{
                     borderBottom: '4px solid #36D399',
                     borderRight: '4px solid #FBAF3A'
                 }}
             >
                 <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center md:p-10">
-                    <Card />
-                    <Form />
+                    <div className="flex w-full">
+                        <Card />
+                            <div className="divider divider-horizontal text-slate-200">
+                                <kbd className="kbd kbd-md text-slate-600">OR</kbd>
+                            </div>
+                        <Form />
+                    </div>
                 </div>
-
             </div>
-
-
         </section>
 
     )
