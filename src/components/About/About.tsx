@@ -6,7 +6,7 @@ import { TReferenceProps } from '../../lib/props-types'
 const About = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-slate-800 pattern py-20">
-            <div className="max-w-6xl px-6 mx-auto text-center flex justify-center md:justify-start flex-col">
+            <div className="max-w-6xl px-6 mx-auto text-center flex items-center md:items-start flex-col">
                 <h2 className="text-2xl font-semibold text-slate-200 w-fit flex">
                     <ChevronsUpLeft />
                     About Me

@@ -19,9 +19,9 @@ const Contact = ({ reference }: TReferenceProps) => {
                 }}
             >
                 <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center md:p-10">
-                    <div className="flex w-full">
+                    <div className="flex w-full flex-col lg:flex-row">
                         <Card />
-                            <div className="divider divider-horizontal text-slate-200">
+                            <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
                                 <kbd className="kbd kbd-md text-slate-600">OR</kbd>
                             </div>
                         <Form />
