@@ -18,7 +18,6 @@ const About = ({ reference }: TReferenceProps) => {
                 <SkillSet />
                 <Divider up={<Par />} down={<Stat />} />
             </div>
-
         </section>
     )
 }
@@ -41,7 +40,7 @@ const SkillSet = () => {
     )
 }
 
-const Divider = ({ up, down }: {up: ReactNode, down: ReactNode}) => {
+const Divider = ({ up, down }: { up: ReactNode, down: ReactNode }) => {
     return (
         <div className="flex flex-col w-full border-opacity-50">
             <div className="grid h-fit card rounded-box place-items-center">{up}</div>
@@ -117,7 +116,7 @@ const Techs = () => {
     )
 }
 
-const ItemAvatars = ({ image }: {image: string}) => {
+const ItemAvatars = ({ image }: { image: string }) => {
     return (
         <div className="avatar mr-2">
             <div className="w-4 rounded">

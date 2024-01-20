@@ -1,5 +1,5 @@
 import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronsUpLeft, Home, Menu, ThreeDCubeSphere, BrandHipchat } from 'tabler-icons-react'
+import { ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat, Menu2 } from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
 
 type TReferenceLinksProps = {
@@ -23,6 +23,8 @@ const Navbar = ({ children, referenceLinks }: {
         { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
         { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
     ]
+
+    const [burgerOn, setBurgerOn] = useState(false)
 
     const navbarRef = useRef<HTMLDivElement | null>(null)
     const childrenRef = useRef<HTMLDivElement | null>(null)
@@ -57,28 +59,34 @@ const Navbar = ({ children, referenceLinks }: {
         , [bodyPadding, childPosition, direction])
 
     // Attach scroll event listener to window
-    window.addEventListener('scroll', () =>
+    const onClickBurger = () => {
+        setBurgerOn(prev => !prev)
+    }
+
+    window.addEventListener('scroll', () => {
         childrenRef.current && setChildPosition(childrenRef.current?.getBoundingClientRect().top * -1)
-    )
+        setBurgerOn(false)
+    })
 
     return (
         <>
             <nav ref={navbarRef} className={`${positionClass} top-0 z-10 w-full shadow-2xl bg-secondary border-b-2 border-info`}>
                 <div className="container mx-auto justify-between max-w-8xl flex p-5 flex-row items-center">
-                    <div onClick={() => goToSection(hero)} className="flex title-font font-medium items-center text-gray-50 mb-4 md:mb-0">
+                    <div onClick={() => goToSection(hero)} className="flex title-font font-medium items-center text-gray-50 my-auto">
                         <span className="ml-3 text-xl font-bold text-accent cursor-pointer">JemFolio</span>
                     </div>
-
                     <WebMenu navLinks={navLinks} />
-                    <MobileMenu navLinks={navLinks} />
+
+                    <button className="btn bg-neutral text-info btn-outline md:hidden sm:hidden" onClick={onClickBurger}><Menu2 /></button>
                 </div>
+                <TempMobileMenu navLinks={navLinks} show={burgerOn} onClick={onClickBurger} />
             </nav >
             {childrenComponent}
         </>
     )
 }
 
-const WebMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
+const WebMenu = ({ navLinks }: { navLinks: TNavLinksProps[] }) => {
     return (<div className="sm:inline-flex hidden p-4">
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
             {navLinks.map(n => (
@@ -90,17 +98,22 @@ const WebMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
     </div>)
 }
 
-const MobileMenu = ({ navLinks }: {navLinks: TNavLinksProps[]}) => {
-    return (<div className="md:hidden sm:hidden inline-flex p-4">
-        <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="mx-2 btn btn-outline btn-info font-bold border-b-2 border-primary hover:border-accent"><Menu /></label>
-            <ul id="navitem" tabIndex={0} className="dropdown-content menu shadow bg-base-100 rounded-box w-40 border-2 border-primary">
+
+const TempMobileMenu = ({ navLinks, show, onClick }: { navLinks: TNavLinksProps[], show: boolean, onClick: () => void }) => {
+    return <>
+        <div className={`h-fit md:hidden sm:hidden ${!show ? 'hidden' : ''}`}>
+            <ul className="flex flex-col items-center">
                 {navLinks.map(n => (
-                    <li key={n.title}><div className="btn btn-ghost" onClick={() => goToSection(n.link)}>{n.icon}{n.title}</div> </li>
+                    <li key={n.title}><div className="btn btn-ghost text-slate-200" onClick={() => {
+                        onClick()
+                        goToSection(n.link)
+                    }}>{n.icon}{n.title.toUpperCase()}</div> </li>
                 ))}
             </ul>
         </div>
-    </div>)
+    </>
+
+
 }
 
 export default Navbar
