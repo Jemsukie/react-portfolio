@@ -21,9 +21,9 @@ const Contact = ({ reference }: TReferenceProps) => {
                 <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center md:p-10">
                     <div className="flex w-full flex-col lg:flex-row">
                         <Card />
-                            <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
-                                <kbd className="kbd kbd-md text-slate-600">OR</kbd>
-                            </div>
+                        <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
+                            <kbd className="kbd kbd-md text-slate-600">OR</kbd>
+                        </div>
                         <Form />
                     </div>
                 </div>
@@ -49,8 +49,8 @@ const Card = () => {
     return (<div className='flex items-center mx-auto my-4'>
         <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
-                <h2 className="card-title">Let&apos;s get in touch!</h2>
-                <div>
+                <h2 className="card-title flex mx-auto">Let&apos;s get in touch!</h2>
+                <div className='text-center'>
                     Send me a message now
                     <ul className='my-4'>
                         <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Mail />Email:</div> <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
