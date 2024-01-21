@@ -63,27 +63,34 @@ const Par = () => {
 }
 
 const Stat = () => {
+    const stats = [
+        {
+            title: 'Freelance Experience',
+            value: '2 years',
+            desc: 'Fullstack Development'
+        },
+        {
+            title: 'Professional Experience',
+            value: '3 years',
+            desc: 'Software Engineering',
+            bg: 'bg-slate-800'
+        },
+        {
+            title: 'Availability',
+            value: '24/7',
+            desc: 'Message me anytime'
+        }
+    ]
+
     return (
         <div className="stats shadow stats-vertical md:stats-horizontal">
-
-            <div className="stat place-items-center">
-                <div className="stat-title">Freelance Experience</div>
-                <div className="stat-value">3 years</div>
-                <div className="stat-desc">Fullstack Development</div>
-            </div>
-
-            <div className="stat place-items-center bg-slate-800">
-                <div className="stat-title text-slate-400">Professional Experience</div>
-                <div className="stat-value  text-slate-100">2 years</div>
-                <div className="stat-desc  text-slate-100">Fullstack Web Development</div>
-            </div>
-
-            <div className="stat place-items-center">
-                <div className="stat-title">Availability</div>
-                <div className="stat-value">24/7</div>
-                <div className="stat-desc">Message me anytime</div>
-            </div>
-
+            {stats.map((s, idx) => {
+                return <div className={`stat place-items-center ${s.bg || ''}`} key={idx}>
+                    <div className={`stat-title ${s.bg ? 'text-slate-400' : ''}`}>{s.title}</div>
+                    <div className={`stat-value ${s.bg ? 'text-slate-100' : ''}`}>{s.value}</div>
+                    <div className={`stat-desc ${s.bg ? 'text-slate-100' : ''}`}>{s.desc}</div>
+                </div>
+            })}
         </div>
     )
 }
