@@ -4,23 +4,27 @@ import { ReactNode } from 'react'
 import { TReferenceProps } from '../../lib/props-types'
 
 type TCards = {
-    img: string
-    title: string
-    sourceCode: string
-    description: ReactNode
+	img: string
+	title: string
+	sourceCode: string
+	description: ReactNode
 }
 
 const Projects = ({ reference }: TReferenceProps) => {
-	const { img1, img2, img3, img4, img5, img6 } = assets
+	const { img1, img2, img3, img4, img5, img6, img7 } = assets
 
 
 	const cards: TCards[] = [
 		{ img: img1, title: 'AJA: Gamification of Programming Language', sourceCode: '', description: <>My <span className="text-info">Capstone Project</span> back in my college days. This project is an E-learning game with scoring functionality and challenges that helps student enjoy learning more about <span className="text-accent">Computer Programming</span>.</> },
-		{ img: img2, title: 'Chat App', sourceCode: 'https://github.com/Jemsukie/chat-app', description: <>A simple Chat Application I made with <a className="text-error" href="https://redwoodjs.com/" target="_blank" rel="noreferrer">Redwood JS</a>. Here you can add and chat your contacts.</> },
-		{ img: img3, title: 'Appointment Booking System', sourceCode: '', description: <>This Web Application is an appointment booking website for a Cooperative Business in Lagonoy, Camarines Sur. This Web App has a Client and an Admin interface. Made with <a className="text-warning" href="https://codeigniter.com/" target="_blank" rel="noreferrer">CodeIgniter 4</a>.</> },
-		{ img: img4, title: 'Memorial Park Map and Appoinment System', sourceCode: 'https://github.com/Jemsukie/memorial-park-php.git', description: <>This Web Application is a Mapping and Appointment System for Katoninongan Cemetery in San Jose, Camarines Sur. It has coordinates for the deceased that can be searched by their relatives. Made with <a className="text-warning" href="https://codeigniter.com/" target="_blank" rel="noreferrer">CodeIgniter 4</a>.</> },
-		{ img: img5, title: 'Remo.co Online Event Organizer', sourceCode: '', description: <>A Web Application made by <span className="text-primary">Remo.co</span>. My task here is to realize the feature that my client wants since their CMS: <span className="text-success">Webflow</span> has a lot of limitations. The backend and animation here are coded using <span className="text-warning">Vanilla JavaScript</span>.</> },
-		{ img: img6, title: 'Levitate Media Video Pricing Calculator', sourceCode: '', description: <><span className="text-accent">Cart + Craft</span> is a Webflow Agency that offers Web Design and Branding Solutions for their clients. My task here is to realize the feature that my client wants since their CMS: <span className="text-success">Webflow</span> has a lot of limitations. The backend and animation here are coded using <span className="text-warning">Vanilla JavaScript</span>.</> },
+		{
+			img: img2, title: 'Atlas', sourceCode: '', description: <>Learning Management System for a Community called <a className="text-[#0ea0bf]" href="https://thefreelancemovement.com/" target="_blank" rel="noreferrer">The Freelance Movement </a>
+				founded by <span className="text-primary font-bold" >John Pagulayan</span>. This is a Community/CRM/LMS app for <span className="text-primary" >Tribe Freelancers</span>.</>
+		},
+		{ img: img3, title: 'Chat App', sourceCode: 'https://github.com/Jemsukie/chat-app', description: <>A simple Chat Application I made with <a className="text-error" href="https://redwoodjs.com/" target="_blank" rel="noreferrer">Redwood JS</a>. Here you can add and chat your contacts.</> },
+		{ img: img4, title: 'Appointment Booking System', sourceCode: '', description: <>This Web Application is an appointment booking website for a Cooperative Business in Lagonoy, Camarines Sur. This Web App has a Client and an Admin interface. Made with <a className="text-warning" href="https://codeigniter.com/" target="_blank" rel="noreferrer">CodeIgniter 4</a>.</> },
+		{ img: img5, title: 'Memorial Park Map and Appoinment System', sourceCode: 'https://github.com/Jemsukie/memorial-park-php.git', description: <>This Web Application is a Mapping and Appointment System for Katoninongan Cemetery in San Jose, Camarines Sur. It has coordinates for the deceased that can be searched by their relatives. Made with <a className="text-warning" href="https://codeigniter.com/" target="_blank" rel="noreferrer">CodeIgniter 4</a>.</> },
+		{ img: img6, title: 'Remo.co Online Event Organizer', sourceCode: '', description: <>A Web Application made by <span className="text-primary">Remo.co</span>. My task here is to realize the feature that my client wants since their CMS: <span className="text-success">Webflow</span> has a lot of limitations. The backend and animation here are coded using <span className="text-warning">Vanilla JavaScript</span>.</> },
+		{ img: img7, title: 'Levitate Media Video Pricing Calculator', sourceCode: '', description: <><span className="text-accent">Cart + Craft</span> is a Webflow Agency that offers Web Design and Branding Solutions for their clients. My task here is to realize the feature that my client wants since their CMS: <span className="text-success">Webflow</span> has a lot of limitations. The backend and animation here are coded using <span className="text-warning">Vanilla JavaScript</span>.</> },
 	]
 
 	return (
