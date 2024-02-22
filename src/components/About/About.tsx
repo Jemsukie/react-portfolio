@@ -54,7 +54,7 @@ const Par = () => {
     return (
         <div className="max-w-5xl px-6 mx-auto text-center">
             <p className="mt-4 text-slate-100">
-                I&apos;m a <span className="text-warning">Fullstack Web Developer</span> from Sariaya Quezon (Philippines).
+                I&apos;m a <span className="text-warning">Software Engineer</span> from Sariaya Quezon (Philippines).
                 Turning <span className="text-error">complex</span> problem into a <span className="text-success">simple</span> and <span className="text-info">manageable</span> Web Information System is my forte.
                 I earned my Bachelor&apos;s degree in <span className="text-success">Information Technology</span> in the year of <span className="text-warning">2021</span>.
             </p>
