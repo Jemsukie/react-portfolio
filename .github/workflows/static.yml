@@ -19,7 +19,7 @@ jobs:
       - name: Configure Git
         run: |
           git config user.email "jemuel.lupo@gmail.com"
-          git config user.name "GitHub Actions"
+          git config user.name "Jemsukie"
 
       - name: Build and deploy
         run: yarn deploy
