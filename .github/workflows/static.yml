@@ -16,5 +16,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Configure Git
+        run: |
+          git config user.email "jemuel.lupo@gmail.com"
+          git config user.name "GitHub Actions"
+
       - name: Build and deploy
         run: yarn deploy
