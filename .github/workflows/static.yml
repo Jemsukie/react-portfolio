@@ -22,12 +22,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  version-and-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
     steps:
-      - name: Deploy React
+      - name: Deploy React Page
         run: yarn deploy
