@@ -15,6 +15,7 @@ import devtools from '../assets/logo/devtools.png'
 import hubspot from '../assets/logo/hubspot.png'
 import zapier from '../assets/logo/zapier.png'
 import temporal from '../assets/logo/temporal.png'
+import inngest from '../assets/logo/inngest.png'
 import mongodb from '../assets/logo/mongodb.png'
 import firebase from '../assets/logo/firebase.png'
 import postgresql from '../assets/logo/postgresql.png'
@@ -51,6 +52,7 @@ export const assets = {
     hubspot,
     zapier,
     temporal,
+    inngest,
     mongodb,
     firebase,
     postgresql,
@@ -117,6 +119,7 @@ export const menuLinks: TMenuLinks = {
             { brand: 'HubSpot', image: hubspot },
             { brand: 'Zapier', image: zapier },
             { brand: 'Temporal IO', image: temporal },
+            { brand: 'Inngest', image: inngest },
         ]
     },
 }
