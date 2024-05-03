@@ -53,13 +53,13 @@ const Card = () => {
                 <div className='text-center'>
                     Send me a message now
                     <ul className='my-4'>
-                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Mail />Email:</div> <span className='text-primary mx-auto'>jemuel.lupo@gmail.com</span></li>
-                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Phone />Phone:</div> <span className='text-success mx-auto'>(+63) 909 051 1103</span></li>
+                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Mail />Email:</div> <span className='text-primary ml-auto'><a href='mailto:jemuel.lupo@gmail.com'>jemuel.lupo@gmail.com</a></span></li>
+                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Phone />Phone:</div> <span className='text-success ml-auto'><a href='tel:+639090511103'>(+63) 909 051 1103</a></span></li>
                     </ul>
 
                     <span className='flex justify-center'>
                         <ul className="menu menu-horizontal bg-slate-800 rounded-box text-slate-200">
-                            {links.map((l, idx) => <li key={idx} className='hover:bg-warning hover:text-slate-800'><a href={l.link} target='_blank' rel="noreferrer">{l.icon}</a></li>)}
+                            {links.map((l, idx) => <li key={idx} className={`hover:bg-warning hover:text-slate-800 ${idx === 0 ? 'rounded-s-lg' : idx === links.length - 1 ? 'rounded-e-lg' : ''} `}><a href={l.link} target='_blank' rel="noreferrer">{l.icon}</a></li>)}
                         </ul>
                     </span>
 
