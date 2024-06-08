@@ -23,7 +23,7 @@ function App() {
           <About reference={referenceLinks.about} />
           <Projects reference={referenceLinks.projects} />
           <Contact reference={referenceLinks.contact} />
-          <Footer reference={referenceLinks.hero} />
+          <Footer reference={referenceLinks.hero} className={'hidden md:flex border-t-2 border-info bg-secondary'} />
         </Navbar>
       </main>
     </div>

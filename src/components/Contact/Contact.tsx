@@ -1,65 +1,77 @@
 import { useEffect, useRef, useState } from 'react'
-import { BrandFacebook, BrandGithub, BrandHipchat, BrandLinkedin, Mail, Phone } from 'tabler-icons-react'
+import { BrandHipchat } from 'tabler-icons-react'
 import emailjs from '@emailjs/browser'
 import { TReferenceProps } from '../../lib/props-types'
+import { contactInfo, socialLinks } from '../../lib/config'
 
 const Contact = ({ reference }: TReferenceProps) => {
     return (
-        <section ref={reference} className="bg-neutral pattern py-20" >
-            <div className="max-w-6xl px-6 mx-auto text-center flex items-center flex-col">
-                <h2 className="text-2xl font-semibold text-slate-200 w-fit flex">
-                    <BrandHipchat /> Contact Me
-                </h2>
-                <progress className="progress w-56 progress-success bg-transparent" />
+        <section ref={reference} className="bg-neutral pattern" >
+            <div className="shadow-lg py-6">
+                <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+                    <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
+                    <progress className="progress w-56 progress-success bg-transparent" />
+                </div>
             </div>
-            <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs mt-4 flex-col lg:flex-row-reverse rounded-tr-lg rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
-                style={{
-                    borderBottom: '4px solid #36D399',
-                    borderRight: '4px solid #FBAF3A'
-                }}
-            >
-                <div className="flex container mx-auto my-4 flex-col lg:flex-row justify-center md:p-10">
-                    <div className="flex w-full flex-col lg:flex-row">
-                        <Card />
-                        <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
-                            <kbd className="kbd kbd-md text-slate-600">OR</kbd>
+            <div className="md:py-4 py-0">
+                <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs flex-col lg:flex-row-reverse md:rounded-tr-lg md:rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
+                    style={{
+                        borderBottom: '4px solid #36D399',
+                        borderRight: '4px solid #FBAF3A'
+                    }}
+                >
+                    <div className="flex container mx-auto flex-col lg:flex-row justify-center md:p-10">
+                        <div className="flex w-full flex-col lg:flex-row">
+                            <Card />
+                            <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
+                                <kbd className="kbd kbd-md text-slate-600">OR</kbd>
+                            </div>
+                            <Form />
                         </div>
-                        <Form />
                     </div>
                 </div>
             </div>
+
         </section>
 
     )
 }
 
 const Card = () => {
-    const links = [{
-        link: 'https://www.linkedin.com/in/jemuel-lupo-96312b176/',
-        icon: <BrandLinkedin />
-    }, {
-        link: 'https://github.com/Jemsukie',
-        icon: <BrandGithub />
-    }, {
-        link: 'https://www.facebook.com/jemuel.lupo/',
-        icon: <BrandFacebook />
-    },
-    ]
+
 
     return (<div className='flex items-center mx-auto my-4'>
         <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
             <div className="card-body">
                 <h2 className="card-title flex mx-auto">Let&apos;s get in touch!</h2>
-                <div className='text-center'>
+                <div className='text-center items-center flex flex-col'>
                     Send me a message now
                     <ul className='my-4'>
-                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Mail />Email:</div> <span className='text-primary ml-auto'><a href='mailto:jemuel.lupo@gmail.com'>jemuel.lupo@gmail.com</a></span></li>
-                        <li className='flex flex-col sm:flex-row'><div className='flex-row flex'><Phone />Phone:</div> <span className='text-success ml-auto'><a href='tel:+639090511103'>(+63) 909 051 1103</a></span></li>
+                        {contactInfo.map(({ Icon, title, className, link, desc }) =>
+                            <li className='flex flex-col sm:flex-row gap-4' key={title}>
+                                <div className='flex-row flex justify-center md:justify-start'>
+                                    <Icon />
+                                </div>
+                                <span className={`${className} hover-enlarge`}>
+                                    <a href={link}>{desc}</a>
+                                </span>
+                            </li>
+                        )}
                     </ul>
 
                     <span className='flex justify-center'>
                         <ul className="menu menu-horizontal bg-slate-800 rounded-box text-slate-200">
-                            {links.map((l, idx) => <li key={idx} className={`hover:bg-warning hover:text-slate-800 ${idx === 0 ? 'rounded-s-lg' : idx === links.length - 1 ? 'rounded-e-lg' : ''} `}><a href={l.link} target='_blank' rel="noreferrer">{l.icon}</a></li>)}
+                            {socialLinks.map(({ Icon, link }, idx) => {
+                                const roundedClassName = idx === 0 ? 'rounded-s-lg' : idx === socialLinks.length - 1 ? 'rounded-e-lg' : ''
+
+                                return <li key={idx} className={`hover:bg-warning hover:text-slate-800 ${roundedClassName} hover-enlarge`}>
+                                    <a href={link} target='_blank' rel="noreferrer">
+                                        <Icon />
+                                    </a>
+                                </li>
+                            }
+
+                            )}
                         </ul>
                     </span>
 
@@ -124,7 +136,7 @@ const Form = () => {
 
 
     return (
-        <form className="form-control w-full max-w-sm p-2 mx-auto my-4" onSubmit={submitHandler} ref={form}>
+        <form className="form-control w-full max-w-sm p-2 mx-auto" onSubmit={submitHandler} ref={form}>
 
             {viewToast && (<div className="toast">
                 <div className={`alert alert-${toastMessage.type}`}>
@@ -161,13 +173,13 @@ const Form = () => {
             <textarea
                 id="input-message"
                 name="message"
-                className="textarea textarea-info"
+                className="textarea textarea-info text-base"
                 placeholder="Hi there! Anything you wanna tell me?"
             >
             </textarea>
 
             <div className="flex justify-center mt-4">
-                <input type="submit" className="btn btn-outline bg-neutral btn-info w-1/2" />
+                <input type="submit" className="btn btn-outline bg-neutral btn-info w-1/2 hover-enlarge" />
             </div>
         </form>)
 }

@@ -1,28 +1,34 @@
 import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat, Menu2 } from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
+import Drawer from '../../layout/Drawer'
 
-type TReferenceLinksProps = {
+export type TReferenceLinksProps = {
     [key: string]: MutableRefObject<null>
 }
 
-type TNavLinksProps = {
+export type TNavLinksProps = {
     title: string
     link: React.MutableRefObject<null>
     icon: JSX.Element
+}
+
+export const getNavlinks = ({ referenceLinks }: { referenceLinks: TReferenceLinksProps }) => {
+    const { hero, about, projects, contact } = referenceLinks
+
+    return [
+        { title: 'Home', link: hero, icon: <Home /> },
+        { title: 'About', link: about, icon: <ChevronsUpLeft /> },
+        { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
+        { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
+    ]
 }
 
 const Navbar = ({ children, referenceLinks }: {
     children?: ReactNode
     referenceLinks: TReferenceLinksProps
 }) => {
-    const { hero, about, projects, contact } = referenceLinks
-    const navLinks: TNavLinksProps[] = [
-        { title: 'Home', link: hero, icon: <Home /> },
-        { title: 'About', link: about, icon: <ChevronsUpLeft /> },
-        { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
-        { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
-    ]
+    const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks })
 
     const [burgerOn, setBurgerOn] = useState(false)
 
@@ -72,14 +78,14 @@ const Navbar = ({ children, referenceLinks }: {
         <>
             <nav ref={navbarRef} className={`${positionClass} top-0 z-10 w-full shadow-2xl bg-secondary border-b-2 border-info`}>
                 <div className="container mx-auto justify-between max-w-8xl flex p-5 flex-row items-center">
-                    <div onClick={() => goToSection(hero)} className="flex title-font font-medium items-center text-gray-50 my-auto">
+                    <div onClick={() => goToSection(referenceLinks.hero)} className="flex title-font font-medium items-center text-gray-50 my-auto">
                         <span className="ml-3 text-xl font-bold text-accent cursor-pointer">JemFolio</span>
                     </div>
                     <WebMenu navLinks={navLinks} />
 
                     <button className="btn bg-neutral text-info btn-outline md:hidden sm:hidden" onClick={onClickBurger}><Menu2 /></button>
                 </div>
-                <TempMobileMenu navLinks={navLinks} show={burgerOn} onClick={onClickBurger} />
+                <TempMobileMenu navLinks={navLinks} show={burgerOn} onClick={onClickBurger} referenceLinks={referenceLinks} />
             </nav >
             {childrenComponent}
         </>
@@ -99,21 +105,22 @@ const WebMenu = ({ navLinks }: { navLinks: TNavLinksProps[] }) => {
 }
 
 
-const TempMobileMenu = ({ navLinks, show, onClick }: { navLinks: TNavLinksProps[], show: boolean, onClick: () => void }) => {
+const TempMobileMenu = ({ show, onClick, referenceLinks }: { navLinks: TNavLinksProps[], show: boolean, onClick: () => void, referenceLinks: TReferenceLinksProps }) => {
     return <>
-        <div className={`h-fit md:hidden sm:hidden ${!show ? 'hidden' : ''}`}>
-            <ul className="flex flex-col items-center">
+        <Drawer onClickBurger={onClick} isChecked={show} referenceLinks={referenceLinks} />
+        {/* <div className={`h-fit md:hidden sm:hidden ${!show ? 'hidden' : ''}`}>
+            <ul className="flex flex-col items-start mx-8">
                 {navLinks.map(n => (
-                    <li key={n.title}><div className="btn btn-ghost text-slate-200" onClick={() => {
+                    <li key={n.title} className='flex justify-start'><div className="btn btn-ghost text-slate-200" onClick={() => {
                         onClick()
                         goToSection(n.link)
-                    }}>{n.icon}{n.title.toUpperCase()}</div> </li>
+                    }}>
+                        {n.icon}
+                        {n.title.toUpperCase()}</div> </li>
                 ))}
             </ul>
-        </div>
+        </div> */}
     </>
-
-
 }
 
 export default Navbar

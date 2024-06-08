@@ -1,5 +1,6 @@
 export type TReferenceProps = {
     reference: React.MutableRefObject<null>
+    className?: string
 }
 
 export type TMenuLinks = {

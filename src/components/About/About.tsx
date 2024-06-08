@@ -2,19 +2,27 @@ import { ReactNode, useState } from 'react'
 import { ChevronsUpLeft } from 'tabler-icons-react'
 import { menuLinks } from '../../lib/asset-helper'
 import { TReferenceProps } from '../../lib/props-types'
+import { expStats } from '../../lib/config'
 
 const About = ({ reference }: TReferenceProps) => {
     return (
-        <section ref={reference} className="bg-slate-800 pattern py-20">
-            <div className="max-w-6xl px-6 mx-auto text-center flex items-center md:items-start flex-col">
+        <section ref={reference} className="bg-slate-800 pattern">
+            {/* <div className="max-w-6xl px-6 pt-6 pb-4 mx-auto text-center flex items-center md:items-start flex-col">
                 <h2 className="text-2xl font-semibold text-slate-200 w-fit flex">
                     <ChevronsUpLeft />
                     About Me
                 </h2>
                 <progress className="progress w-56 progress-warning bg-transparent" />
+            </div> */}
+
+            <div className="shadow-lg py-6">
+                <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-start flex-col" id="project">
+                    <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
+                    <progress className="progress w-56 progress-warning bg-transparent" />
+                </div>
             </div>
 
-            <div className="flex container w-full xl:w-4/5 mx-auto my-4 flex-col lg:flex-row max-w-6xl">
+            <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
                 <SkillSet />
                 <Divider up={<Par />} down={<Stat />} />
             </div>
@@ -63,28 +71,9 @@ const Par = () => {
 }
 
 const Stat = () => {
-    const stats = [
-        {
-            title: 'Freelance Experience',
-            value: '2 years',
-            desc: 'Fullstack Development'
-        },
-        {
-            title: 'Professional Experience',
-            value: '3 years',
-            desc: 'Software Engineering',
-            bg: 'bg-slate-800'
-        },
-        {
-            title: 'Availability',
-            value: '24/7',
-            desc: 'Message me anytime'
-        }
-    ]
-
     return (
         <div className="stats shadow stats-vertical md:stats-horizontal">
-            {stats.map((s, idx) => {
+            {expStats.map((s, idx) => {
                 return <div className={`stat place-items-center ${s.bg || ''}`} key={idx}>
                     <div className={`stat-title ${s.bg ? 'text-slate-400' : ''}`}>{s.title}</div>
                     <div className={`stat-value ${s.bg ? 'text-slate-100' : ''}`}>{s.value}</div>
