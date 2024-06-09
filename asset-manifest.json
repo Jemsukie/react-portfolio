@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/react-portfolio/static/css/main.c16474ef.css",
-    "main.js": "/react-portfolio/static/js/main.e9cf2e97.js",
+    "main.css": "/react-portfolio/static/css/main.efa4d903.css",
+    "main.js": "/react-portfolio/static/js/main.5fba052c.js",
     "static/js/787.a2cb61a6.chunk.js": "/react-portfolio/static/js/787.a2cb61a6.chunk.js",
-    "static/media/2.png": "/react-portfolio/static/media/2.b2a3ab996eeceed7f132.png",
     "static/media/jem.png": "/react-portfolio/static/media/jem.eaaca06772e8e5ddf635.png",
-    "static/media/7.png": "/react-portfolio/static/media/7.1407f8fc38433671364a.png",
-    "static/media/1.png": "/react-portfolio/static/media/1.b749372d35e6adead30a.png",
-    "static/media/6.png": "/react-portfolio/static/media/6.e4f7d6cc41572b0a5e20.png",
+    "static/media/2.png": "/react-portfolio/static/media/2.5eacfa5a72b0d16a047e.png",
+    "static/media/7.png": "/react-portfolio/static/media/7.8889b1bbdc5db038018a.png",
+    "static/media/1.png": "/react-portfolio/static/media/1.7c27fd9c105c6c3bb432.png",
+    "static/media/6.png": "/react-portfolio/static/media/6.ec57bdc93f65f3398368.png",
     "static/media/bg.jpg": "/react-portfolio/static/media/bg.0a09234c82dabeb9ddc5.jpg",
     "static/media/cv.pdf": "/react-portfolio/static/media/cv.af0caf02844d05245ff2.pdf",
-    "static/media/4.png": "/react-portfolio/static/media/4.36ebc9f8af01a5835379.png",
-    "static/media/5.png": "/react-portfolio/static/media/5.2e93f2510e06adee6b36.png",
-    "static/media/3.png": "/react-portfolio/static/media/3.cbf7408a666f92b55881.png",
+    "static/media/5.png": "/react-portfolio/static/media/5.1fccdcd8b5d20b0a4eb1.png",
+    "static/media/4.png": "/react-portfolio/static/media/4.b35806844ca04f2ce1c6.png",
+    "static/media/3.png": "/react-portfolio/static/media/3.ec414c3b35536dc4c550.png",
     "index.html": "/react-portfolio/index.html",
-    "main.c16474ef.css.map": "/react-portfolio/static/css/main.c16474ef.css.map",
-    "main.e9cf2e97.js.map": "/react-portfolio/static/js/main.e9cf2e97.js.map",
+    "main.efa4d903.css.map": "/react-portfolio/static/css/main.efa4d903.css.map",
+    "main.5fba052c.js.map": "/react-portfolio/static/js/main.5fba052c.js.map",
     "787.a2cb61a6.chunk.js.map": "/react-portfolio/static/js/787.a2cb61a6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c16474ef.css",
-    "static/js/main.e9cf2e97.js"
+    "static/css/main.efa4d903.css",
+    "static/js/main.5fba052c.js"
   ]
 }
