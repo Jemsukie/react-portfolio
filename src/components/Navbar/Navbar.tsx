@@ -1,5 +1,5 @@
 import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat, Menu2 } from 'tabler-icons-react'
+import { ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat, Menu2, X } from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
 import Drawer from '../../layout/Drawer'
 
@@ -83,7 +83,15 @@ const Navbar = ({ children, referenceLinks }: {
                     </div>
                     <WebMenu navLinks={navLinks} />
 
-                    <button className="btn bg-neutral text-info btn-outline md:hidden sm:hidden" onClick={onClickBurger}><Menu2 /></button>
+                    <label className="swap swap-rotate btn bg-neutral text-info btn-outline md:hidden sm:hidden" >
+
+                        {/* this hidden checkbox controls the state */}
+                        <input type="checkbox" checked={!burgerOn} onChange={onClickBurger} />
+
+                        <div className="swap-on"><Menu2 /></div>
+                        <div className="swap-off">< X /></div>
+                    </label>
+
                 </div>
                 <TempMobileMenu navLinks={navLinks} show={burgerOn} onClick={onClickBurger} referenceLinks={referenceLinks} />
             </nav >

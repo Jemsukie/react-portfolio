@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+
 import { TransitionLeft, TransitionRight } from 'tabler-icons-react'
 import { TNavLinksProps, TReferenceLinksProps, getNavlinks } from '../components/Navbar/Navbar'
 import { goToSection } from '../lib/link-helper'
@@ -7,12 +7,8 @@ import Footer from '../components/Footer/Footer'
 const Drawer = ({ onClickBurger, isChecked = false, referenceLinks }: { onClickBurger: () => void, isChecked?: boolean, referenceLinks: TReferenceLinksProps }) => {
     const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks })
 
-    const Collapser = useMemo(() => {
-        return isChecked ? TransitionLeft : TransitionRight
-    }, [isChecked])
-
     return <div className="drawer">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" checked={isChecked} />
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" checked={isChecked} onChange={() => { }} />
         <div className="drawer-content">
             {/* Page content here */}
             {/* <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label> */}
@@ -34,7 +30,14 @@ const Drawer = ({ onClickBurger, isChecked = false, referenceLinks }: { onClickB
                             ))}
                         </ul>
                         <div className='flex justify-end align-bottom'>
-                            <button className='btn bg-neutral text-info btn-outline' onClick={onClickBurger} disabled={!isChecked}><Collapser /></button>
+                            <label className="swap swap-rotate btn bg-neutral text-info btn-outline">
+
+                                {/* this hidden checkbox controls the state */}
+                                <input type="checkbox" checked={isChecked} onChange={onClickBurger} />
+
+                                <div className="swap-on"><TransitionLeft /></div>
+                                <div className="swap-off"><TransitionRight /></div>
+                            </label>
                         </div>
                     </div>
                     <Footer reference={referenceLinks.hero} />

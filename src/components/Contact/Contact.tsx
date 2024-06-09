@@ -48,7 +48,7 @@ const Card = () => {
                     Send me a message now
                     <ul className='my-4'>
                         {contactInfo.map(({ Icon, title, className, link, desc }) =>
-                            <li className='flex flex-col sm:flex-row gap-4' key={title}>
+                            <li className='flex flex-row gap-4' key={title}>
                                 <div className='flex-row flex justify-center md:justify-start'>
                                     <Icon />
                                 </div>
