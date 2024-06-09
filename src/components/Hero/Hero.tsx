@@ -16,7 +16,9 @@ const Hero = ({ reference }: TReferenceProps) => {
                     borderRight: '4px solid #FBAF3A'
                 }}
             >
-                <img src={hero} className="w-full max-w-xs" alt='No img' />
+                <div className='md:p-0 py-4'>
+                    <img src={hero} className="w-full max-w-xs rounded-full bg-gradient-to-r from-[#FF7F28] to-[#36D399] p-1" alt='No img' />
+                </div>
                 <div className='p-4 text-center md:text-start'>
                     <h1 className="text-5xl font-bold text-slate-200 flex flex-col sm:flex-row justify-center md:justify-start">Hi I&apos;m&nbsp;<span className="text-warning border-b-2 border-info xs:w-full cursor-pointer">Jemuel Lupo</span></h1>
                     <p className="mt-6 text-success text-2xl">Software Engineer</p>
