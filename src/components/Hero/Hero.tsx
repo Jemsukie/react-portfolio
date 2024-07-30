@@ -25,7 +25,7 @@ const Hero = ({ reference }: TReferenceProps) => {
                         <span className="text-warning border-b-2 border-info xs:w-full cursor-pointer">Jemuel Lupo</span>
                     </h1>
                     <p className="mt-6 text-success text-2xl">Software Engineer</p>
-                    <p className="mt-2 md:mx-0 mx-10 text-white text-md">Empowering businesses with streamlined digital systems and organizational efficiency</p>
+                    <p className="mt-2 md:mx-0 mx-10 text-white text-md">I help businesses acquire efficient digitized management over their organizational workflow</p>
                     <div className="mt-2 flex justify-center md:justify-start">
                         <a className="btn btn-info btn-outline bg-neutral hover-enlarge" href={cv} download="resume.pdf">
                             Download CV <Download />
