@@ -79,7 +79,7 @@ const Navbar = ({ children, referenceLinks }: {
             <nav ref={navbarRef} className={`${positionClass} top-0 z-10 w-full shadow-2xl bg-secondary border-b-2 border-info`}>
                 <div className="container mx-auto justify-between max-w-8xl flex p-5 flex-row items-center">
                     <div onClick={() => goToSection(referenceLinks.hero)} className="flex title-font font-medium items-center text-gray-50 my-auto">
-                        <span className="ml-3 text-xl font-bold text-accent cursor-pointer">JemFolio</span>
+                        <span className="ml-3 text-xl font-bold text-accent cursor-pointer hover-enlarge hover:text-success">JemFolio</span>
                     </div>
                     <WebMenu navLinks={navLinks} />
 

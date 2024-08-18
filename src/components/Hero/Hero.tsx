@@ -22,9 +22,12 @@ const Hero = ({ reference }: TReferenceProps) => {
                 <div className='p-4 text-center md:text-start'>
                     <h1 className="text-5xl font-bold text-slate-200 flex flex-col sm:flex-row justify-center md:justify-start">
                         Hi I&apos;m&nbsp;
-                        <span className="text-warning border-b-2 border-info xs:w-full cursor-pointer">Jemuel Lupo</span>
+                        <div className='flex flex-col'>
+                            <span className="text-warning xs:w-full cursor-pointer z-10">Jemuel Lupo</span>
+                            <progress className="progress w-full progress-success bg-transparent z-0" />
+                        </div>
                     </h1>
-                    <p className="mt-6 text-success text-2xl">Software Engineer</p>
+                    <p className="mt-2 text-success text-2xl">Software Engineer</p>
                     <p className="mt-2 md:mx-0 mx-10 text-white text-md">I help businesses acquire efficient digitized management over their organizational workflow</p>
                     <div className="mt-2 flex justify-center md:justify-start">
                         <a className="btn btn-info btn-outline bg-neutral hover-enlarge" href={cv} download="resume.pdf">
