@@ -1,5 +1,8 @@
 import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat, Menu2, X } from 'tabler-icons-react'
+import {
+    // ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat,
+    Menu2, X
+} from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
 import Drawer from '../../layout/Drawer'
 
@@ -17,10 +20,10 @@ export const getNavlinks = ({ referenceLinks }: { referenceLinks: TReferenceLink
     const { hero, about, projects, contact } = referenceLinks
 
     return [
-        { title: 'Home', link: hero, icon: <Home /> },
-        { title: 'About', link: about, icon: <ChevronsUpLeft /> },
-        { title: 'Projects', link: projects, icon: <ThreeDCubeSphere /> },
-        { title: 'Say Hi', link: contact, icon: <BrandHipchat /> },
+        { title: 'Home', link: hero, icon: <></> },
+        { title: 'About', link: about, icon: <></> },
+        { title: 'Projects', link: projects, icon: <></> },
+        { title: 'Say Hi', link: contact, icon: <></> },
     ]
 }
 

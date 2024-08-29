@@ -10,7 +10,7 @@ const Contact = ({ reference }: TReferenceProps) => {
             <div className="shadow-lg py-6">
                 <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
                     <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
-                    <progress className="progress w-56 progress-success bg-transparent" />
+                    {/* <progress className="progress w-56 progress-success bg-transparent" /> */}
                 </div>
             </div>
             <div className="md:py-4 py-0">

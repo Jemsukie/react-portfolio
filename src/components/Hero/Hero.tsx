@@ -24,7 +24,7 @@ const Hero = ({ reference }: TReferenceProps) => {
                         Hi I&apos;m&nbsp;
                         <div className='flex flex-col'>
                             <span className="text-warning xs:w-full cursor-pointer z-10">Jemuel Lupo</span>
-                            <progress className="progress w-full progress-success bg-transparent z-0" />
+                            {/* <progress className="progress w-full progress-success bg-transparent z-0" /> */}
                         </div>
                     </h1>
                     <p className="mt-2 text-success text-2xl">Software Engineer</p>

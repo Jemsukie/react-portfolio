@@ -7,18 +7,10 @@ import { expStats } from '../../lib/config'
 const About = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-slate-800 pattern">
-            {/* <div className="max-w-6xl px-6 pt-6 pb-4 mx-auto text-center flex items-center md:items-start flex-col">
-                <h2 className="text-2xl font-semibold text-slate-200 w-fit flex">
-                    <ChevronsUpLeft />
-                    About Me
-                </h2>
-                <progress className="progress w-56 progress-warning bg-transparent" />
-            </div> */}
 
             <div className="shadow-lg py-6">
                 <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-start flex-col" id="project">
                     <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
-                    <progress className="progress w-56 progress-warning bg-transparent" />
                 </div>
             </div>
 
@@ -61,10 +53,10 @@ const Divider = ({ up, down }: { up: ReactNode, down: ReactNode }) => {
 const Par = () => {
     return (
         <div className="max-w-5xl px-6 mx-auto text-center">
-            <p className="mt-4 text-slate-100">
-                I&apos;m a <span className="text-warning">Software Engineer</span> from Sariaya Quezon (Philippines).
-                Turning <span className="text-error">complex</span> problem into a <span className="text-success">simple</span> and <span className="text-info">manageable</span> Web Information System is my forte.
-                I earned my Bachelor&apos;s degree in <span className="text-success">Information Technology</span> in the year of <span className="text-warning">2021</span>.
+            <p className='mt-4 text-slate-100'>
+                I'm a Software Engineer from Sariaya Quezon (Philippines).
+                Turning complex problem into a simple and manageable Web Information System is my forte.
+                I earned my Bachelor's degree in Information Technology in the year of 2021.
             </p>
         </div>
     )
@@ -77,7 +69,7 @@ const Stat = () => {
                 return <div className={`stat place-items-center ${s.bg || ''}`} key={idx}>
                     <div className={`stat-title ${s.bg ? 'text-slate-400' : ''}`}>{s.title}</div>
                     <div className={`stat-value ${s.bg ? 'text-slate-100' : ''}`}>{s.value}</div>
-                    <div className={`stat-desc ${s.bg ? 'text-slate-100' : ''}`}>{s.desc}</div>
+                    <div className={`mt-2 stat-desc ${s.bg ? 'text-slate-100' : ''}`}>{s.desc}</div>
                 </div>
             })}
         </div>

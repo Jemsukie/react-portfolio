@@ -1,6 +1,6 @@
 import { ThreeDCubeSphere } from 'tabler-icons-react'
 import { assets } from '../../lib/asset-helper'
-import { ReactNode, useEffect, useMemo, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { TReferenceProps } from '../../lib/props-types'
 
 type TCards = {
@@ -26,78 +26,129 @@ const Projects = ({ reference }: TReferenceProps) => {
 		{ img: img7, title: 'Levitate Media Video Pricing Calculator', sourceCode: '', description: <><span className="text-accent">Cart + Craft</span> is a Webflow Agency that offers Web Design and Branding Solutions for their clients. My task here is to realize the feature that my client wants since their CMS: <span className="text-success">Webflow</span> has a lot of limitations. The backend and animation here are coded using <span className="text-warning">Vanilla JavaScript</span>.</> },
 	]
 
-	const [currentSlide, setCurrentSlide] = useState(0)
-	const prevSlide = () => setCurrentSlide(prev => prev === 0 ? cards.length - 1 : prev - 1)
-	const nextSlide = () => setCurrentSlide(prev => prev === cards.length - 1 ? 0 : prev + 1)
-
 	return (
-		<section ref={reference}>
+		<section ref={reference} className='flex flex-col justify-center'>
 			<div className="shadow-lg py-6">
 				<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-end flex-col" id="project">
 					<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
-					<progress className="progress w-56 progress-primary bg-transparent" />
+					{/* <progress className="progress w-56 progress-primary bg-transparent" /> */}
 				</div>
 			</div>
-
-			<div className="relative w-full md:p-4 shadow" data-carousel="slide">
-
-				{cards.map((c, idx) => {
-					return <div className={`${currentSlide !== idx ? 'hidden' : ''} duration-700 ease-in-out`} data-carousel-item key={idx}>
-						<Cards
-							details={c}
-							prevFn={prevSlide}
-							nextFn={nextSlide}
-						/>
-					</div>
-				})}
-
-				<button type="button" className="md:flex hidden absolute top-0 start-0 z-30 items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev
-					onClick={prevSlide}
-				>
-					<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg  hover-enlarge hover:border-2 hover:border-info">
-						❮❮
-						<span className="sr-only">Previous</span>
-					</span>
-				</button>
-				<button type="button" className="md:flex hidden absolute top-0 end-0 z-30 items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next
-					onClick={nextSlide}
-				>
-					<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg hover-enlarge hover:border-2 hover:border-info">
-						❯❯
-						<span className="sr-only">Next</span>
-					</span>
-				</button>
+			<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
+				{/* <Carousel cards={[cards[0], cards[1]]} /> */}
+				<Carousel cards={cards} />
 			</div>
+
 
 		</section >
 	)
 }
 
+const Carousel = ({ cards }: { cards: TCards[] }) => {
+	const carouselRef = useRef<HTMLDivElement>(null)
+	const [currentIndex, setCurrentIndex] = useState(0)
+	const interval = 5000 // 5 seconds
+	const itemRefs = useRef<(HTMLDivElement | null)[]>([]) // Array of refs
+	const intervalRef = useRef<NodeJS.Timeout | null>(null) // Ref to store the interval ID
+
+	// Function to start the auto-slide timer
+	const startAutoSlide = () => {
+		if (intervalRef.current) {
+			clearInterval(intervalRef.current)
+		}
+		intervalRef.current = setInterval(() => {
+			setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length)
+		}, interval)
+	}
+
+	// Automatically start the auto-slide timer when the component mounts
+	useEffect(() => {
+		startAutoSlide()
+
+		return () => {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current)
+			}
+		}
+	}, [cards.length, interval])
+
+	// Scroll to the current slide whenever the currentIndex changes
+	useEffect(() => {
+		const carousel = carouselRef.current
+		if (!carousel) return
+
+		const currentItem = itemRefs.current[currentIndex]
+		if (currentItem) {
+			carousel.scrollLeft = currentItem.offsetLeft
+		}
+	}, [currentIndex])
+
+	// Move to the previous slide and reset the timer
+	const moveToPrevSlide = () => {
+		setCurrentIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length)
+		startAutoSlide() // Reset the auto-slide timer
+	}
+
+	// Move to the next slide and reset the timer
+	const moveToNextSlide = () => {
+		setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length)
+		startAutoSlide() // Reset the auto-slide timer
+	}
+
+	return (
+		<div ref={carouselRef} className="carousel rounded-box w-full">
+			{cards.map((c, idx) => (
+				<div
+					ref={(el) => (itemRefs.current[idx] = el)}
+					className="carousel-item w-full"
+					key={idx}
+				>
+					<div className={`w-full ${currentIndex !== idx ? 'hidden' : ''}`}>
+						<Cards prevFn={moveToPrevSlide} nextFn={moveToNextSlide} details={c} />
+					</div>
+				</div>
+			))}
+		</div>
+	)
+}
+
+
 const Cards = ({ details, prevFn, nextFn }: { details: TCards, prevFn: () => void, nextFn: () => void }) => {
 	const { img, title, description, sourceCode } = details
 
-	return (
-		<div className="flex flex-col md:flex-row w-full shadow-2xl duration-700 ease-in-out">
-			<div className='w-full md:w-1/2'>
-				<img src={img} className="h-fit sm:h-full md:h-full w-full object-cover" alt="Album" />
-			</div>
-			<div className='w-full md:w-1/2 h-auto'>
-				<div className="indicator w-full h-full">
-					<span className="flex md:hidden indicator-item indicator-start btn bg-neutral text-info btn-outline ml-6" onClick={prevFn}>❮❮</span>
-					<span className="flex md:hidden indicator-item indicator-end btn bg-neutral text-info btn-outline mr-6" onClick={nextFn}>❯❯</span>
+	return (<div className="card lg:card-side bg-secondary text-slate-200 shadow container">
+		<figure className='w-full lg:w-1/2 '>
+			<img src={img} className="h-fit sm:h-full md:h-full w-full object-cover" alt="Album" />
+		</figure>
+		<div className="card-body lg:w-1/2 w-full">
+			<h2 className="card-title text-2xl mb-2 w-full">{title}</h2>
+			<p className="text-slate-400 text-lg">{description}</p>
 
-					<div className="grid place-items-center"><div className="card-body bg-secondary text-slate-200 h-full">
-						<h2 className="card-title text-2xl mb-2">{title}</h2>
-						<p className="text-slate-400 text-lg">{description}</p>
-						{sourceCode !== '' && (<div className="card-actions justify-end">
-							<a className="badge badge-primary badge-outline cursor-pointer" target="_blank" href={sourceCode} rel="noreferrer">Source Code</a>
-						</div>)}
-					</div></div>
+			<div className="card-actions justify-between">
+				<div className='flex gap-2'>
+					<button onClick={prevFn}>
+						<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg  hover-enlarge hover:border-2 hover:border-info">
+							❮❮
+							<span className="sr-only">Previous</span>
+						</span>
+					</button>
+
+					<button onClick={nextFn}>
+						<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg hover-enlarge hover:border-2 hover:border-info">
+							❯❯
+							<span className="sr-only">Next</span>
+						</span>
+					</button>
+
+
 				</div>
 
+				{sourceCode !== '' && (
+					<a className="badge badge-primary badge-outline cursor-pointer" target="_blank" href={sourceCode} rel="noreferrer">Source Code</a>
+				)}
 			</div>
 		</div>
-
+	</div>
 
 
 	)
