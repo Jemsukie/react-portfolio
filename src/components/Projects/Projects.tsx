@@ -81,6 +81,8 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 		if (currentItem) {
 			carousel.scrollLeft = currentItem.offsetLeft
 		}
+
+
 	}, [currentIndex])
 
 	// Move to the previous slide and reset the timer
@@ -103,7 +105,7 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 					className="carousel-item w-full"
 					key={idx}
 				>
-					<div className={`w-full ${currentIndex !== idx ? 'hidden' : ''}`}>
+					<div className='w-full'>
 						<Cards prevFn={moveToPrevSlide} nextFn={moveToNextSlide} details={c} />
 					</div>
 				</div>
