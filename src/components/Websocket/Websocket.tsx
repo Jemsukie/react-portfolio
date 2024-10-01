@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import useWebsocketConnection from '../../hooks/useWebsocketConnection'
+import React from 'react'
+// import useWebsocketConnection from '../../hooks/useWebsocketConnection'
 
 const Websocket: React.FC = () => {
 
-    const { connection } = useWebsocketConnection('ws://192.168.5.52:8080')
-    useEffect(() => {
-        if (connection) {
+    // const { connection } = useWebsocketConnection('ws://192.168.5.52:8080')
+    // useEffect(() => {
+    //     if (connection) {
 
-            console.log('--this is connection', connection)
+    //         console.log('--this is connection', connection)
 
-            connection.onmessage = () => {
-                console.log('Hello open!')
-            }
-        }
-    }, [connection])
+    //         connection.onmessage = () => {
+    //             console.log('Hello open!')
+    //         }
+    //     }
+    // }, [connection])
 
 
 
@@ -66,11 +66,33 @@ const Websocket: React.FC = () => {
 
     return (
         <div>
-            <button onClick={() => {
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                        const newSocket = new WebSocket('ws://192.168.5.52:8080')
+
+                        newSocket.onopen = () => {
+                            console.log('WebSocket connection established:', url)
+                        }
+
+                        newSocket.onmessage = (event: MessageEvent) => {
+                            console.log('Message from server:', event.data)
+                        }
+
+                        newSocket.onerror = (error: Event) => {
+                            console.error('WebSocket error:', error)
+                        }
+
+                        newSocket.onclose = () => {
+                            console.log('WebSocket connection closed')
+                        }
+              `,
+            }}
+            ></script>
+            {/* <button onClick={() => {
                 if(connection){
                     connection.send('Helllllloooooo')
                 }
-            }}>WS {!connection ? '❌' : '✔️'}</button>
+            }}>WS {!connection ? '❌' : '✔️'}</button> */}
         </div>
     )
 }
