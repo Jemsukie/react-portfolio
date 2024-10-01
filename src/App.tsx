@@ -15,7 +15,7 @@ function App() {
     contact: useRef(null),
   }
 
-  const ws = new WebSocket('ws://192.168.5.52:8080')
+  const ws = new WebSocket('wss://192.168.5.52:8080')
 
   ws.onopen = () => {
     console.log('Connected to WebSocket server')
