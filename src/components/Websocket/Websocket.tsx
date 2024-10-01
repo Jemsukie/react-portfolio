@@ -1,9 +1,13 @@
 import React, { useEffect,  useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const Websocket: React.FC = () => {
+    const [searchParams] = useSearchParams()
+    const wsLink = searchParams.get('wsLink')
+
     const [socket, setSocket] = useState<WebSocket | null>(null)
     const [connectionStatus, setConnectionStatus] = useState<string>('Disconnected')
-    const websocketUrl = '192.168.5.45:8080' // Your server IP and port
+    const websocketUrl = wsLink || '192.168.5.45:8080'  // Your server IP and port
     const wsPrefix = 'ws://'
     const wssPrefix = 'wss://'
 
