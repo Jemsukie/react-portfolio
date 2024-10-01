@@ -40,7 +40,8 @@
   "scripts": {
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "start": "cross-env HTTPS=true react-scripts start",
+    "start": "react-scripts start",
+    "start-pwa": "cross-env HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
