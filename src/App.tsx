@@ -19,6 +19,7 @@ function App() {
 
   ws.onopen = () => {
     console.log('Connected to WebSocket server')
+    window.alert('Connected to WebSocket server')
   }
 
   ws.onmessage = event => {
