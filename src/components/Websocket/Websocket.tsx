@@ -1,11 +1,10 @@
-import React, {   useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Websocket: React.FC = () => {
     const [socket, setSocket] = useState<WebSocket | null>(null)
-    const [connectionStatus, setConnectionStatus] = useState<string>('Disconnected')
+    const [connectionStatus, setConnectionStatus] = useState<string>('Not Connected')
     const websocketUrl = '192.168.5.45:8080' // Your server IP and port
     const wsPrefix = 'ws://'
-    const wssPrefix = 'wss://'
 
     // Function to create WebSocket connection
     const createWebSocket = (url: string): void => {
@@ -33,12 +32,13 @@ const Websocket: React.FC = () => {
     }
 
     useEffect(() => {
-        // Determine the correct WebSocket prefix based on the current page protocol
-        const isSecureConnection = window.location.protocol === 'https:'
-        const websocketProtocol = isSecureConnection ? wssPrefix : wsPrefix
-
-        // Start the WebSocket connection using the appropriate prefix
-        createWebSocket(`${websocketProtocol}${websocketUrl}`)
+        // Only connect via WebSocket if the page is served over HTTP
+        if (window.location.protocol === 'http:') {
+            console.log('Page loaded over HTTP, attempting WebSocket connection...')
+            createWebSocket(`${wsPrefix}${websocketUrl}`)
+        } else {
+            console.log('Page loaded over HTTPS, WebSocket connection not allowed.')
+        }
 
         // Cleanup on component unmount
         return () => {
