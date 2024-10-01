@@ -15,6 +15,17 @@ function App() {
     contact: useRef(null),
   }
 
+  const ws = new WebSocket('ws://192.168.5.52:8080')
+
+  ws.onopen = () => {
+    console.log('Connected to WebSocket server')
+  }
+
+  ws.onmessage = event => {
+    const li = document.createElement('li')
+    li.textContent = event.data
+  }
+
   return (
     <div className="App">
       <main className="bg-body font-Montserrat">
