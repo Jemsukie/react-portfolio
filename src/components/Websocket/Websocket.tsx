@@ -41,7 +41,6 @@ const Websocket: React.FC = () => {
                 console.log('Page loaded over HTTPS, WebSocket connection not allowed.')
             }
         }
-      
 
         // Cleanup on component unmount
         return () => {
