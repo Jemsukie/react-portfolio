@@ -70,7 +70,7 @@ const Websocket: React.FC = () => {
                 if(connection){
                     connection.send('Helllllloooooo')
                 }
-            }}>WS</button>
+            }}>WS {connection ? '❌' : '✔️'}</button>
         </div>
     )
 }
