@@ -33,12 +33,15 @@ const Websocket: React.FC = () => {
 
     useEffect(() => {
         // Only connect via WebSocket if the page is served over HTTP
-        if (window.location.protocol === 'http:') {
-            console.log('Page loaded over HTTP, attempting WebSocket connection...')
-            createWebSocket(`${wsPrefix}${websocketUrl}`)
-        } else {
-            console.log('Page loaded over HTTPS, WebSocket connection not allowed.')
+        if(!socket){
+            if (window.location.protocol === 'http:') {
+                console.log('Page loaded over HTTP, attempting WebSocket connection...')
+                createWebSocket(`${wsPrefix}${websocketUrl}`)
+            } else {
+                console.log('Page loaded over HTTPS, WebSocket connection not allowed.')
+            }
         }
+      
 
         // Cleanup on component unmount
         return () => {
