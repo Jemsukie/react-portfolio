@@ -5,7 +5,6 @@ import {
 } from 'tabler-icons-react'
 import { goToSection } from '../../lib/link-helper'
 import Drawer from '../../layout/Drawer'
-import Websocket from '../Websocket/Websocket'
 
 export type TReferenceLinksProps = {
     [key: string]: MutableRefObject<null>
