@@ -5,7 +5,6 @@ const useWebsocketConnection = (link: string): {connection: WebSocket | null, er
     const [error, setError] = useState<Event | null>(null)
 
     useEffect(() => {
-        if(location.protocol === 'http:'){
             const ws = new WebSocket(link)
 
             ws.onopen = () => {
@@ -18,7 +17,6 @@ const useWebsocketConnection = (link: string): {connection: WebSocket | null, er
                 setConnection(null)
                 setError(event)
             }
-        }
     }, [])
 
 

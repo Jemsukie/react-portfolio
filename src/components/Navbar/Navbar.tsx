@@ -86,7 +86,7 @@ const Navbar = ({ children, referenceLinks }: {
                         <span className="ml-3 text-xl font-bold text-accent cursor-pointer hover-enlarge hover:text-success">JemFolio</span>
                     </div>
                     <WebMenu navLinks={navLinks} />
-                    <Websocket />
+                    {/* <Websocket /> */}
 
                     <label className="swap swap-rotate btn bg-neutral text-info btn-outline md:hidden sm:hidden" >
 
