@@ -118,7 +118,7 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 const Cards = ({ details, prevFn, nextFn }: { details: TCards, prevFn: () => void, nextFn: () => void }) => {
 	const { img, title, description, sourceCode } = details
 
-	return (<div className="card lg:card-side bg-secondary text-slate-200 shadow container">
+	return (<div className="card lg:card-side bg-secondary text-slate-200 shadow container h-full">
 		<figure className='w-full lg:w-1/2 '>
 			<img src={img} className="h-fit sm:h-full md:h-full w-full object-cover" alt="Album" />
 		</figure>
