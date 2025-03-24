@@ -90,12 +90,12 @@ const contactInfo = [
 const expStats = [
     {
         title: 'Freelance Experience',
-        value: '2 years',
+        value: '3 years',
         desc: 'Fullstack Development'
     },
     {
         title: 'Professional Experience',
-        value: '3 years',
+        value: '5 years',
         desc: 'Software Engineering',
         bg: 'bg-slate-800'
     },
