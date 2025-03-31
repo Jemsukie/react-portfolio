@@ -13,6 +13,7 @@ import jest from '../assets/logo/jest.png'
 import testproject from '../assets/logo/testproject.png'
 import devtools from '../assets/logo/devtools.png'
 import hubspot from '../assets/logo/hubspot.png'
+import make from '../assets/logo/make.png'
 import zapier from '../assets/logo/zapier.png'
 import temporal from '../assets/logo/temporal.png'
 import inngest from '../assets/logo/inngest.png'
@@ -50,6 +51,7 @@ export const assets = {
     testproject,
     devtools,
     hubspot,
+    make,
     zapier,
     temporal,
     inngest,
@@ -117,6 +119,7 @@ export const menuLinks: TMenuLinks = {
         title: 'Workflow Automation',
         swap: [
             { brand: 'HubSpot', image: hubspot },
+            { brand: 'Make', image: make },
             { brand: 'Zapier', image: zapier },
             { brand: 'Temporal IO', image: temporal },
             { brand: 'Inngest', image: inngest },
