@@ -5,6 +5,7 @@ import img4 from '../assets/projects/4.png'
 import img5 from '../assets/projects/5.png'
 import img6 from '../assets/projects/6.png'
 import img7 from '../assets/projects/7.png'
+import img8 from '../assets/projects/8.png'
 import bg from '../assets/hero/bg.jpg'
 import hero from '../assets/hero/halo.png'
 import storybook from '../assets/logo/storybook.png'
@@ -43,6 +44,7 @@ export const assets = {
     img5,
     img6,
     img7,
+    img8,
     bg,
     hero,
     storybook,
