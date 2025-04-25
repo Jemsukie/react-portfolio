@@ -3,11 +3,14 @@ import { BrandHipchat } from 'tabler-icons-react'
 import emailjs from '@emailjs/browser'
 import { TReferenceProps } from '../../lib/props-types'
 import { contactInfo, socialLinks } from '../../lib/config'
+import SectionWrapper from '../../layout/SectionWrapper'
 
 const Contact = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-neutral pattern" >
-            <div className="shadow-lg py-6">
+
+            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+            <div className="py-6">
                 <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
                     <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
                     {/* <progress className="progress w-56 progress-success bg-transparent" /> */}
@@ -31,6 +34,7 @@ const Contact = ({ reference }: TReferenceProps) => {
                     </div>
                 </div>
             </div>
+            </SectionWrapper>
 
         </section>
 

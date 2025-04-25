@@ -2,6 +2,7 @@ import { ThreeDCubeSphere } from 'tabler-icons-react'
 import { assets } from '../../lib/asset-helper'
 import { ReactNode, useEffect,  useRef, useState } from 'react'
 import { TReferenceProps } from '../../lib/props-types'
+import SectionWrapper from '../../layout/SectionWrapper'
 
 type TCards = {
 	img: string
@@ -29,18 +30,18 @@ const Projects = ({ reference }: TReferenceProps) => {
 
 	return (
 		<section ref={reference} className='flex flex-col justify-center'>
-			<div className="shadow-lg py-6">
-				<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-end flex-col" id="project">
-					<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
-					{/* <progress className="progress w-56 progress-primary bg-transparent" /> */}
+            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+				<div className="py-6">
+					<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+						<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
+						{/* <progress className="progress w-56 progress-primary bg-transparent" /> */}
+					</div>
 				</div>
-			</div>
-			<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
-				{/* <Carousel cards={[cards[0], cards[1]]} /> */}
-				<Carousel cards={cards} />
-			</div>
-
-
+				<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
+					{/* <Carousel cards={[cards[0], cards[1]]} /> */}
+					<Carousel cards={cards} />
+				</div>
+			</SectionWrapper>
 		</section >
 	)
 }
@@ -48,7 +49,7 @@ const Projects = ({ reference }: TReferenceProps) => {
 const Carousel = ({ cards }: { cards: TCards[] }) => {
 	const carouselRef = useRef<HTMLDivElement>(null)
 	const [currentIndex, setCurrentIndex] = useState(0)
-	const interval = 5000 // 5 seconds
+	const interval = 10000 // 10 seconds
 	const itemRefs = useRef<(HTMLDivElement | null)[]>([]) // Array of refs
 	const intervalRef = useRef<NodeJS.Timeout | null>(null) // Ref to store the interval ID
 

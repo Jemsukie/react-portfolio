@@ -3,21 +3,23 @@ import { ChevronsUpLeft } from 'tabler-icons-react'
 import { menuLinks } from '../../lib/asset-helper'
 import { TReferenceProps } from '../../lib/props-types'
 import { expStats } from '../../lib/config'
+import SectionWrapper from '../../layout/SectionWrapper'
 
 const About = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-slate-800 pattern">
-
-            <div className="shadow-lg py-6">
-                <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-start flex-col" id="project">
-                    <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
+            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+                <div className="py-6">
+                    <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+                        <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
-                <SkillSet />
-                <Divider up={<Par />} down={<Stat />} />
-            </div>
+                <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
+                    <SkillSet />
+                    <Divider up={<Par />} down={<Stat />} />
+                </div>
+            </SectionWrapper>
         </section>
     )
 }

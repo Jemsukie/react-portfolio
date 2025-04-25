@@ -1,16 +1,19 @@
 import { assets } from '../../lib/asset-helper'
 import { Download } from 'tabler-icons-react'
 import { TReferenceProps } from '../../lib/props-types'
+import SectionWrapper from '../../layout/SectionWrapper'
 
 const Hero = ({ reference }: TReferenceProps) => {
     const { bg, hero, cv } = assets
 
     return (
-        <section ref={reference} className="hero min-h-screen bg-cover bg-gradient-to-bl"
+        <section ref={reference} className="hero bg-cover bg-gradient-to-bl"
             style={{
                 backgroundImage: `url(${bg})`
             }}>
-            <div className="hero-content flex-col lg:flex-row-reverse bg-slate-800 bg-opacity-30 md:rounded-tr-lg md:rounded-bl-lg h-full md:h-auto"
+               <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+
+               <div className="hero-content flex-col lg:flex-row-reverse bg-slate-800 bg-opacity-30 md:rounded-tr-lg md:rounded-bl-lg h-full md:h-auto"
                 style={{
                     borderBottom: '4px solid #36D399',
                     borderRight: '4px solid #FBAF3A'
@@ -37,6 +40,8 @@ const Hero = ({ reference }: TReferenceProps) => {
 
                 </div>
             </div>
+               </SectionWrapper>
+
         </section>
     )
 }

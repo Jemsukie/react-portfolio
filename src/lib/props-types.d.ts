@@ -12,3 +12,9 @@ export type TMenuLinks = {
         }[]
     }
 }
+
+export type TSectionWrapperProps = {
+    children: React.ReactNode
+    containerClass: string
+    paddingSectionClass: string
+}
