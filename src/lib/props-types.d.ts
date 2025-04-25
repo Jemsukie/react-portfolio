@@ -18,3 +18,9 @@ export type TSectionWrapperProps = {
     containerClass: string
     paddingSectionClass: string
 }
+
+export type TScrollAnimationWrapperProps = {
+    children: React.ReactNode
+    delay?: number
+    className?: string
+}

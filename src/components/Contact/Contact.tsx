@@ -4,36 +4,51 @@ import emailjs from '@emailjs/browser'
 import { TReferenceProps } from '../../lib/props-types'
 import { contactInfo, socialLinks } from '../../lib/config'
 import SectionWrapper from '../../layout/SectionWrapper'
+import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
 
 const Contact = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-neutral pattern" >
 
             <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
-            <div className="py-6">
-                <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
-                    <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
-                    {/* <progress className="progress w-56 progress-success bg-transparent" /> */}
-                </div>
-            </div>
-            <div className="md:py-4 py-0">
-                <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs flex-col lg:flex-row-reverse md:rounded-tr-lg md:rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
-                    style={{
-                        borderBottom: '4px solid #36D399',
-                        borderRight: '4px solid #FBAF3A'
-                    }}
-                >
-                    <div className="flex container mx-auto flex-col lg:flex-row justify-center md:p-10">
-                        <div className="flex w-full flex-col lg:flex-row">
-                            <Card />
-                            <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
-                                <kbd className="kbd kbd-md text-slate-600">OR</kbd>
-                            </div>
-                            <Form />
+                <ScrollAnimationWrapper delay={200}>
+                    <div className="py-6">
+                        <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+                            <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
+                            {/* <progress className="progress w-56 progress-success bg-transparent" /> */}
                         </div>
                     </div>
-                </div>
-            </div>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper delay={200}>
+                    <div className="md:py-4 py-0">
+                        <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs flex-col lg:flex-row-reverse md:rounded-tr-lg md:rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
+                            style={{
+                                borderBottom: '4px solid #36D399',
+                                borderRight: '4px solid #FBAF3A'
+                            }}
+                        >
+                            <div className="flex container mx-auto flex-col lg:flex-row justify-center md:p-10">
+                                <div className="flex w-full flex-col lg:flex-row">
+                                    <ScrollAnimationWrapper delay={400} className="flex w-full justify-center flex-col lg:flex-row">
+                                        <Card />
+                                    </ScrollAnimationWrapper>
+
+
+                                        <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
+                                            <ScrollAnimationWrapper delay={200} className="flex w-full justify-center flex-col lg:flex-row">
+                                            <kbd className="kbd kbd-md text-slate-600">OR</kbd>
+                                            </ScrollAnimationWrapper>
+                                        </div>
+
+
+                                    <ScrollAnimationWrapper delay={600} className="flex w-full justify-center flex-col lg:flex-row">
+                                        <Form />
+                                    </ScrollAnimationWrapper>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ScrollAnimationWrapper>
             </SectionWrapper>
 
         </section>

@@ -1,8 +1,9 @@
 import { ThreeDCubeSphere } from 'tabler-icons-react'
 import { assets } from '../../lib/asset-helper'
-import { ReactNode, useEffect,  useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { TReferenceProps } from '../../lib/props-types'
 import SectionWrapper from '../../layout/SectionWrapper'
+import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
 
 type TCards = {
 	img: string
@@ -31,18 +32,20 @@ const Projects = ({ reference }: TReferenceProps) => {
 	return (
 		<section ref={reference} className='flex flex-col justify-center'>
             <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
-				<div className="py-6">
-					<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
-						<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
-						{/* <progress className="progress w-56 progress-primary bg-transparent" /> */}
+				<ScrollAnimationWrapper>
+					<div className="py-6">
+						<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+							<h2 className="text-2xl font-semibold w-fit flex"> <ThreeDCubeSphere /> My Projects</h2>
+						</div>
 					</div>
-				</div>
-				<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
-					{/* <Carousel cards={[cards[0], cards[1]]} /> */}
-					<Carousel cards={cards} />
-				</div>
+				</ScrollAnimationWrapper>
+				<ScrollAnimationWrapper>
+					<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
+						<Carousel cards={cards} />
+					</div>
+				</ScrollAnimationWrapper>
 			</SectionWrapper>
-		</section >
+		</section>
 	)
 }
 
@@ -115,7 +118,6 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 		</div>
 	)
 }
-
 
 const Cards = ({ details, prevFn, nextFn }: { details: TCards, prevFn: () => void, nextFn: () => void }) => {
 	const { img, title, description, sourceCode } = details

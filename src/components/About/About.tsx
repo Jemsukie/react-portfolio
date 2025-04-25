@@ -4,20 +4,33 @@ import { menuLinks } from '../../lib/asset-helper'
 import { TReferenceProps } from '../../lib/props-types'
 import { expStats } from '../../lib/config'
 import SectionWrapper from '../../layout/SectionWrapper'
+import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
 
 const About = ({ reference }: TReferenceProps) => {
     return (
         <section ref={reference} className="bg-slate-800 pattern">
             <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
-                <div className="py-6">
-                    <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
-                        <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
+                <ScrollAnimationWrapper delay={200}>
+                    <div className="py-6">
+                        <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
+                            <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
+                        </div>
                     </div>
-                </div>
+                </ScrollAnimationWrapper>
 
                 <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
-                    <SkillSet />
-                    <Divider up={<Par />} down={<Stat />} />
+                    <ScrollAnimationWrapper delay={400}>
+                        <SkillSet />
+                    </ScrollAnimationWrapper>
+                    <Divider up={
+                        <ScrollAnimationWrapper delay={200}>
+                            <Par />
+                        </ScrollAnimationWrapper>
+                    } down={
+                        <ScrollAnimationWrapper delay={400}>
+                            <Stat />
+                        </ScrollAnimationWrapper>
+                    } />
                 </div>
             </SectionWrapper>
         </section>
@@ -26,7 +39,7 @@ const About = ({ reference }: TReferenceProps) => {
 
 const SkillSet = () => {
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center h-full">
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">
@@ -55,7 +68,7 @@ const Divider = ({ up, down }: { up: ReactNode, down: ReactNode }) => {
 const Par = () => {
     return (
         <div className="max-w-5xl px-6 mx-auto text-center">
-            <p className='mt-4 text-slate-100'>
+            <p className='text-slate-100'>
                 I'm a Software Engineer from Sariaya Quezon (Philippines).
                 Turning complex problem into a simple and manageable Web Information System is my forte.
                 I earned my Bachelor's degree in Information Technology in the year of 2021.
