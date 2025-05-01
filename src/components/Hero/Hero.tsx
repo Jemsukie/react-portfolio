@@ -12,7 +12,7 @@ const Hero = ({ reference }: TReferenceProps) => {
             style={{
                 backgroundImage: `url(${bg})`
             }}>
-            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-224'}>
                 <div className="hero-content flex-col lg:flex-row-reverse bg-slate-800 bg-opacity-30 md:rounded-tr-lg md:rounded-bl-lg h-full md:h-auto"
                     style={{
                         borderBottom: '4px solid #36D399',
