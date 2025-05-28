@@ -5,14 +5,17 @@ import { TReferenceProps } from '../../lib/props-types'
 import SectionWrapper from '../../layout/SectionWrapper'
 import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
 
-type TCards = {
+export type TCards = {
 	img: string
 	title: string
 	sourceCode: string
 	description: ReactNode
 }
 
-const Projects = ({ reference }: TReferenceProps) => {
+// eslint-disable-next-line no-unused-vars
+type ProjectsProps = TReferenceProps & { onSeeMore: (card: TCards) => void }
+
+const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
 	const { img1, img2, img3, img4, img5, img6, img7, img8 } = assets
 
 	const cards: TCards[] = [
@@ -41,7 +44,7 @@ const Projects = ({ reference }: TReferenceProps) => {
 				</ScrollAnimationWrapper>
 				<ScrollAnimationWrapper>
 					<div className='flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4'>
-						<Carousel cards={cards} />
+						<Carousel cards={cards} onSeeMore={onSeeMore} />
 					</div>
 				</ScrollAnimationWrapper>
 			</SectionWrapper>
@@ -49,12 +52,14 @@ const Projects = ({ reference }: TReferenceProps) => {
 	)
 }
 
-const Carousel = ({ cards }: { cards: TCards[] }) => {
+type CarouselProps = { cards: TCards[], onSeeMore: (card: TCards) => void }
+
+const Carousel = ({ cards, onSeeMore }: CarouselProps) => {
 	const carouselRef = useRef<HTMLDivElement>(null)
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const interval = 10000 // 10 seconds
-	const itemRefs = useRef<(HTMLDivElement | null)[]>([]) // Array of refs
-	const intervalRef = useRef<NodeJS.Timeout | null>(null) // Ref to store the interval ID
+	const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+	const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
 	// Function to start the auto-slide timer
 	const startAutoSlide = () => {
@@ -86,8 +91,6 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 		if (currentItem) {
 			carousel.scrollLeft = currentItem.offsetLeft
 		}
-
-
 	}, [currentIndex])
 
 	// Move to the previous slide and reset the timer
@@ -111,7 +114,12 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 					key={idx}
 				>
 					<div className='w-full flex justify-center'>
-						<Cards prevFn={moveToPrevSlide} nextFn={moveToNextSlide} details={c} />
+						<Cards
+							prevFn={moveToPrevSlide}
+							nextFn={moveToNextSlide}
+							details={c}
+							onSeeMore={() => onSeeMore(c)}
+						/>
 					</div>
 				</div>
 			))}
@@ -119,44 +127,83 @@ const Carousel = ({ cards }: { cards: TCards[] }) => {
 	)
 }
 
-const Cards = ({ details, prevFn, nextFn }: { details: TCards, prevFn: () => void, nextFn: () => void }) => {
+const truncateText = (text: string, maxLength: number) => {
+	if (text.length <= maxLength) return text
+	return text.slice(0, maxLength) + '...'
+}
+
+const Cards = ({ details, prevFn, nextFn, onSeeMore }: {
+	details: TCards,
+	prevFn: () => void,
+	nextFn: () => void,
+	onSeeMore: () => void
+}) => {
 	const { img, title, description, sourceCode } = details
 
-	return (<div className="card lg:card-side bg-secondary text-slate-200 shadow container h-full">
-		<figure className='w-full lg:w-1/2 '>
-			<img src={img} className="h-fit sm:h-full md:h-full w-full object-cover" alt="Album" />
-		</figure>
-		<div className="card-body lg:w-1/2 w-full">
-			<h2 className="card-title text-2xl mb-2 w-full">{title}</h2>
-			<p className="text-slate-400 text-lg">{description}</p>
+	// Convert ReactNode description to string for truncation
+	let descString = ''
+	if (typeof description === 'string') {
+		descString = description
+	} else if (Array.isArray(description)) {
+		descString = description.map(d => (typeof d === 'string' ? d : '')).join(' ')
+	} else if (typeof description === 'object' && description !== null && 'props' in description) {
+		descString = description.props?.children ? (Array.isArray(description.props.children) ? description.props.children.map((c: any) => (typeof c === 'string' ? c : '')).join(' ') : description.props.children) : ''
+	}
+	const isLong = descString.length > 120
 
-			<div className="card-actions justify-between">
-				<div className='flex gap-2'>
-					<button onClick={prevFn}>
-						<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg  hover-enlarge hover:border-2 hover:border-info">
-							❮❮
-							<span className="sr-only">Previous</span>
-						</span>
-					</button>
+	return <>
+		<div className="card lg:card-side bg-secondary text-slate-200 shadow container h-full">
+			<figure className='w-full lg:w-1/2 '>
+				<img src={img} className="h-fit sm:h-full md:h-full w-full object-cover" alt="Album" />
+			</figure>
+			<div className="card-body lg:w-1/2 w-full">
+				<h2 className="card-title text-2xl mb-2 w-full">{title}</h2>
+				<p className="text-slate-400 text-lg">
+					{isLong ? truncateText(descString, 120) : description}
+					{isLong && <span className="text-info cursor-pointer ml-2 underline" onClick={onSeeMore}>See more</span>}
+				</p>
 
-					<button onClick={nextFn}>
-						<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg hover-enlarge hover:border-2 hover:border-info">
-							❯❯
-							<span className="sr-only">Next</span>
-						</span>
-					</button>
+				<div className="card-actions justify-between">
+					<div className='flex gap-2'>
+						<button onClick={prevFn}>
+							<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg  hover-enlarge hover:border-2 hover:border-info">
+								❮❮
+								<span className="sr-only">Previous</span>
+							</span>
+						</button>
 
+						<button onClick={nextFn}>
+							<span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg hover-enlarge hover:border-2 hover:border-info">
+								❯❯
+								<span className="sr-only">Next</span>
+							</span>
+						</button>
+					</div>
 
+					{sourceCode !== '' && (
+						<a className="badge badge-primary badge-outline cursor-pointer" target="_blank" href={sourceCode} rel="noreferrer">Source Code</a>
+					)}
 				</div>
-
-				{sourceCode !== '' && (
-					<a className="badge badge-primary badge-outline cursor-pointer" target="_blank" href={sourceCode} rel="noreferrer">Source Code</a>
-				)}
 			</div>
 		</div>
-	</div>
+	</>
+}
 
-
+const ProjectModal = ({ card, onClose }: { card: TCards, onClose: () => void }) => {
+	const { img, title, description } = card
+	return (
+		<div className="modal modal-open z-50">
+			{/* Blurred overlay */}
+			<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={onClose}></div>
+			<div className="modal-box max-w-lg z-50 relative">
+				<h3 className="font-bold text-lg mb-2">{title}</h3>
+				<img src={img} className="w-full object-cover rounded mb-4" alt="Album" />
+				<div className="text-slate-400 text-base mb-4">{description}</div>
+				<div className="modal-action">
+					<button className="btn btn-info" onClick={onClose}>Close</button>
+				</div>
+			</div>
+		</div>
 	)
 }
 
