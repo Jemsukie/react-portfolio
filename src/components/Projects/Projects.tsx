@@ -13,7 +13,7 @@ export type TCards = {
 }
 
 // eslint-disable-next-line no-unused-vars
-type ProjectsProps = TReferenceProps & { onSeeMore: (card: TCards) => void }
+type ProjectsProps = TReferenceProps & { onSeeMore: (_card: TCards) => void }
 
 const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
 	const { img1, img2, img3, img4, img5, img6, img7, img8 } = assets
