@@ -52,7 +52,8 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
 	)
 }
 
-type CarouselProps = { cards: TCards[], onSeeMore: (card: TCards) => void }
+// eslint-disable-next-line no-unused-vars
+type CarouselProps = { cards: TCards[], onSeeMore: (_card: TCards) => void }
 
 const Carousel = ({ cards, onSeeMore }: CarouselProps) => {
 	const carouselRef = useRef<HTMLDivElement>(null)
