@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Build project
+        run: yarn build
+
       - name: Configure Git
         run: |
           git config --global user.name "${{ github.actor }}"
