@@ -31,7 +31,7 @@ const Projects = ({ reference }: TReferenceProps) => {
 
 	return (
 		<section ref={reference} className='flex flex-col justify-center'>
-            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'padding-section-128'}>
+            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'py-[1em] sm:py-[2em] lg:py-[8em]'}>
 				<ScrollAnimationWrapper>
 					<div className="py-6">
 						<div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
