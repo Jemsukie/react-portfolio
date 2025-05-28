@@ -189,22 +189,4 @@ const Cards = ({ details, prevFn, nextFn, onSeeMore }: {
 	</>
 }
 
-const ProjectModal = ({ card, onClose }: { card: TCards, onClose: () => void }) => {
-	const { img, title, description } = card
-	return (
-		<div className="modal modal-open z-50">
-			{/* Blurred overlay */}
-			<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={onClose}></div>
-			<div className="modal-box max-w-lg z-50 relative">
-				<h3 className="font-bold text-lg mb-2">{title}</h3>
-				<img src={img} className="w-full object-cover rounded mb-4" alt="Album" />
-				<div className="text-slate-400 text-base mb-4">{description}</div>
-				<div className="modal-action">
-					<button className="btn btn-info" onClick={onClose}>Close</button>
-				</div>
-			</div>
-		</div>
-	)
-}
-
 export default Projects
