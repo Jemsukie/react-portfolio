@@ -24,7 +24,14 @@ const Footer = () => {
                 whileTap={{ scale: 0.9 }}
                 aria-label={`Visit ${link}`}
               >
-                <Icon className="text-primary" size={20} />
+                <motion.div
+                  className="inline-flex items-center justify-center"
+                  style={{ transformOrigin: 'center' }}
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                >
+                  <Icon className="text-primary" size={20} />
+                </motion.div>
               </motion.a>
             ))}
           </div>

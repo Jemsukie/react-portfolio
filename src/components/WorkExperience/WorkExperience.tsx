@@ -28,7 +28,14 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <Briefcase className="text-accent" size={40} />
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <Briefcase className="text-accent" size={40} />
+              </motion.div>
               Work Experience
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -134,22 +141,38 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
           {/* View More Button */}
           {workExperience.length > 3 && (
             <div className="mt-12 text-center">
-              <button
+              <motion.button
                 onClick={() => setShowAll(!showAll)}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-light transition-all duration-300 shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {showAll ? (
                   <>
-                    <ChevronUp size={20} />
+                    <motion.div
+                      className="inline-flex items-center justify-center"
+                      style={{ transformOrigin: 'center' }}
+                      whileHover={{ scale: 1.15, rotate: 360 }}
+                      transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                    >
+                      <ChevronUp size={20} />
+                    </motion.div>
                     View Less
                   </>
                 ) : (
                   <>
-                    <ChevronDown size={20} />
+                    <motion.div
+                      className="inline-flex items-center justify-center"
+                      style={{ transformOrigin: 'center' }}
+                      whileHover={{ scale: 1.15, rotate: 360 }}
+                      transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                    >
+                      <ChevronDown size={20} />
+                    </motion.div>
                     View More
                   </>
                 )}
-              </button>
+              </motion.button>
             </div>
           )}
         </div>

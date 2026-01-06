@@ -41,7 +41,16 @@ const CalendlyButton = ({
       whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.98 }}
     >
-      {showIcon && <Calendar size={iconSize} />}
+      {showIcon && (
+        <motion.div
+          className="inline-flex items-center justify-center"
+          style={{ transformOrigin: 'center' }}
+          whileHover={{ scale: 1.15, rotate: 360 }}
+          transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+        >
+          <Calendar size={iconSize} />
+        </motion.div>
+      )}
       <span>{children || 'Schedule Meeting'}</span>
     </motion.button>
   )

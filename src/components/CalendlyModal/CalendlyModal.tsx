@@ -62,13 +62,21 @@ const CalendlyModal = ({ isOpen, onClose }: CalendlyModalProps) => {
                     Schedule a consultation to discuss your project
                   </p>
                 </div>
-                <button
+                <motion.button
                   onClick={onClose}
                   className="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white"
                   aria-label="Close modal"
+                  whileHover={{ scale: 1.1 }}
                 >
-                  <X size={24} />
-                </button>
+                  <motion.div
+                    className="inline-flex items-center justify-center"
+                    style={{ transformOrigin: 'center' }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                  >
+                    <X size={24} />
+                  </motion.div>
+                </motion.button>
               </div>
 
               {/* Calendly Embed */}

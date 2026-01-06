@@ -1,83 +1,89 @@
-import { useState, useEffect, useRef } from 'react'
-import { Menu2, X, Download } from 'tabler-icons-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { goToSection } from '../../lib/link-helper'
-import { assets } from '../../lib/asset-helper'
-import CalendlyButton from '../CalendlyButton/CalendlyButton'
+import { useState, useEffect, useRef } from "react";
+import { Menu2, X, Download } from "tabler-icons-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { goToSection } from "../../lib/link-helper";
+import { assets } from "../../lib/asset-helper";
+import CalendlyButton from "../CalendlyButton/CalendlyButton";
 
 export type TReferenceLinksProps = {
-  [key: string]: React.RefObject<HTMLElement>
-}
+  [key: string]: React.RefObject<HTMLElement>;
+};
 
 export type TNavLinksProps = {
-  title: string
-  link: React.RefObject<HTMLElement>
-  icon?: JSX.Element
-}
+  title: string;
+  link: React.RefObject<HTMLElement>;
+  icon?: JSX.Element;
+};
 
-export const getNavlinks = ({ referenceLinks }: { referenceLinks: TReferenceLinksProps }) => {
-  const { hero, about, workExperience, skills, services, projects, testimonials, contact } = referenceLinks
+export const getNavlinks = ({
+  referenceLinks,
+}: {
+  referenceLinks: TReferenceLinksProps;
+}) => {
+  const { hero, about, workExperience, skills, services, projects, contact } =
+    referenceLinks;
 
   return [
-    { title: 'Home', link: hero },
-    { title: 'About', link: about },
-    { title: 'Experience', link: workExperience },
-    { title: 'Skills', link: skills },
-    { title: 'Services', link: services },
-    { title: 'Projects', link: projects },
-    { title: 'Testimonials', link: testimonials },
-    { title: 'Contact', link: contact },
-  ]
-}
+    { title: "Home", link: hero },
+    { title: "About", link: about },
+    { title: "Experience", link: workExperience },
+    { title: "Skills", link: skills },
+    { title: "Services", link: services },
+    { title: "Projects", link: projects },
+    { title: "Contact", link: contact },
+  ];
+};
 
 type NavbarProps = {
-  referenceLinks: TReferenceLinksProps
-  onOpenCalendly: () => void
-}
+  referenceLinks: TReferenceLinksProps;
+  onOpenCalendly: () => void;
+};
 
 const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
-  const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks })
-  const [burgerOn, setBurgerOn] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const navbarRef = useRef<HTMLDivElement>(null)
-  const { cv } = assets
+  const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks });
+  const [burgerOn, setBurgerOn] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const navbarRef = useRef<HTMLDivElement>(null);
+  const { cv } = assets;
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      setBurgerOn(false)
-    }
+      setIsScrolled(window.scrollY > 50);
+      setBurgerOn(false);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (burgerOn) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [burgerOn])
+      document.body.style.overflow = "unset";
+    };
+  }, [burgerOn]);
 
   const onClickBurger = () => {
-    setBurgerOn(prev => !prev)
-  }
+    setBurgerOn((prev) => !prev);
+  };
 
   const handleCloseMenu = () => {
-    setBurgerOn(false)
-  }
+    setBurgerOn(false);
+  };
 
   return (
     <>
       <nav
         ref={navbarRef}
         className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md' : 'bg-white/80 backdrop-blur-sm'
+          isScrolled
+            ? "bg-white/95 backdrop-blur-sm shadow-md"
+            : "bg-white/80 backdrop-blur-sm"
         }`}
       >
         <div className="container-max">
@@ -115,17 +121,28 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
             </div>
 
             {/* Mobile/Tablet Menu Button - Visible on mobile and tablet */}
-            <button
+            <motion.button
               onClick={onClickBurger}
               className="lg:hidden p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors z-50 relative"
               aria-label="Toggle menu"
+              whileHover={{ scale: 1.1 }}
             >
-              {burgerOn ? <X size={24} className="text-gray-700" /> : <Menu2 size={24} className="text-gray-700" />}
-            </button>
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: "center" }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
+              >
+                {burgerOn ? (
+                  <X size={24} className="text-gray-700" />
+                ) : (
+                  <Menu2 size={24} className="text-gray-700" />
+                )}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </nav>
-
       {/* Mobile Menu Overlay & Drawer - Outside nav for proper z-index */}
       <AnimatePresence>
         {burgerOn && (
@@ -142,23 +159,35 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
 
             {/* Mobile/Tablet Menu Drawer */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-[9999] lg:hidden shadow-2xl overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
                 <h2 className="text-xl font-bold text-gray-800">Portfolio</h2>
-                <button
+                <motion.button
                   onClick={handleCloseMenu}
                   className="p-2 rounded-full hover:bg-gray-100 transition-colors"
                   aria-label="Close menu"
+                  whileHover={{ scale: 1.1 }}
                 >
-                  <X size={24} className="text-gray-600" />
-                </button>
+                  <motion.div
+                    className="inline-flex items-center justify-center"
+                    style={{ transformOrigin: "center" }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      duration: 0.6,
+                    }}
+                  >
+                    <X size={24} className="text-gray-600" />
+                  </motion.div>
+                </motion.button>
               </div>
 
               {/* Menu Content */}
@@ -168,8 +197,8 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
                   <button
                     key={link.title}
                     onClick={() => {
-                      goToSection(link.link)
-                      handleCloseMenu()
+                      goToSection(link.link);
+                      handleCloseMenu();
                     }}
                     className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors text-base text-gray-700 font-medium"
                   >
@@ -189,7 +218,18 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Download size={20} />
+                  <motion.div
+                    className="inline-flex items-center justify-center"
+                    style={{ transformOrigin: "center" }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      duration: 0.6,
+                    }}
+                  >
+                    <Download size={20} />
+                  </motion.div>
                   Download CV
                 </motion.a>
 
@@ -197,8 +237,8 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
                 <div className="w-full">
                   <CalendlyButton
                     onOpenCalendly={() => {
-                      onOpenCalendly()
-                      handleCloseMenu()
+                      onOpenCalendly();
+                      handleCloseMenu();
                     }}
                     variant="accent"
                     size="md"
@@ -212,10 +252,9 @@ const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
           </>
         )}
       </AnimatePresence>
-
       <div className="h-16 md:h-20" /> {/* Spacer for fixed navbar */}
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

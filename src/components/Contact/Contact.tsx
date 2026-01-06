@@ -20,7 +20,14 @@ const Contact = ({ reference }: TReferenceProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <Mail className="text-accent" size={40} />
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <Mail className="text-accent" size={40} />
+              </motion.div>
               Contact Me
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -58,7 +65,14 @@ const ContactCard = () => {
             href={link}
             className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
           >
-            <Icon className="text-accent group-hover:scale-110 transition-transform" size={24} />
+            <motion.div
+              className="inline-flex items-center justify-center"
+              style={{ transformOrigin: 'center' }}
+              whileHover={{ scale: 1.15, rotate: 360 }}
+              transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+            >
+              <Icon className="text-accent" size={24} />
+            </motion.div>
             <div>
               <div className="text-xs text-gray-500 mb-1">{title}</div>
               <div className="text-base font-medium text-primary">{desc}</div>
@@ -69,16 +83,24 @@ const ContactCard = () => {
 
       <div className="flex items-center justify-center gap-3">
         {socialLinks.map(({ Icon, link }, idx) => (
-          <a
+          <motion.a
             key={idx}
             href={link}
             target="_blank"
             rel="noreferrer"
-            className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all hover:scale-110"
+            className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all"
             aria-label={`Visit ${link}`}
+            whileHover={{ scale: 1.1 }}
           >
-            <Icon className="text-primary" size={24} />
-          </a>
+            <motion.div
+              className="inline-flex items-center justify-center"
+              style={{ transformOrigin: 'center' }}
+              whileHover={{ scale: 1.15, rotate: 360 }}
+              transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+            >
+              <Icon className="text-primary" size={24} />
+            </motion.div>
+          </motion.a>
         ))}
       </div>
     </div>

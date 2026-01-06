@@ -65,13 +65,21 @@ const ModalPortal = ({ isOpen, card, onClose }: ModalPortalProps) => {
             >
               <div className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl relative">
               {/* Close Button */}
-              <button
+              <motion.button
                 onClick={onClose}
                 className="absolute top-4 right-4 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors z-10"
                 aria-label="Close modal"
+                whileHover={{ scale: 1.1 }}
               >
-                <X size={24} className="text-gray-700" />
-              </button>
+                <motion.div
+                  className="inline-flex items-center justify-center"
+                  style={{ transformOrigin: 'center' }}
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                >
+                  <X size={24} className="text-gray-700" />
+                </motion.div>
+              </motion.button>
 
               {/* Content */}
               <div className="mt-4">

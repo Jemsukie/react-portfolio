@@ -15,7 +15,14 @@ const Services = ({ reference }: TReferenceProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <Briefcase className="text-accent" size={40} />
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <Briefcase className="text-accent" size={40} />
+              </motion.div>
               Services
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -31,9 +38,14 @@ const Services = ({ reference }: TReferenceProps) => {
                 whileHover={{ y: -5 }}
                 className="card p-8 card-hover h-full flex flex-col"
               >
-                <div className="mb-4">
+                <motion.div
+                  className="mb-4 inline-flex items-center justify-center"
+                  style={{ transformOrigin: 'center' }}
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                >
                   <service.Icon className="text-accent" size={48} />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-bold text-primary mb-3">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed flex-grow">{service.description}</p>
               </motion.div>

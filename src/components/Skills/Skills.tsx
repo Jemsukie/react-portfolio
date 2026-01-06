@@ -20,7 +20,14 @@ const Skills = ({ reference }: TReferenceProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <Code className="text-accent" size={40} />
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <Code className="text-accent" size={40} />
+              </motion.div>
               Skills & Expertise
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">

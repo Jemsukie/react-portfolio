@@ -35,7 +35,14 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
                 transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6"
               >
-                <Star className="text-accent" size={18} />
+                <motion.div
+                  className="inline-flex items-center justify-center"
+                  style={{ transformOrigin: 'center' }}
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                >
+                  <Star className="text-accent" size={18} />
+                </motion.div>
                 <span className="text-sm font-semibold text-accent">
                   Available for New Projects
                 </span>
@@ -67,7 +74,14 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Download size={20} />
+                  <motion.div
+                    className="inline-flex items-center justify-center"
+                    style={{ transformOrigin: 'center' }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                  >
+                    <Download size={20} />
+                  </motion.div>
                   Download CV
                 </motion.a>
 

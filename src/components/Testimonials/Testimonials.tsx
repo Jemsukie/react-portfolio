@@ -28,7 +28,14 @@ const Testimonials = ({ reference }: TReferenceProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <Quote className="text-accent" size={40} />
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <Quote className="text-accent" size={40} />
+              </motion.div>
               Client Testimonials
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -69,9 +76,14 @@ const Testimonials = ({ reference }: TReferenceProps) => {
 
                 {/* Right Side - Quote and Testimonial */}
                 <div className="flex flex-col">
-                  <div className="mb-4">
+                  <motion.div
+                    className="mb-4 inline-flex items-center justify-center"
+                    style={{ transformOrigin: 'center' }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                  >
                     <Quote className="text-accent mb-4" size={32} />
-                  </div>
+                  </motion.div>
                   <blockquote className="text-2xl md:text-3xl font-bold text-primary mb-6 leading-tight">
                     &quot;{currentTestimonial.quote || currentTestimonial.text.split('.')[0]}.&quot;
                   </blockquote>
@@ -84,13 +96,21 @@ const Testimonials = ({ reference }: TReferenceProps) => {
 
           {/* Navigation Arrows */}
           <div className="flex items-center justify-center gap-4 mt-12">
-            <button
+            <motion.button
               onClick={prevTestimonial}
               className="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
               aria-label="Previous testimonial"
+              whileHover={{ scale: 1.1 }}
             >
-              <ChevronLeft size={24} className="text-primary" />
-            </button>
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <ChevronLeft size={24} className="text-primary" />
+              </motion.div>
+            </motion.button>
             <div className="flex gap-2">
               {testimonials.map((_, index) => (
                 <button
@@ -105,13 +125,21 @@ const Testimonials = ({ reference }: TReferenceProps) => {
                 />
               ))}
             </div>
-            <button
+            <motion.button
               onClick={nextTestimonial}
               className="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
               aria-label="Next testimonial"
+              whileHover={{ scale: 1.1 }}
             >
-              <ChevronRight size={24} className="text-primary" />
-            </button>
+              <motion.div
+                className="inline-flex items-center justify-center"
+                style={{ transformOrigin: 'center' }}
+                whileHover={{ scale: 1.15, rotate: 360 }}
+                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              >
+                <ChevronRight size={24} className="text-primary" />
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </SectionWrapper>

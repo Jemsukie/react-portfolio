@@ -19,12 +19,15 @@ const CalendlyCTA = ({ reference, onOpenCalendly }: CalendlyCTAProps) => {
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center">
             <motion.div
+              className="inline-flex items-center justify-center mx-auto mb-6"
+              style={{ transformOrigin: 'center' }}
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
+              whileHover={{ scale: 1.15, rotate: 360 }}
             >
-              <Calendar className="mx-auto mb-6 text-accent" size={48} />
+              <Calendar className="text-accent" size={48} />
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               Let&apos;s Talk

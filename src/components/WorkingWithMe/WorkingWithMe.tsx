@@ -34,9 +34,14 @@ const WorkingWithMe = ({ reference }: TReferenceProps) => {
                   whileHover={{ y: -5 }}
                   className="card p-8 card-hover h-full flex flex-col items-center text-center"
                 >
-                  <div className="mb-4">
+                  <motion.div
+                    className="mb-4 inline-flex items-center justify-center"
+                    style={{ transformOrigin: 'center' }}
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                  >
                     <Icon className="text-accent" size={48} />
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold text-primary mb-3">{item.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{item.description}</p>
                 </motion.div>
