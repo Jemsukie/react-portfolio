@@ -1,38 +1,37 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['src/**/*.{js,jsx,ts,tsx}'],
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    fontFamily: {
-      sans: ['Lato', 'ui-sans-serif', 'system-ui'],
-      logo: ['ui-sans-serif', 'system-ui'],
-    },
-    extend: {},
-  },
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: [
-      {
-        light: {
-          primary: '#2871BC',
-          'primary-content': '#d7e7ff',
-          secondary: '#18202E',
-          'secondary-content': '#ffffff',
-          'error-content': '#ffffff',
-          'success-content': '#ffffff',
-          accent: '#FF7F28',
-          neutral: '#1f2937',
-          'neutral-focus': '#374151',
-          'neutral-content': '#374151',
-          'base-100': '#FFFFFF',
-          'base-200': '#F4F4F5',
-          'base-300': '#dadade',
-          info: '#3ABFF8',
-          success: '#36D399',
-          warning: '#FBAF3A',
-          error: '#F87272',
-          label: '#323232',
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        primary: {
+          DEFAULT: '#0F172A',
+          light: '#1E293B',
+          dark: '#020617',
+        },
+        accent: {
+          DEFAULT: '#0D9488',
+          light: '#14B8A6',
+          dark: '#0F766E',
         },
       },
-    ],
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
+      },
+      lineHeight: {
+        'relaxed': '1.75',
+        'loose': '2',
+      },
+    },
   },
+  plugins: [],
 }
+

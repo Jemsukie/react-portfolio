@@ -1,50 +1,77 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import Navbar from './components/Navbar/Navbar'
+import Hero from './components/Hero/Hero'
 import About from './components/About/About'
+import WorkExperience from './components/WorkExperience/WorkExperience'
+import Skills from './components/Skills/Skills'
+import Services from './components/Services/Services'
+import WorkingWithMe from './components/WorkingWithMe/WorkingWithMe'
+import Projects from './components/Projects/Projects'
+import Testimonials from './components/Testimonials/Testimonials'
+import CalendlyCTA from './components/CalendlyCTA/CalendlyCTA'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
-import Hero from './components/Hero/Hero'
-import Navbar from './components/Navbar/Navbar'
-import Projects from './components/Projects/Projects'
-import './index.css'
-import { useState } from 'react'
-import type { TCards } from './components/Projects/Projects'
 import ModalPortal from './components/ModalPortal'
+import CalendlyModal from './components/CalendlyModal/CalendlyModal'
+import CustomCursor from './components/CustomCursor/CustomCursor'
+import InteractiveBackground from './components/InteractiveBackground/InteractiveBackground'
+import type { TCards } from './components/Projects/Projects'
 
 function App() {
   const referenceLinks = {
-    hero: useRef(null),
-    about: useRef(null),
-    projects: useRef(null),
-    contact: useRef(null),
+    hero: useRef<HTMLElement>(null),
+    about: useRef<HTMLElement>(null),
+    workExperience: useRef<HTMLElement>(null),
+    skills: useRef<HTMLElement>(null),
+    services: useRef<HTMLElement>(null),
+    workingWithMe: useRef<HTMLElement>(null),
+    projects: useRef<HTMLElement>(null),
+    testimonials: useRef<HTMLElement>(null),
+    calendly: useRef<HTMLElement>(null),
+    contact: useRef<HTMLElement>(null),
   }
 
-  // Modal state at the top level
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalCard, setModalCard] = useState<TCards | null>(null)
+  const [isCalendlyModalOpen, setIsCalendlyModalOpen] = useState(false)
 
-  // Handler to open modal with card
   const handleOpenModal = (card: TCards) => {
     setModalCard(card)
     setIsModalOpen(true)
   }
-  // Handler to close modal
+
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setModalCard(null)
   }
 
+  const handleOpenCalendlyModal = () => {
+    setIsCalendlyModalOpen(true)
+  }
+
+  const handleCloseCalendlyModal = () => {
+    setIsCalendlyModalOpen(false)
+  }
+
   return (
-    <div className="App">
-      <main className="bg-body font-Montserrat">
-        <Navbar referenceLinks={referenceLinks}>
-          <Hero reference={referenceLinks.hero} />
-          <About reference={referenceLinks.about} />
-          <Projects reference={referenceLinks.projects} onSeeMore={handleOpenModal} />
-          <Contact reference={referenceLinks.contact} />
-          <Footer reference={referenceLinks.hero} className={'hidden md:flex border-t-2 border-info bg-secondary'} />
-        </Navbar>
-        {/* Modal rendered at the top level using portal */}
+    <div className="App min-h-screen bg-white">
+      <CustomCursor />
+      <InteractiveBackground />
+      <main className="relative z-10">
+        <Navbar referenceLinks={referenceLinks} onOpenCalendly={handleOpenCalendlyModal} />
+        <Hero reference={referenceLinks.hero} onOpenCalendly={handleOpenCalendlyModal} />
+        <About reference={referenceLinks.about} />
+        <WorkExperience reference={referenceLinks.workExperience} />
+        <Skills reference={referenceLinks.skills} />
+        <Services reference={referenceLinks.services} />
+        <WorkingWithMe reference={referenceLinks.workingWithMe} />
+        <Projects reference={referenceLinks.projects} onSeeMore={handleOpenModal} />
+        <Testimonials reference={referenceLinks.testimonials} />
+        <CalendlyCTA reference={referenceLinks.calendly} onOpenCalendly={handleOpenCalendlyModal} />
+        <Contact reference={referenceLinks.contact} />
+        <Footer />
         <ModalPortal isOpen={isModalOpen} card={modalCard} onClose={handleCloseModal} />
+        <CalendlyModal isOpen={isCalendlyModalOpen} onClose={handleCloseCalendlyModal} />
       </main>
     </div>
   )

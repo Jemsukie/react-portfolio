@@ -1,25 +1,37 @@
-import { assets } from '../../lib/asset-helper'
-import { goToSection } from '../../lib/link-helper'
-import { TReferenceProps } from '../../lib/props-types'
+import { motion } from 'framer-motion'
+import { socialLinks } from '../../lib/config'
 
-const
-    Footer = ({ reference, className }: TReferenceProps) => {
-        const { hero } = assets
-        const dateYear = new Date().getFullYear()
+const Footer = () => {
+  return (
+    <footer className="relative py-8 md:py-12 bg-gray-50 border-t border-gray-200">
+      <div className="container-max">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-center md:text-left">
+            <p className="text-sm text-gray-600">
+              © {new Date().getFullYear()} Jemuel Lupo. All rights reserved.
+            </p>
+          </div>
 
-        return (
-            <footer className={`footer footer-center p-4 text-slate-200 justify-center ${className}`}>
-                <div className="flex md:flex-row flex-col-reverse">
-                    <p>Copyright ©{dateYear} - Uel Versed Labs</p>
-                    <div className="avatar mr-2">
-                        <div className="w-16 rounded-full border-slate-200 hover:border-info border-2 hover-enlarge">
-                            <img onClick={() => goToSection(reference)} src={hero} className="cursor-pointer" alt="No img" />
-                        </div>
-                    </div>
-                </div>
-
-            </footer>
-        )
-    }
+          <div className="flex items-center gap-3">
+            {socialLinks.map(({ Icon, link }, idx) => (
+              <motion.a
+                key={idx}
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 bg-white rounded-lg hover:bg-gray-100 transition-all border border-gray-200"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`Visit ${link}`}
+              >
+                <Icon className="text-primary" size={20} />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
 
 export default Footer

@@ -1,6 +1,6 @@
 {
-  "short_name": "Uel Versed Labs",
-  "name": "Uel Versed Labs",
+  "short_name": "Jemuel Portfolio",
+  "name": "Jemuel Lupo - Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#0D9488",
   "background_color": "#ffffff"
 }
+

@@ -1,39 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-white text-slate-900;
+    font-family: 'Inter', system-ui, sans-serif;
+    cursor: none;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Hide default cursor on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+}
+
 @layer utilities {
-  .hover-enlarge {
-    @apply transform transition duration-300 ease-in-out;
+  /* Card utilities */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200;
   }
-  .hover-enlarge:hover {
-    @apply scale-110;
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  .section-spacing {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+  
+  .container-max {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive typography */
+  .text-fluid-xs {
+    font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  }
+  
+  .text-fluid-sm {
+    font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  }
+  
+  .text-fluid-base {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  }
+  
+  .text-fluid-lg {
+    font-size: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);
+  }
+  
+  .text-fluid-xl {
+    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  }
+  
+  .text-fluid-2xl {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  }
+  
+  .text-fluid-3xl {
+    font-size: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  }
+
+  /* Touch-friendly targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-1;
+  }
+  
+  .hover-lift:active {
+    @apply translate-y-0;
+  }
+
+  /* Container utilities */
+  .container-1280 {
+    @apply w-full max-w-[82rem] mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
-/* Add your custom styles here */
-
-.padding-global {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+/* Smooth scroll */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-.container-1280 {
-  width: 100%;
-  max-width: 82em;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-}
-
-.padding-section-128 {
-  padding-top: 8em;
-  padding-bottom: 8em;
-}
-
-.padding-section-224 {
-  padding-top: 16em;
-  padding-bottom: 16em;
-}
-
-/* Add your custom styles here */ 

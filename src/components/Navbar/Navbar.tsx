@@ -1,138 +1,221 @@
-import { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import {
-    // ChevronsUpLeft, Home, ThreeDCubeSphere, BrandHipchat,
-    Menu2, X
-} from 'tabler-icons-react'
+import { useState, useEffect, useRef } from 'react'
+import { Menu2, X, Download } from 'tabler-icons-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { goToSection } from '../../lib/link-helper'
-import Drawer from '../../layout/Drawer'
+import { assets } from '../../lib/asset-helper'
+import CalendlyButton from '../CalendlyButton/CalendlyButton'
 
 export type TReferenceLinksProps = {
-    [key: string]: MutableRefObject<null>
+  [key: string]: React.RefObject<HTMLElement>
 }
 
 export type TNavLinksProps = {
-    title: string
-    link: React.MutableRefObject<null>
-    icon: JSX.Element
+  title: string
+  link: React.RefObject<HTMLElement>
+  icon?: JSX.Element
 }
 
 export const getNavlinks = ({ referenceLinks }: { referenceLinks: TReferenceLinksProps }) => {
-    const { hero, about, projects, contact } = referenceLinks
+  const { hero, about, workExperience, skills, services, projects, testimonials, contact } = referenceLinks
 
-    return [
-        { title: 'Home', link: hero, icon: <></> },
-        { title: 'About', link: about, icon: <></> },
-        { title: 'Projects', link: projects, icon: <></> },
-        { title: 'Say Hi', link: contact, icon: <></> },
-    ]
+  return [
+    { title: 'Home', link: hero },
+    { title: 'About', link: about },
+    { title: 'Experience', link: workExperience },
+    { title: 'Skills', link: skills },
+    { title: 'Services', link: services },
+    { title: 'Projects', link: projects },
+    { title: 'Testimonials', link: testimonials },
+    { title: 'Contact', link: contact },
+  ]
 }
 
-const Navbar = ({ children, referenceLinks }: {
-    children?: ReactNode
-    referenceLinks: TReferenceLinksProps
-}) => {
-    const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks })
+type NavbarProps = {
+  referenceLinks: TReferenceLinksProps
+  onOpenCalendly: () => void
+}
 
-    const [burgerOn, setBurgerOn] = useState(false)
+const Navbar = ({ referenceLinks, onOpenCalendly }: NavbarProps) => {
+  const navLinks: TNavLinksProps[] = getNavlinks({ referenceLinks })
+  const [burgerOn, setBurgerOn] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const navbarRef = useRef<HTMLDivElement>(null)
+  const { cv } = assets
 
-    const navbarRef = useRef<HTMLDivElement | null>(null)
-    const childrenRef = useRef<HTMLDivElement | null>(null)
-    const [bodyPadding, setBodyPadding] = useState(0)
-    const [childPosition, setChildPosition] = useState(0)
-    const [scrollDir, setScrollDir] = useState({ from: 0, to: 0 })
-
-    const childrenComponent = (
-        <div ref={childrenRef} style={{ paddingTop: `${bodyPadding}px` }}>
-            {children}
-        </div>
-    )
-
-    useEffect(() => {
-        // Add padding to the body to offset the fixed navbar
-        setBodyPadding(navbarRef.current?.offsetHeight || 0)
-    }, [navbarRef])
-
-    useEffect(() => {
-        setScrollDir({
-            from: scrollDir.to,
-            to: childPosition
-        })
-        // eslint-disable-next-line
-    }, [childPosition])
-
-    const direction = useMemo(() => scrollDir.to < scrollDir.from ? 'up' : 'down', [scrollDir])
-    const positionClass = useMemo(() => direction === 'down' ? 'absolute' :
-        childPosition > bodyPadding ? 'fixed' :
-            direction === 'up' ? 'fixed' :
-                'absolute'
-        , [bodyPadding, childPosition, direction])
-
-    // Attach scroll event listener to window
-    const onClickBurger = () => {
-        setBurgerOn(prev => !prev)
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+      setBurgerOn(false)
     }
 
-    window.addEventListener('scroll', () => {
-        childrenRef.current && setChildPosition(childrenRef.current?.getBoundingClientRect().top * -1)
-        setBurgerOn(false)
-    })
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-    return (
-        <>
-            <nav ref={navbarRef} className={`${positionClass} top-0 z-10 w-full shadow-2xl bg-secondary border-b-2 border-info`}>
-                <div className="container mx-auto justify-between max-w-8xl flex p-5 flex-row items-center">
-                    <div onClick={() => goToSection(referenceLinks.hero)} className="flex title-font font-medium items-center text-gray-50 my-auto">
-                        <span className="ml-3 text-xl font-bold text-accent cursor-pointer hover-enlarge hover:text-success">Portfolio</span>
-                    </div>
-                    <WebMenu navLinks={navLinks} />
-                    {/* <Websocket /> */}
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (burgerOn) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [burgerOn])
 
-                    <label className="swap swap-rotate btn bg-neutral text-info btn-outline md:hidden sm:hidden" >
+  const onClickBurger = () => {
+    setBurgerOn(prev => !prev)
+  }
 
-                        {/* this hidden checkbox controls the state */}
-                        <input type="checkbox" checked={!burgerOn} onChange={onClickBurger} />
+  const handleCloseMenu = () => {
+    setBurgerOn(false)
+  }
 
-                        <div className="swap-on"><Menu2 /></div>
-                        <div className="swap-off">< X /></div>
-                    </label>
+  return (
+    <>
+      <nav
+        ref={navbarRef}
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md' : 'bg-white/80 backdrop-blur-sm'
+        }`}
+      >
+        <div className="container-max">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <div
+              onClick={() => goToSection(referenceLinks.hero)}
+              className="flex items-center cursor-pointer"
+            >
+              <span className="text-xl md:text-2xl font-bold text-primary hover:text-accent transition-colors">
+                Portfolio
+              </span>
+            </div>
 
-                </div>
-                <TempMobileMenu navLinks={navLinks} show={burgerOn} onClick={onClickBurger} referenceLinks={referenceLinks} />
-            </nav >
-            {childrenComponent}
-        </>
-    )
-}
+            {/* Desktop Menu - Hidden on tablet, visible on large screens */}
+            <div className="hidden lg:flex items-center gap-2 lg:gap-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.title}
+                  onClick={() => goToSection(link.link)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-200 rounded-lg hover:bg-gray-100"
+                >
+                  {link.title}
+                </button>
+              ))}
+              <div className="ml-2">
+                <CalendlyButton
+                  onOpenCalendly={onOpenCalendly}
+                  variant="accent"
+                  size="sm"
+                  iconSize={18}
+                >
+                  Schedule
+                </CalendlyButton>
+              </div>
+            </div>
 
-const WebMenu = ({ navLinks }: { navLinks: TNavLinksProps[] }) => {
-    return (<div className="sm:inline-flex hidden p-4">
-        <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            {navLinks.map(n => (
-                <div key={n.title} onClick={() => goToSection(n.link)} className="md:mx-2 mx-px font-bold hover:border-accent">
-                    <span className={`hover:text-info flex cursor-pointer ${n.title === 'Say Hi' ? 'btn bg-neutral text-info btn-outline' : 'text-slate-200 mx-2'}`}>{n.icon}{n.title}</span>
-                </div>
-            ))}
-        </nav>
-    </div>)
-}
+            {/* Mobile/Tablet Menu Button - Visible on mobile and tablet */}
+            <button
+              onClick={onClickBurger}
+              className="lg:hidden p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors z-50 relative"
+              aria-label="Toggle menu"
+            >
+              {burgerOn ? <X size={24} className="text-gray-700" /> : <Menu2 size={24} className="text-gray-700" />}
+            </button>
+          </div>
+        </div>
+      </nav>
 
+      {/* Mobile Menu Overlay & Drawer - Outside nav for proper z-index */}
+      <AnimatePresence>
+        {burgerOn && (
+          <>
+            {/* Dark Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={handleCloseMenu}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] lg:hidden"
+            />
 
-const TempMobileMenu = ({ show, onClick, referenceLinks }: { navLinks: TNavLinksProps[], show: boolean, onClick: () => void, referenceLinks: TReferenceLinksProps }) => {
-    return <>
-        <Drawer onClickBurger={onClick} isChecked={show} referenceLinks={referenceLinks} />
-        {/* <div className={`h-fit md:hidden sm:hidden ${!show ? 'hidden' : ''}`}>
-            <ul className="flex flex-col items-start mx-8">
-                {navLinks.map(n => (
-                    <li key={n.title} className='flex justify-start'><div className="btn btn-ghost text-slate-200" onClick={() => {
-                        onClick()
-                        goToSection(n.link)
-                    }}>
-                        {n.icon}
-                        {n.title.toUpperCase()}</div> </li>
+            {/* Mobile/Tablet Menu Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-[9999] lg:hidden shadow-2xl overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
+                <h2 className="text-xl font-bold text-gray-800">Portfolio</h2>
+                <button
+                  onClick={handleCloseMenu}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X size={24} className="text-gray-600" />
+                </button>
+              </div>
+
+              {/* Menu Content */}
+              <div className="px-6 py-6 space-y-3">
+                {/* Navigation Links */}
+                {navLinks.map((link) => (
+                  <button
+                    key={link.title}
+                    onClick={() => {
+                      goToSection(link.link)
+                      handleCloseMenu()
+                    }}
+                    className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors text-base text-gray-700 font-medium"
+                  >
+                    {link.title}
+                  </button>
                 ))}
-            </ul>
-        </div> */}
+
+                {/* Divider */}
+                <div className="border-t border-gray-200 my-4" />
+
+                {/* Download CV Button */}
+                <motion.a
+                  href={cv}
+                  download="jemuel-lupo.pdf"
+                  onClick={handleCloseMenu}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold text-base hover:bg-primary-light transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Download size={20} />
+                  Download CV
+                </motion.a>
+
+                {/* Schedule Meeting Button */}
+                <div className="w-full">
+                  <CalendlyButton
+                    onOpenCalendly={() => {
+                      onOpenCalendly()
+                      handleCloseMenu()
+                    }}
+                    variant="accent"
+                    size="md"
+                    className="w-full"
+                  >
+                    Schedule Meeting
+                  </CalendlyButton>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <div className="h-16 md:h-20" /> {/* Spacer for fixed navbar */}
     </>
+  )
 }
 
 export default Navbar

@@ -1,131 +1,132 @@
-import { ReactNode, useState } from 'react'
-import { ChevronsUpLeft } from 'tabler-icons-react'
-import { menuLinks } from '../../lib/asset-helper'
-import { TReferenceProps } from '../../lib/props-types'
-import { expStats } from '../../lib/config'
-import SectionWrapper from '../../layout/SectionWrapper'
-import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
+import { motion } from "framer-motion";
+import { User } from "tabler-icons-react";
+import { assets } from "../../lib/asset-helper";
+import { expStats, socialLinks } from "../../lib/config";
+import { TReferenceProps } from "../../lib/props-types";
+import SectionWrapper from "../../layout/SectionWrapper";
+import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
 
 const About = ({ reference }: TReferenceProps) => {
-    return (
-        <section ref={reference} className="bg-slate-800 pattern">
-            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'py-[1em] sm:py-[2em] lg:py-[8em]'}>
-                <ScrollAnimationWrapper delay={200}>
-                    <div className="py-6">
-                        <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
-                            <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <ChevronsUpLeft /> About Me</h2>
-                        </div>
-                    </div>
-                </ScrollAnimationWrapper>
+  const { hero } = assets;
 
-                <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
-                    <ScrollAnimationWrapper delay={400}>
-                        <SkillSet />
-                    </ScrollAnimationWrapper>
-                    <Divider up={
-                        <ScrollAnimationWrapper delay={200}>
-                            <Par />
-                        </ScrollAnimationWrapper>
-                    } down={
-                        <ScrollAnimationWrapper delay={400}>
-                            <Stat />
-                        </ScrollAnimationWrapper>
-                    } />
-                </div>
-            </SectionWrapper>
-        </section>
-    )
-}
+  return (
+    <section ref={reference} className="relative section-spacing bg-gray-50">
+      <SectionWrapper containerClass="container-max" paddingSectionClass="">
+        <ScrollAnimationWrapper delay={0.2}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
+              <User className="text-accent" size={40} />
+              About Me
+            </h2>
+          </div>
+        </ScrollAnimationWrapper>
 
-const SkillSet = () => {
-    return (
-        <div className="flex justify-center h-full">
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">
-                        <div className="md:tooltip tooltip-open md:tooltip-right md:tooltip-info" data-tip="Check these out!">
-                            <span>My Skills and Techs&nbsp;</span>
-                            <span className="md:hidden badge badge-primary text-xs badge-outline cursor-pointer">Check these out!</span>
-                        </div>
-                    </h2>
-                    <Techs />
+        {/* Stats Boxes - Under Title */}
+        <ScrollAnimationWrapper delay={0.25}>
+          <div className="mb-12">
+            <Stats />
+          </div>
+        </ScrollAnimationWrapper>
+
+        {/* Layout: Flex with Picture and Texts side by side */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+          {/* Profile Image Section - Full width on mobile, 2/6 width on desktop (25%) */}
+          <ScrollAnimationWrapper delay={0.3}>
+            <div className="w-full lg:w-1/4 flex flex-col items-center lg:items-start">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="relative mb-6 w-full lg:w-64 xl:w-80"
+              >
+                <div className="relative w-full aspect-square lg:aspect-auto lg:h-64 xl:h-80 rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src={hero}
+                    alt="Jemuel Lupo"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
                 </div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/20 rounded-full blur-3xl -z-10 hidden lg:block" />
+              </motion.div>
+
+              {/* Social Media Links - Centered on mobile and desktop */}
+              <div className="flex items-center gap-3 justify-center lg:justify-start">
+                {socialLinks.map(({ Icon, link }, idx) => (
+                  <motion.a
+                    key={idx}
+                    href={link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-3 bg-white rounded-lg hover:bg-gray-100 transition-all border border-gray-200 shadow-sm"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label={`Visit ${link}`}
+                  >
+                    <Icon className="text-primary" size={24} />
+                  </motion.a>
+                ))}
+              </div>
             </div>
-        </div>
-    )
-}
+          </ScrollAnimationWrapper>
 
-const Divider = ({ up, down }: { up: ReactNode, down: ReactNode }) => {
-    return (
-        <div className="flex flex-col w-full border-opacity-50">
-            <div className="grid h-fit card rounded-box place-items-center">{up}</div>
-            <div className="divider"></div>
-            <div className="grid h-fit card rounded-box place-items-center">{down}</div>
-        </div>
-    )
-}
-
-const Par = () => {
-    return (
-        <div className="max-w-5xl px-6 mx-auto text-center">
-            <p className='text-slate-100'>
-                I'm a Software Engineer from Sariaya Quezon (Philippines).
-                Turning complex problem into a simple and manageable Web Information System is my forte.
-                I earned my Bachelor's degree in Information Technology in the year of 2021.
-            </p>
-        </div>
-    )
-}
-
-const Stat = () => {
-    return (
-        <div className="stats shadow stats-vertical md:stats-horizontal">
-            {expStats.map((s, idx) => {
-                return <div className={`stat place-items-center ${s.bg || ''}`} key={idx}>
-                    <div className={`stat-title ${s.bg ? 'text-slate-400' : ''}`}>{s.title}</div>
-                    <div className={`stat-value ${s.bg ? 'text-slate-100' : ''}`}>{s.value}</div>
-                    <div className={`mt-2 stat-desc ${s.bg ? 'text-slate-100' : ''}`}>{s.desc}</div>
-                </div>
-            })}
-        </div>
-    )
-}
-
-const Techs = () => {
-    const [swapOn, setSwapOn] = useState(<></>)
-    const changeSwapOn = (item: string) => setSwapOn(
-        <ul className="text-slate-800">
-            {menuLinks[item].swap.map((s, idx) => <li key={idx}><ItemAvatars image={s.image} />{s.brand}</li>)}
-        </ul>
-    )
-
-    const menu = (
-        <ul className="text-slate-800">
-            {Object.entries(menuLinks).map(([key, value]) => <li key={key}
-                onClick={() => { changeSwapOn(key) }}
-                className="hover:border-success border-b-2 border-transparent"
-            >{value.title}</li>)}
-        </ul>
-    )
-
-    return (
-        <label className="swap swap-flip justify-start w-fit">
-            {/* this hidden checkbox controls the state */}
-            <input type="checkbox" />
-
-            <div className="swap-on">{swapOn}</div>
-            <div className="swap-off">{menu}</div>
-        </label>
-    )
-}
-
-const ItemAvatars = ({ image }: { image: string }) => {
-    return (
-        <div className="avatar mr-2">
-            <div className="w-4 rounded">
-                <img src={image} alt="No img" />
+          {/* About Text - Full width on mobile, 6/6 width on desktop (75%) */}
+          <ScrollAnimationWrapper delay={0.4}>
+            <div className="w-full flex flex-col justify-center">
+              <div className="space-y-6 text-center lg:text-left">
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  I&apos;m a Fullstack Developer and Lead Software Engineer from
+                  Sariaya Quezon, Philippines. With over 4 years of professional
+                  experience, I specialize in building scalable web
+                  applications, leading development teams, and delivering
+                  end-to-end product launches.
+                </p>
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  I earned my Bachelor of Science in Information Technology from
+                  Partido State University (2017-2021). Throughout my career,
+                  I&apos;ve led multiple MVP developments, mentored junior
+                  developers, and delivered complex solutions for companies like
+                  Ethical Hire, Brylliant Solutions, and The Freelance Movement
+                  Tribe.
+                </p>
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  My expertise spans full-stack development, AI integration,
+                  microservices architecture, and custom Webflow solutions.
+                  I&apos;ve successfully delivered products that serve 500+
+                  users and resolved 1,000+ complex technical challenges, always
+                  focusing on quality, scalability, and team collaboration.
+                </p>
+              </div>
             </div>
-        </div>)
-}
+          </ScrollAnimationWrapper>
+        </div>
+      </SectionWrapper>
+    </section>
+  );
+};
 
-export default About
+const Stats = () => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {expStats.map((stat, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.1 }}
+          className="card p-6 text-center card-hover"
+        >
+          <div className="text-sm font-medium text-gray-500 mb-2">
+            {stat.title}
+          </div>
+          <div className="text-2xl md:text-3xl font-bold text-primary mb-2">
+            {stat.value}
+          </div>
+          <div className="text-sm text-gray-600">{stat.desc}</div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+export default About;

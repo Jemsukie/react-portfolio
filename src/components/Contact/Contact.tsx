@@ -1,206 +1,225 @@
 import { useEffect, useRef, useState } from 'react'
-import { BrandHipchat } from 'tabler-icons-react'
+import { Mail } from 'tabler-icons-react'
+import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import { TReferenceProps } from '../../lib/props-types'
 import { contactInfo, socialLinks } from '../../lib/config'
+import { TReferenceProps } from '../../lib/props-types'
 import SectionWrapper from '../../layout/SectionWrapper'
 import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
 
 const Contact = ({ reference }: TReferenceProps) => {
-    return (
-        <section ref={reference} className="bg-neutral pattern" >
+  return (
+    <section
+      ref={reference}
+      className="relative section-spacing bg-white"
+    >
+      <SectionWrapper
+        containerClass="container-max"
+        paddingSectionClass=""
+      >
+        <ScrollAnimationWrapper delay={0.2}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
+              <Mail className="text-accent" size={40} />
+              Contact Me
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Get in touch and let&apos;s discuss your project
+            </p>
+          </div>
+        </ScrollAnimationWrapper>
 
-            <SectionWrapper containerClass={'container-1280'} paddingSectionClass={'py-[1em] sm:py-[2em] lg:py-[8em]'}>
-                <ScrollAnimationWrapper delay={200}>
-                    <div className="py-6">
-                        <div className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col" id="project">
-                            <h2 className="text-2xl font-semibold text-slate-200 w-fit flex"> <BrandHipchat /> Contact Me</h2>
-                            {/* <progress className="progress w-56 progress-success bg-transparent" /> */}
-                        </div>
-                    </div>
-                </ScrollAnimationWrapper>
-                <ScrollAnimationWrapper delay={200}>
-                    <div className="md:py-4 py-0">
-                        <div className="container max-w-6xl w-full md:w-3/4 mx-auto w-xs flex-col lg:flex-row-reverse md:rounded-tr-lg md:rounded-bl-lg bg-gradient-to-r to-neutral from-slate-500"
-                            style={{
-                                borderBottom: '4px solid #36D399',
-                                borderRight: '4px solid #FBAF3A'
-                            }}
-                        >
-                            <div className="flex container mx-auto flex-col lg:flex-row justify-center md:p-10">
-                                <div className="flex w-full flex-col lg:flex-row">
-                                    <ScrollAnimationWrapper delay={400} className="flex w-full justify-center flex-col lg:flex-row">
-                                        <Card />
-                                    </ScrollAnimationWrapper>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {/* Contact Info Card */}
+          <ScrollAnimationWrapper delay={0.3}>
+            <ContactCard />
+          </ScrollAnimationWrapper>
 
-
-                                        <div className="divider divider-vertical lg:divider-horizontal text-slate-200">
-                                            <ScrollAnimationWrapper delay={200} className="flex w-full justify-center flex-col lg:flex-row">
-                                            <kbd className="kbd kbd-md text-slate-600">OR</kbd>
-                                            </ScrollAnimationWrapper>
-                                        </div>
-
-
-                                    <ScrollAnimationWrapper delay={600} className="flex w-full justify-center flex-col lg:flex-row">
-                                        <Form />
-                                    </ScrollAnimationWrapper>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ScrollAnimationWrapper>
-            </SectionWrapper>
-
-        </section>
-
-    )
-}
-
-const Card = () => {
-
-
-    return (<div className='flex items-center mx-auto my-4'>
-        <div className="card md:w-96 shadow-xl bg-slate-950 h-fit text-slate-200">
-            <div className="card-body">
-                <h2 className="card-title flex mx-auto">Let&apos;s get in touch!</h2>
-                <div className='text-center items-center flex flex-col'>
-                    Send me a message now
-                    <ul className='my-4'>
-                        {contactInfo.map(({ Icon, title, className, link, desc }) =>
-                            <li className='flex flex-row gap-4' key={title}>
-                                <div className='flex-row flex justify-center md:justify-start'>
-                                    <Icon />
-                                </div>
-                                <span className={`${className} hover-enlarge`}>
-                                    <a href={link}>{desc}</a>
-                                </span>
-                            </li>
-                        )}
-                    </ul>
-
-                    <span className='flex justify-center'>
-                        <ul className="menu menu-horizontal bg-slate-800 rounded-box text-slate-200">
-                            {socialLinks.map(({ Icon, link }, idx) => {
-                                const roundedClassName = idx === 0 ? 'rounded-s-lg' : idx === socialLinks.length - 1 ? 'rounded-e-lg' : ''
-
-                                return <li key={idx} className={`hover:bg-warning hover:text-slate-800 ${roundedClassName} hover-enlarge`}>
-                                    <a href={link} target='_blank' rel="noreferrer">
-                                        <Icon />
-                                    </a>
-                                </li>
-                            }
-
-                            )}
-                        </ul>
-                    </span>
-
-                </div>
-
-            </div>
+          {/* Contact Form */}
+          <ScrollAnimationWrapper delay={0.4}>
+            <ContactForm />
+          </ScrollAnimationWrapper>
         </div>
-    </div>)
+      </SectionWrapper>
+    </section>
+  )
 }
 
-const Form = () => {
-    const [viewToast, setViewToast] = useState(false)
-    const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
-    const form = useRef(null)
+const ContactCard = () => {
+  return (
+    <div className="card p-8 h-fit">
+      <h3 className="text-2xl font-bold mb-6 text-primary">Let&apos;s get in touch!</h3>
+      <p className="text-base text-gray-600 mb-8">Send me a message or reach out directly</p>
 
-
-    useEffect(() => {
-        if (toastMessage.message !== '') toastNotify()
-    }, [toastMessage])
-
-    const validateEmail = (email: string) => {
-        // Regular expression pattern for validating email addresses
-        const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-
-        // Test the email against the pattern
-        return pattern.test(email)
-    }
-
-    const submitHandler = (e: React.FormEvent) => {
-        e.preventDefault()
-        const formRef = form.current
-        const name = formRef?.['name']['value']
-        const email = formRef?.['email']['value']
-        const message = formRef?.['message']['value']
-
-        if (name && email && message) {
-            validateEmail(email) ? sendMail() : setToastMessage({ message: 'Invalid Email!', type: 'error' })
-        } else {
-            setToastMessage({ message: 'Please complete all fields!', type: 'error' })
-        }
-    }
-
-    const toastNotify = () => {
-        setViewToast(true)
-        setTimeout(() => setViewToast(false), 5000)
-    }
-
-    const sendMail = () => {
-        const config = {
-            serviceId: process.env.REACT_APP_SERVICE_ID || '',
-            templateId: process.env.REACT_APP_TEMPLATE_ID || '',
-            publicKey: process.env.REACT_APP_PUBLIC_KEY || '',
-        }
-
-        emailjs.sendForm(config.serviceId, config.templateId, form.current || '', config.publicKey)
-            .then(() =>
-                setToastMessage({ message: 'Email sent!', type: 'success' }),
-                () =>
-                    setToastMessage({ message: 'Email sending failed!', type: 'error' })
-            )
-    }
-
-
-    return (
-        <form className="form-control w-full max-w-sm p-2 mx-auto" onSubmit={submitHandler} ref={form}>
-
-            {viewToast && (<div className="toast">
-                <div className={`alert alert-${toastMessage.type}`}>
-                    <span>{toastMessage.message}</span>
-                </div>
-            </div>)}
-
-
-            <label className="label" htmlFor="input-name">
-                <span className="label-text text-slate-200">Name</span>
-            </label>
-            <input
-                id="input-name"
-                name="name"
-                type="text"
-                placeholder="Yepp! Your name"
-                className="input input-bordered input-primary w-full max-w-sm text-neutral"
-            />
-
-            <label className="label" htmlFor="input-email">
-                <span className="label-text text-slate-200">Email</span>
-            </label>
-            <input
-                id="input-email"
-                name="email"
-                type="email"
-                placeholder="Then enter your email"
-                className="input input-bordered input-primary w-full max-w-sm text-neutral"
-            />
-
-            <label className="label" htmlFor="input-message">
-                <span className="label-text text-slate-200">Message</span>
-            </label>
-            <textarea
-                id="input-message"
-                name="message"
-                className="textarea textarea-info text-base"
-                placeholder="Hi there! Anything you wanna tell me?"
-            >
-            </textarea>
-
-            <div className="flex justify-center mt-4">
-                <input type="submit" className="btn btn-outline bg-neutral btn-info w-1/2 hover-enlarge" />
+      <div className="space-y-4 mb-8">
+        {contactInfo.map(({ Icon, title, link, desc }) => (
+          <a
+            key={title}
+            href={link}
+            className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
+          >
+            <Icon className="text-accent group-hover:scale-110 transition-transform" size={24} />
+            <div>
+              <div className="text-xs text-gray-500 mb-1">{title}</div>
+              <div className="text-base font-medium text-primary">{desc}</div>
             </div>
-        </form>)
+          </a>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-center gap-3">
+        {socialLinks.map(({ Icon, link }, idx) => (
+          <a
+            key={idx}
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+            className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all hover:scale-110"
+            aria-label={`Visit ${link}`}
+          >
+            <Icon className="text-primary" size={24} />
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const ContactForm = () => {
+  const [viewToast, setViewToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
+  const form = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (toastMessage.message !== '') toastNotify()
+  }, [toastMessage])
+
+  const validateEmail = (email: string) => {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return pattern.test(email)
+  }
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault()
+    const formRef = form.current
+    if (!formRef) return
+
+    const name = (formRef['name' as keyof typeof formRef] as HTMLInputElement)?.value
+    const email = (formRef['email' as keyof typeof formRef] as HTMLInputElement)?.value
+    const message = (formRef['message' as keyof typeof formRef] as HTMLTextAreaElement)?.value
+
+    if (name && email && message) {
+      if (validateEmail(email)) {
+        sendMail()
+      } else {
+        setToastMessage({ message: 'Invalid Email!', type: 'error' })
+      }
+    } else {
+      setToastMessage({ message: 'Please complete all fields!', type: 'error' })
+    }
+  }
+
+  const toastNotify = () => {
+    setViewToast(true)
+    setTimeout(() => setViewToast(false), 5000)
+  }
+
+  const sendMail = () => {
+    if (!form.current) return
+
+    const config = {
+      serviceId: import.meta.env.VITE_SERVICE_ID || '',
+      templateId: import.meta.env.VITE_TEMPLATE_ID || '',
+      publicKey: import.meta.env.VITE_PUBLIC_KEY || '',
+    }
+
+    if (!config.serviceId || !config.templateId || !config.publicKey) {
+      setToastMessage({ message: 'Email service not configured!', type: 'error' })
+      return
+    }
+
+    emailjs
+      .sendForm(config.serviceId, config.templateId, form.current, config.publicKey)
+      .then(
+        () => setToastMessage({ message: 'Email sent successfully!', type: 'success' }),
+        () => setToastMessage({ message: 'Email sending failed!', type: 'error' })
+      )
+  }
+
+  return (
+    <form
+      className="card p-8"
+      onSubmit={submitHandler}
+      ref={form}
+    >
+      {viewToast && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`mb-4 p-4 rounded-lg ${
+            toastMessage.type === 'success'
+              ? 'bg-green-50 border border-green-200 text-green-700'
+              : 'bg-red-50 border border-red-200 text-red-700'
+          }`}
+        >
+          {toastMessage.message}
+        </motion.div>
+      )}
+
+      <div className="space-y-4">
+        <div>
+          <label htmlFor="input-name" className="block text-sm font-medium text-gray-700 mb-2">
+            Name
+          </label>
+          <input
+            id="input-name"
+            name="name"
+            type="text"
+            placeholder="Your name"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="input-email" className="block text-sm font-medium text-gray-700 mb-2">
+            Email
+          </label>
+          <input
+            id="input-email"
+            name="email"
+            type="email"
+            placeholder="your.email@example.com"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="input-message" className="block text-sm font-medium text-gray-700 mb-2">
+            Message
+          </label>
+          <textarea
+            id="input-message"
+            name="message"
+            rows={5}
+            placeholder="Hi there! Anything you wanna tell me?"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
+            required
+          />
+        </div>
+
+        <motion.button
+          type="submit"
+          className="w-full px-6 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary-light transition-all duration-300 shadow-md hover:shadow-lg"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Send Message
+        </motion.button>
+      </div>
+    </form>
+  )
 }
 
 export default Contact

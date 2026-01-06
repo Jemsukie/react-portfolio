@@ -1,29 +1,111 @@
-import ReactDOM from 'react-dom'
+import { useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X } from 'tabler-icons-react'
 import type { TCards } from './Projects/Projects'
 
-interface ModalPortalProps {
-  isOpen: boolean;
-  card: TCards | null;
-  onClose: () => void;
+type ModalPortalProps = {
+  isOpen: boolean
+  card: TCards | null
+  onClose: () => void
 }
 
-const ModalPortal: React.FC<ModalPortalProps> = ({ isOpen, card, onClose }) => {
-  if (!isOpen || !card) return null
+const ModalPortal = ({ isOpen, card, onClose }: ModalPortalProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
 
-  return ReactDOM.createPortal(
-    <div className="modal modal-open z-50">
-      <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={onClose}></div>
-      <div className="modal-box max-w-lg z-50 relative">
-        <h3 className="font-bold text-lg mb-2">{card.title}</h3>
-        <img src={card.img} className="w-full object-cover rounded mb-4" alt="Album" />
-        <div className="text-slate-400 text-base mb-4">{card.description}</div>
-        <div className="modal-action">
-          <button className="btn btn-info" onClick={onClose}>Close</button>
-        </div>
-      </div>
-    </div>,
-    document.body
-  ) as React.ReactNode
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscape)
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, onClose])
+
+  if (!card) return null
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm"
+          />
+
+          {/* Modal */}
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="w-full max-w-4xl max-h-[90vh] overflow-auto pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl relative">
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors z-10"
+                aria-label="Close modal"
+              >
+                <X size={24} className="text-gray-700" />
+              </button>
+
+              {/* Content */}
+              <div className="mt-4">
+                <div className="mb-6">
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="w-full h-64 md:h-96 object-cover rounded-xl mb-6"
+                  />
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">{card.title}</h2>
+                </div>
+
+                <div className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
+                  {card.description}
+                </div>
+
+                {card.sourceCode && (
+                  <a
+                    href={card.sourceCode}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-light transition-colors"
+                  >
+                    View Source Code
+                  </a>
+                )}
+              </div>
+            </div>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
+  )
 }
 
 export default ModalPortal
