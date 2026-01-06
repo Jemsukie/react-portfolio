@@ -22,4 +22,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-!.yarn/releases/yarn-4.12.0.cjs
+.yarn/cache
+.yarn/install-state.gz
