@@ -6,7 +6,6 @@ import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
 import CalendlyButton from "../CalendlyButton/CalendlyButton";
 import HexagonGrid from "../HexagonGrid/HexagonGrid";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 type HeroProps = TReferenceProps & {
   onOpenCalendly: () => void;

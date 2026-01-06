@@ -5,7 +5,6 @@ import { menuLinks } from "../../lib/asset-helper";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 const Skills = ({ reference }: TReferenceProps) => {
   const [activeCategory, setActiveCategory] = useState<string>("frontend");

@@ -5,7 +5,6 @@ import { workExperience } from "../../lib/workExperience";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 const WorkExperience = ({ reference }: TReferenceProps) => {
   const [showAll, setShowAll] = useState(false);
