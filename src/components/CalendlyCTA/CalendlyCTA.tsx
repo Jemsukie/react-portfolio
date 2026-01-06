@@ -24,7 +24,10 @@ const CalendlyCTA = ({ reference, onOpenCalendly }: CalendlyCTAProps) => {
           backgroundColor="transparent"
         />
       </div>
-      <SectionWrapper containerClass="container-max" paddingSectionClass="">
+      <SectionWrapper
+        containerClass="container-max relative z-10"
+        paddingSectionClass=""
+      >
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center">
             <motion.div
