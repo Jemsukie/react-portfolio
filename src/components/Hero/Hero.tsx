@@ -5,6 +5,8 @@ import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
 import CalendlyButton from "../CalendlyButton/CalendlyButton";
+import HexagonGrid from "../HexagonGrid/HexagonGrid";
+import ReactParticles from "../ReactParticles/ReactParticles";
 
 type HeroProps = TReferenceProps & {
   onOpenCalendly: () => void;
@@ -16,8 +18,32 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
   return (
     <section
       ref={reference}
-      className="relative min-h-screen flex items-center bg-gradient-to-br from-white via-gray-50 to-white"
+      className="relative min-h-screen flex items-center bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden"
     >
+      {/* Hexagon Grid Background */}
+      <div className="absolute inset-0 z-0">
+        <HexagonGrid
+          hexagonSize={60}
+          hexagonColor="#0D9488"
+          backgroundColor="transparent"
+        />
+      </div>
+      {/* React Particles Background */}
+      {/* <div className="absolute inset-0 z-0">
+        <ReactParticles
+          particleCount={60}
+          repelStrength={150}
+          attractStrength={300}
+          connectionDistance={150}
+          particleSpeed={1.0}
+          particleSize={4}
+          enableRainbow={false}
+          primaryColor="#000000ff"
+          backgroundColor="transparent"
+          cursorRadius={400}
+        />
+      </div> */}
+
       <SectionWrapper
         containerClass="container-max relative z-10"
         paddingSectionClass="section-spacing"
@@ -37,9 +63,9 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
               >
                 <motion.div
                   className="inline-flex items-center justify-center"
-                  style={{ transformOrigin: 'center' }}
+                  style={{ transformOrigin: "center" }}
                   whileHover={{ scale: 1.15, rotate: 360 }}
-                  transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                  transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
                 >
                   <Star className="text-accent" size={18} />
                 </motion.div>
@@ -76,9 +102,13 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
                 >
                   <motion.div
                     className="inline-flex items-center justify-center"
-                    style={{ transformOrigin: 'center' }}
+                    style={{ transformOrigin: "center" }}
                     whileHover={{ scale: 1.15, rotate: 360 }}
-                    transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      duration: 0.6,
+                    }}
                   >
                     <Download size={20} />
                   </motion.div>

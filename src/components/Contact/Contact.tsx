@@ -1,30 +1,27 @@
-import { useEffect, useRef, useState } from 'react'
-import { Mail } from 'tabler-icons-react'
-import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
-import { contactInfo, socialLinks } from '../../lib/config'
-import { TReferenceProps } from '../../lib/props-types'
-import SectionWrapper from '../../layout/SectionWrapper'
-import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
+import { useEffect, useRef, useState } from "react";
+import { Mail } from "tabler-icons-react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { contactInfo, socialLinks } from "../../lib/config";
+import { TReferenceProps } from "../../lib/props-types";
+import SectionWrapper from "../../layout/SectionWrapper";
+import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
 
 const Contact = ({ reference }: TReferenceProps) => {
   return (
     <section
       ref={reference}
-      className="relative section-spacing bg-white"
+      className="relative section-spacing bg-white overflow-hidden"
     >
-      <SectionWrapper
-        containerClass="container-max"
-        paddingSectionClass=""
-      >
+      <SectionWrapper containerClass="container-max" paddingSectionClass="">
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
               <motion.div
                 className="inline-flex items-center justify-center"
-                style={{ transformOrigin: 'center' }}
+                style={{ transformOrigin: "center" }}
                 whileHover={{ scale: 1.15, rotate: 360 }}
-                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
               >
                 <Mail className="text-accent" size={40} />
               </motion.div>
@@ -49,14 +46,18 @@ const Contact = ({ reference }: TReferenceProps) => {
         </div>
       </SectionWrapper>
     </section>
-  )
-}
+  );
+};
 
 const ContactCard = () => {
   return (
     <div className="card p-8 h-fit">
-      <h3 className="text-2xl font-bold mb-6 text-primary">Let&apos;s get in touch!</h3>
-      <p className="text-base text-gray-600 mb-8">Send me a message or reach out directly</p>
+      <h3 className="text-2xl font-bold mb-6 text-primary">
+        Let&apos;s get in touch!
+      </h3>
+      <p className="text-base text-gray-600 mb-8">
+        Send me a message or reach out directly
+      </p>
 
       <div className="space-y-4 mb-8">
         {contactInfo.map(({ Icon, title, link, desc }) => (
@@ -67,9 +68,9 @@ const ContactCard = () => {
           >
             <motion.div
               className="inline-flex items-center justify-center"
-              style={{ transformOrigin: 'center' }}
+              style={{ transformOrigin: "center" }}
               whileHover={{ scale: 1.15, rotate: 360 }}
-              transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
             >
               <Icon className="text-accent" size={24} />
             </motion.div>
@@ -94,9 +95,9 @@ const ContactCard = () => {
           >
             <motion.div
               className="inline-flex items-center justify-center"
-              style={{ transformOrigin: 'center' }}
+              style={{ transformOrigin: "center" }}
               whileHover={{ scale: 1.15, rotate: 360 }}
-              transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+              transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
             >
               <Icon className="text-primary" size={24} />
             </motion.div>
@@ -104,84 +105,103 @@ const ContactCard = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const ContactForm = () => {
-  const [viewToast, setViewToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState({ message: '', type: 'error' })
-  const form = useRef<HTMLFormElement>(null)
+  const [viewToast, setViewToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState({
+    message: "",
+    type: "error",
+  });
+  const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (toastMessage.message !== '') toastNotify()
-  }, [toastMessage])
+    if (toastMessage.message !== "") toastNotify();
+  }, [toastMessage]);
 
   const validateEmail = (email: string) => {
-    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    return pattern.test(email)
-  }
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(email);
+  };
 
   const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault()
-    const formRef = form.current
-    if (!formRef) return
+    e.preventDefault();
+    const formRef = form.current;
+    if (!formRef) return;
 
-    const name = (formRef['name' as keyof typeof formRef] as HTMLInputElement)?.value
-    const email = (formRef['email' as keyof typeof formRef] as HTMLInputElement)?.value
-    const message = (formRef['message' as keyof typeof formRef] as HTMLTextAreaElement)?.value
+    const name = (formRef["name" as keyof typeof formRef] as HTMLInputElement)
+      ?.value;
+    const email = (formRef["email" as keyof typeof formRef] as HTMLInputElement)
+      ?.value;
+    const message = (
+      formRef["message" as keyof typeof formRef] as HTMLTextAreaElement
+    )?.value;
 
     if (name && email && message) {
       if (validateEmail(email)) {
-        sendMail()
+        sendMail();
       } else {
-        setToastMessage({ message: 'Invalid Email!', type: 'error' })
+        setToastMessage({ message: "Invalid Email!", type: "error" });
       }
     } else {
-      setToastMessage({ message: 'Please complete all fields!', type: 'error' })
+      setToastMessage({
+        message: "Please complete all fields!",
+        type: "error",
+      });
     }
-  }
+  };
 
   const toastNotify = () => {
-    setViewToast(true)
-    setTimeout(() => setViewToast(false), 5000)
-  }
+    setViewToast(true);
+    setTimeout(() => setViewToast(false), 5000);
+  };
 
   const sendMail = () => {
-    if (!form.current) return
+    if (!form.current) return;
 
     const config = {
-      serviceId: import.meta.env.VITE_SERVICE_ID || '',
-      templateId: import.meta.env.VITE_TEMPLATE_ID || '',
-      publicKey: import.meta.env.VITE_PUBLIC_KEY || '',
-    }
+      serviceId: import.meta.env.VITE_SERVICE_ID || "",
+      templateId: import.meta.env.VITE_TEMPLATE_ID || "",
+      publicKey: import.meta.env.VITE_PUBLIC_KEY || "",
+    };
 
     if (!config.serviceId || !config.templateId || !config.publicKey) {
-      setToastMessage({ message: 'Email service not configured!', type: 'error' })
-      return
+      setToastMessage({
+        message: "Email service not configured!",
+        type: "error",
+      });
+      return;
     }
 
     emailjs
-      .sendForm(config.serviceId, config.templateId, form.current, config.publicKey)
-      .then(
-        () => setToastMessage({ message: 'Email sent successfully!', type: 'success' }),
-        () => setToastMessage({ message: 'Email sending failed!', type: 'error' })
+      .sendForm(
+        config.serviceId,
+        config.templateId,
+        form.current,
+        config.publicKey
       )
-  }
+      .then(
+        () =>
+          setToastMessage({
+            message: "Email sent successfully!",
+            type: "success",
+          }),
+        () =>
+          setToastMessage({ message: "Email sending failed!", type: "error" })
+      );
+  };
 
   return (
-    <form
-      className="card p-8"
-      onSubmit={submitHandler}
-      ref={form}
-    >
+    <form className="card p-8" onSubmit={submitHandler} ref={form}>
       {viewToast && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className={`mb-4 p-4 rounded-lg ${
-            toastMessage.type === 'success'
-              ? 'bg-green-50 border border-green-200 text-green-700'
-              : 'bg-red-50 border border-red-200 text-red-700'
+            toastMessage.type === "success"
+              ? "bg-green-50 border border-green-200 text-green-700"
+              : "bg-red-50 border border-red-200 text-red-700"
           }`}
         >
           {toastMessage.message}
@@ -190,7 +210,10 @@ const ContactForm = () => {
 
       <div className="space-y-4">
         <div>
-          <label htmlFor="input-name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="input-name"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Name
           </label>
           <input
@@ -204,7 +227,10 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="input-email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="input-email"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Email
           </label>
           <input
@@ -218,7 +244,10 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="input-message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="input-message"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Message
           </label>
           <textarea
@@ -241,7 +270,7 @@ const ContactForm = () => {
         </motion.button>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

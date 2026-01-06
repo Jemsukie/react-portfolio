@@ -5,6 +5,7 @@ import { workExperience } from "../../lib/workExperience";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
+import ReactParticles from "../ReactParticles/ReactParticles";
 
 const WorkExperience = ({ reference }: TReferenceProps) => {
   const [showAll, setShowAll] = useState(false);
@@ -23,16 +24,22 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
   };
 
   return (
-    <section ref={reference} className="relative section-spacing bg-white">
-      <SectionWrapper containerClass="container-max" paddingSectionClass="">
+    <section
+      ref={reference}
+      className="relative section-spacing bg-white overflow-hidden"
+    >
+      <SectionWrapper
+        containerClass="container-max relative z-10"
+        paddingSectionClass=""
+      >
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
               <motion.div
                 className="inline-flex items-center justify-center"
-                style={{ transformOrigin: 'center' }}
+                style={{ transformOrigin: "center" }}
                 whileHover={{ scale: 1.15, rotate: 360 }}
-                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
               >
                 <Briefcase className="text-accent" size={40} />
               </motion.div>
@@ -151,9 +158,13 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                   <>
                     <motion.div
                       className="inline-flex items-center justify-center"
-                      style={{ transformOrigin: 'center' }}
+                      style={{ transformOrigin: "center" }}
                       whileHover={{ scale: 1.15, rotate: 360 }}
-                      transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        duration: 0.6,
+                      }}
                     >
                       <ChevronUp size={20} />
                     </motion.div>
@@ -163,9 +174,13 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                   <>
                     <motion.div
                       className="inline-flex items-center justify-center"
-                      style={{ transformOrigin: 'center' }}
+                      style={{ transformOrigin: "center" }}
                       whileHover={{ scale: 1.15, rotate: 360 }}
-                      transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        duration: 0.6,
+                      }}
                     >
                       <ChevronDown size={20} />
                     </motion.div>

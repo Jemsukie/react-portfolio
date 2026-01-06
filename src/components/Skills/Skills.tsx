@@ -1,30 +1,28 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Code } from 'tabler-icons-react'
-import { menuLinks } from '../../lib/asset-helper'
-import { TReferenceProps } from '../../lib/props-types'
-import SectionWrapper from '../../layout/SectionWrapper'
-import ScrollAnimationWrapper from '../../layout/ScrollAnimationWrapper'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Code } from "tabler-icons-react";
+import { menuLinks } from "../../lib/asset-helper";
+import { TReferenceProps } from "../../lib/props-types";
+import SectionWrapper from "../../layout/SectionWrapper";
+import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
+import ReactParticles from "../ReactParticles/ReactParticles";
 
 const Skills = ({ reference }: TReferenceProps) => {
-  const [activeCategory, setActiveCategory] = useState<string>('frontend')
+  const [activeCategory, setActiveCategory] = useState<string>("frontend");
 
-  const activeData = menuLinks[activeCategory]
+  const activeData = menuLinks[activeCategory];
 
   return (
     <section ref={reference} className="relative section-spacing bg-white">
-      <SectionWrapper
-        containerClass="container-max"
-        paddingSectionClass=""
-      >
+      <SectionWrapper containerClass="container-max" paddingSectionClass="">
         <ScrollAnimationWrapper delay={0.2}>
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
               <motion.div
                 className="inline-flex items-center justify-center"
-                style={{ transformOrigin: 'center' }}
+                style={{ transformOrigin: "center" }}
                 whileHover={{ scale: 1.15, rotate: 360 }}
-                transition={{ type: 'spring', stiffness: 300, duration: 0.6 }}
+                transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
               >
                 <Code className="text-accent" size={40} />
               </motion.div>
@@ -45,8 +43,8 @@ const Skills = ({ reference }: TReferenceProps) => {
                 onClick={() => setActiveCategory(key)}
                 className={`px-6 py-3 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ${
                   activeCategory === key
-                    ? 'bg-primary text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? "bg-primary text-white shadow-md"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 {value.title}
@@ -77,15 +75,16 @@ const Skills = ({ reference }: TReferenceProps) => {
                   alt={tech.brand}
                   className="w-16 h-16 object-contain"
                 />
-                <span className="text-sm text-center text-gray-700 font-medium">{tech.brand}</span>
+                <span className="text-sm text-center text-gray-700 font-medium">
+                  {tech.brand}
+                </span>
               </motion.div>
             ))}
           </motion.div>
         </ScrollAnimationWrapper>
       </SectionWrapper>
     </section>
-  )
-}
+  );
+};
 
-export default Skills
-
+export default Skills;
