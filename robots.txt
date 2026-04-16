@@ -1,25 +1,3 @@
-# robots.txt for www.jemwealth.co
-
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://www.jemwealth.co/sitemap.xml
-
-# Disallow admin or private areas (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Allow all search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-# Crawl-delay (optional, adjust as needed)
-Crawl-delay: 1
-
+Disallow:
