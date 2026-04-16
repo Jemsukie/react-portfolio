@@ -1,11 +1,9 @@
-import { Folder } from "tabler-icons-react";
-import { motion } from "framer-motion";
+import { ThreeDCubeSphere } from "tabler-icons-react";
 import { assets } from "../../lib/asset-helper";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
-import { ReactNode } from "react";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 export type TCards = {
   img: string;
@@ -17,31 +15,82 @@ export type TCards = {
 type ProjectsProps = TReferenceProps & { onSeeMore: (_card: TCards) => void };
 
 const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
-  const { img1, img2, img3, img4, img5, img6, img7, img8, img9 } = assets;
+  const { img1, img2, img3, img4, img5, img6, img7, img8 } = assets;
 
   const cards: TCards[] = [
     {
       img: img1,
+      title: "Nimbus+",
+      sourceCode: "",
+      description: (
+        <>
+          A full-stack{" "}
+          <span className="text-primary font-bold">
+            construction and project collaboration platform
+          </span>{" "}
+          built for managing workspaces, projects, drawings, RFIs, tasks,
+          notifications, and team communication in one system.{" "}
+          <span className="text-primary">Nimbus+</span> helps teams coordinate
+          project information, track design changes, manage document workflows,
+          and collaborate through real-time messaging and updates.
+          <br />
+          <br />
+          Nimbus+ is developed using{" "}
+          <a
+            className="text-error"
+            href="https://redwoodjs.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            RedwoodJS
+          </a>
+          , with a full-stack architecture powered by{" "}
+          <a
+            className="text-error"
+            href="https://www.prisma.io/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Prisma
+          </a>
+          ,{" "}
+          <a
+            className="text-error"
+            href="https://www.postgresql.org/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            PostgreSQL
+          </a>
+          , and modern React patterns on the frontend. I contributed to features
+          across project dashboards, drawing management, RFI workflows, task
+          tracking, notifications, and direct messaging in a production-scale
+          monorepo application.
+        </>
+      ),
+    },
+    {
+      img: img2,
       title: "Atlas",
       sourceCode: "",
       description: (
         <>
           Learning Management System for a Community called{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-[#0ea0bf]"
             href="https://thefreelancemovement.com/"
             target="_blank"
             rel="noreferrer"
           >
-            The Freelance Movement Tribe
-          </a>{" "}
+            The Freelance Movement Tribe{" "}
+          </a>
           founded by{" "}
-          <span className="font-semibold text-primary">John Pagulayan</span>.
-          This is a Community/CRM/LMS app for{" "}
+          <span className="text-primary font-bold">John Pagulayan</span>. This
+          is a Community/CRM/LMS app for{" "}
           <span className="text-primary">Tribe Freelancers</span>. Visit ATLAS
           at{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-[#0ea0bf]"
             href="https://tfmt.ph/"
             target="_blank"
             rel="noreferrer"
@@ -51,7 +100,7 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
           . <br />
           <br /> Atlas is developed using{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-error"
             href="https://redwoodjs.com/"
             target="_blank"
             rel="noreferrer"
@@ -63,7 +112,7 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
       ),
     },
     {
-      img: img2,
+      img: img3,
       title: "Ethical Hire",
       sourceCode: "",
       description: (
@@ -75,49 +124,27 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
       ),
     },
     {
-      img: img3,
+      img: img4,
       title: "AI Enhanced Clinic System",
       sourceCode: "",
       description: (
         <>
           A modern Medical Clinic Management System built with{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-error"
             href="https://redwoodjs.com/"
             target="_blank"
             rel="noreferrer"
           >
             Redwood JS
           </a>
-          . This system features{" "}
-          <span className="font-semibold text-primary">
-            AI-powered patient diagnosis assistance
-          </span>
-          , intelligent appointment scheduling, and comprehensive medical
-          records management. The dashboard provides real-time analytics on
-          patient demographics, appointment trends, and resource utilization.
-          Healthcare providers can efficiently manage patient records, track lab
-          results, and generate detailed medical reports while maintaining HIPAA
+          . This system features AI-powered patient diagnosis assistance,
+          intelligent appointment scheduling, and comprehensive medical records
+          management. The dashboard provides real-time analytics on patient
+          demographics, appointment trends, and resource utilization. Healthcare
+          providers can efficiently manage patient records, track lab results,
+          and generate detailed medical reports while maintaining HIPAA
           compliance.
-        </>
-      ),
-    },
-    {
-      img: img4,
-      title: "Chat App",
-      sourceCode: "https://github.com/Jemsukie/chat-app",
-      description: (
-        <>
-          A simple Chat Application I made with{" "}
-          <a
-            className="text-accent hover:text-accent-light underline"
-            href="https://redwoodjs.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Redwood JS
-          </a>
-          . Here you can add and chat your contacts.
         </>
       ),
     },
@@ -131,7 +158,7 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
           Cooperative Business in Lagonoy, Camarines Sur. This Web App has a
           Client and an Admin interface. Made with{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-warning"
             href="https://codeigniter.com/"
             target="_blank"
             rel="noreferrer"
@@ -144,7 +171,7 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
     },
     {
       img: img6,
-      title: "Memorial Park Map and Appointment System",
+      title: "Memorial Park Map and Appoinment System",
       sourceCode: "https://github.com/Jemsukie/memorial-park-php.git",
       description: (
         <>
@@ -152,7 +179,7 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
           Katoninongan Cemetery in San Jose, Camarines Sur. It has coordinates
           for the deceased that can be searched by their relatives. Made with{" "}
           <a
-            className="text-accent hover:text-accent-light underline"
+            className="text-warning"
             href="https://codeigniter.com/"
             target="_blank"
             rel="noreferrer"
@@ -170,12 +197,11 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
       description: (
         <>
           A Web Application made by{" "}
-          <span className="text-primary font-semibold">Remo.co</span>. My task
-          here is to realize the feature that my client wants since their CMS:{" "}
-          <span className="text-primary font-semibold">Webflow</span> has a lot
-          of limitations. The backend and animation here are coded using{" "}
-          <span className="text-primary font-semibold">Vanilla JavaScript</span>
-          .
+          <span className="text-primary">Remo.co</span>. My task here is to
+          realize the feature that my client wants since their CMS:{" "}
+          <span className="text-success">Webflow</span> has a lot of
+          limitations. The backend and animation here are coded using{" "}
+          <span className="text-warning">Vanilla JavaScript</span>.
         </>
       ),
     },
@@ -185,170 +211,233 @@ const Projects = ({ reference, onSeeMore }: ProjectsProps) => {
       sourceCode: "",
       description: (
         <>
-          <span className="text-primary font-semibold">Cart + Craft</span> is a
-          Webflow Agency that offers Web Design and Branding Solutions for their
-          clients. My task here is to realize the feature that my client wants
-          since their CMS:{" "}
-          <span className="text-primary font-semibold">Webflow</span> has a lot
-          of limitations. The backend and animation here are coded using{" "}
-          <span className="text-primary font-semibold">Vanilla JavaScript</span>
-          .
+          <span className="text-accent">Cart + Craft</span> is a Webflow Agency
+          that offers Web Design and Branding Solutions for their clients. My
+          task here is to realize the feature that my client wants since their
+          CMS: <span className="text-success">Webflow</span> has a lot of
+          limitations. The backend and animation here are coded using{" "}
+          <span className="text-warning">Vanilla JavaScript</span>.
         </>
       ),
     },
     {
-      img: img9,
+      img: img8,
       title: "AJA: Gamification of Programming Language",
       sourceCode: "",
       description: (
         <>
-          My{" "}
-          <span className="text-primary font-semibold">Capstone Project</span>{" "}
-          back in my college days. This project is an E-learning game with
-          scoring functionality and challenges that helps student enjoy learning
-          more about{" "}
-          <span className="text-primary font-semibold">
-            Computer Programming
-          </span>
-          .
+          My <span className="text-info">Capstone Project</span> back in my
+          college days. This project is an E-learning game with scoring
+          functionality and challenges that helps student enjoy learning more
+          about <span className="text-accent">Computer Programming</span>.
         </>
       ),
     },
   ];
 
   return (
-    <section ref={reference} className="relative section-spacing bg-white">
-      {/* React Particles Background */}
-      <div className="absolute inset-0 z-0">
-        <ReactParticles
-          particleCount={60}
-          repelStrength={150}
-          attractStrength={300}
-          connectionDistance={150}
-          particleSpeed={1.0}
-          particleSize={4}
-          enableRainbow={false}
-          primaryColor="#0D9488"
-          backgroundColor="transparent"
-          cursorRadius={400}
-        />
-      </div>
+    <section ref={reference} className="flex flex-col justify-center">
       <SectionWrapper
-        containerClass="container-max relative z-10"
-        paddingSectionClass=""
+        containerClass={"container-1280"}
+        paddingSectionClass={"py-[1em] sm:py-[2em] lg:py-[8em]"}
       >
-        <ScrollAnimationWrapper delay={0.2}>
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 flex items-center justify-center gap-3 text-primary">
-              <motion.div
-                className="inline-flex items-center justify-center"
-                style={{ transformOrigin: "center" }}
-                whileHover={{ scale: 1.15, rotate: 360 }}
-                transition={{ type: "spring", stiffness: 300, duration: 0.6 }}
-              >
-                <Folder className="text-accent" size={40} />
-              </motion.div>
-              My Projects
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Showcasing innovative solutions and successful implementations
-            </p>
+        <ScrollAnimationWrapper>
+          <div className="py-6">
+            <div
+              className="max-w-5xl px-6 mx-auto text-center flex items-center md:items-center flex-col"
+              id="project"
+            >
+              <h2 className="text-2xl font-semibold w-fit flex">
+                {" "}
+                <ThreeDCubeSphere /> My Projects
+              </h2>
+            </div>
           </div>
         </ScrollAnimationWrapper>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cards.map((card, idx) => (
-            <ProjectCard
-              key={idx}
-              card={card}
-              index={idx}
-              onSeeMore={onSeeMore}
-            />
-          ))}
-        </div>
+        <ScrollAnimationWrapper>
+          <div className="flex container w-full xl:w-4/5 mx-auto flex-col lg:flex-row max-w-6xl py-4">
+            <Carousel cards={cards} onSeeMore={onSeeMore} />
+          </div>
+        </ScrollAnimationWrapper>
       </SectionWrapper>
     </section>
   );
 };
 
-const ProjectCard = ({
-  card,
-  index,
-  onSeeMore,
-}: {
-  card: TCards;
-  index: number;
-  onSeeMore: (card: TCards) => void;
-}) => {
-  const getTextContent = (node: ReactNode): string => {
-    if (typeof node === "string") return node;
-    if (typeof node === "number") return String(node);
-    if (Array.isArray(node)) return node.map(getTextContent).join(" ");
-    if (node && typeof node === "object" && "props" in node) {
-      return getTextContent((node as any).props?.children || "");
+// eslint-disable-next-line no-unused-vars
+type CarouselProps = { cards: TCards[]; onSeeMore: (_card: TCards) => void };
+
+const Carousel = ({ cards, onSeeMore }: CarouselProps) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const interval = 10000; // 10 seconds
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Function to start the auto-slide timer
+  const startAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
-    return "";
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    }, interval);
   };
 
-  const textContent = getTextContent(card.description);
-  const isLong = textContent.length > 120;
+  // Automatically start the auto-slide timer when the component mounts
+  useEffect(() => {
+    startAutoSlide();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [cards.length, interval]);
+
+  // Scroll to the current slide whenever the currentIndex changes
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const currentItem = itemRefs.current[currentIndex];
+    if (currentItem) {
+      carousel.scrollLeft = currentItem.offsetLeft;
+    }
+  }, [currentIndex]);
+
+  // Move to the previous slide and reset the timer
+  const moveToPrevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + cards.length) % cards.length,
+    );
+    startAutoSlide(); // Reset the auto-slide timer
+  };
+
+  // Move to the next slide and reset the timer
+  const moveToNextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    startAutoSlide(); // Reset the auto-slide timer
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="card overflow-hidden card-hover group"
-    >
-      <div className="relative h-48 md:h-56 overflow-hidden bg-gray-100">
-        <img
-          src={card.img}
-          alt={card.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
-      </div>
+    <div ref={carouselRef} className="carousel rounded-box w-full">
+      {cards.map((c, idx) => (
+        <div
+          ref={(el) => (itemRefs.current[idx] = el)}
+          className="carousel-item w-full"
+          key={idx}
+        >
+          <div className="w-full flex justify-center">
+            <Cards
+              prevFn={moveToPrevSlide}
+              nextFn={moveToNextSlide}
+              details={c}
+              onSeeMore={() => onSeeMore(c)}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-primary mb-3">{card.title}</h3>
+const truncateText = (text: string, maxLength: number) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + "...";
+};
 
-        <div className="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-          {isLong ? (
-            <>
-              <span>{textContent.slice(0, 120)}...</span>
-              <button
-                onClick={() => onSeeMore(card)}
-                className="text-accent hover:text-accent-light underline ml-1 font-medium"
+const Cards = ({
+  details,
+  prevFn,
+  nextFn,
+  onSeeMore,
+}: {
+  details: TCards;
+  prevFn: () => void;
+  nextFn: () => void;
+  onSeeMore: () => void;
+}) => {
+  const { img, title, description, sourceCode } = details;
+
+  // Convert ReactNode description to string for truncation
+  let descString = "";
+  if (typeof description === "string") {
+    descString = description;
+  } else if (Array.isArray(description)) {
+    descString = description
+      .map((d) => (typeof d === "string" ? d : ""))
+      .join(" ");
+  } else if (
+    typeof description === "object" &&
+    description !== null &&
+    "props" in description
+  ) {
+    descString = description.props?.children
+      ? Array.isArray(description.props.children)
+        ? description.props.children
+            .map((c: any) => (typeof c === "string" ? c : ""))
+            .join(" ")
+        : description.props.children
+      : "";
+  }
+  const isLong = descString.length > 120;
+
+  return (
+    <>
+      <div className="card lg:card-side bg-secondary text-slate-200 shadow container h-full">
+        <figure className="w-full lg:w-1/2 ">
+          <img
+            src={img}
+            className="h-fit sm:h-full md:h-full w-full object-cover"
+            alt="Album"
+          />
+        </figure>
+        <div className="card-body lg:w-1/2 w-full">
+          <h2 className="card-title text-2xl mb-2 w-full">{title}</h2>
+          <p className="text-slate-400 text-lg">
+            {isLong ? truncateText(descString, 120) : description}
+            {isLong && (
+              <span
+                className="text-info cursor-pointer ml-2 underline"
+                onClick={onSeeMore}
               >
-                View Details
-              </button>
-            </>
-          ) : (
-            <div>{card.description}</div>
-          )}
-        </div>
+                See more
+              </span>
+            )}
+          </p>
 
-        <div className="flex gap-3">
-          <button
-            onClick={() => onSeeMore(card)}
-            className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-light transition-colors"
-          >
-            View Details
-          </button>
-          {card.sourceCode && (
-            <a
-              href={card.sourceCode}
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 bg-gray-100 text-primary rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
-            >
-              Source Code
-            </a>
-          )}
+          <div className="card-actions justify-between">
+            <div className="flex gap-2">
+              <button onClick={prevFn}>
+                <span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg  hover-enlarge hover:border-2 hover:border-info">
+                  ❮❮
+                  <span className="sr-only">Previous</span>
+                </span>
+              </button>
+
+              <button onClick={nextFn}>
+                <span className="shadow-lg btn bg-neutral text-info btn-outline inline-flex items-center justify-center w-10 h-10 rounded-lg hover-enlarge hover:border-2 hover:border-info">
+                  ❯❯
+                  <span className="sr-only">Next</span>
+                </span>
+              </button>
+            </div>
+
+            {sourceCode !== "" && (
+              <a
+                className="badge badge-primary badge-outline cursor-pointer"
+                target="_blank"
+                href={sourceCode}
+                rel="noreferrer"
+              >
+                Source Code
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </motion.div>
+    </>
   );
 };
 
