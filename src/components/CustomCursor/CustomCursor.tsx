@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Cursor configuration - easily customizable
+/**
+ * Halo text: white + mix-blend-difference inverts per-pixel against the page
+ * (halo-based, including splits over light/dark edges).
+ *
+ * Framer `x` / `y` / `scale` use CSS `transform` on the wrapper. That promotes
+ * the halo into its own composited layer, and in Chromium/WebKit the blended
+ * SVG then often samples the wrong backdrop (looks like white-on-white).
+ * Fix: position this wrapper with `left` / `top` only, avoid transform on any
+ * ancestor of the blended SVG; rotate via SVG `transform` attribute on `<g>`.
+ */
 const cursorConfig = {
-  // Size settings
-  outerCircleDiameter: 175, // Diameter of the outer circle with text
-  innerDotSize: 10, // Size of the inner dot
+  outerCircleDiameter: 175,
+  innerDotSize: 10,
+  innerDotColor: "#0D9488",
 
-  // Colors (will use theme colors by default)
-  // Note: Text color should be white for mix-blend-difference to work properly
-  outerCircleColor: "rgba(13, 148, 136, 0.15)", // accent color with opacity
-  innerDotColor: "#0D9488", // accent color (teal)
-  textColor: "white", // white works best with mix-blend-difference
+  ringStroke: "rgba(13, 148, 136, 0.55)",
+  ringStrokeWidth: 2.25,
+  ringRadiusInset: 2,
 
-  // Animation settings
-  rotationSpeed: 1, // Degrees per frame (higher = faster)
-  springStiffness: 150, // Spring animation stiffness
-  springDamping: 30, // Spring animation damping
-  hoverScale: 0.33, // Scale of circle when hovering (1/3 = 0.33, set to 1 to keep same size)
+  rotationSpeed: 1,
+  springStiffness: 150,
+  springDamping: 30,
+  /** Hover feedback without CSS transform (keeps mix-blend backdrop = page) */
+  hoverDimOpacity: 0.45,
 
-  // Text settings
   text: "Portfolio • Showcase • Jemuel • WebDev •",
   textSize: 19,
   textLetterSpacing: 3,
@@ -35,7 +41,6 @@ const CustomCursor = () => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
 
-      // Check if hovering over interactive element
       const element = document.elementFromPoint(e.clientX, e.clientY);
       if (element) {
         const isHTMLElement = element instanceof HTMLElement;
@@ -52,7 +57,6 @@ const CustomCursor = () => {
       }
     };
 
-    // Rotate text continuously
     const rotateInterval = setInterval(() => {
       setRotation((prev) => (prev + cursorConfig.rotationSpeed) % 360);
     }, 20);
@@ -65,26 +69,29 @@ const CustomCursor = () => {
     };
   }, []);
 
-  // Hide cursor on mobile/touch devices
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  const prefersFinePointer =
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: fine)").matches;
 
-  if (isTouchDevice) {
+  if (!prefersFinePointer) {
     return null;
   }
 
-  const radius = cursorConfig.outerCircleDiameter / 2;
-  const centerOffset = radius - 5; // Offset for text path
+  const d = cursorConfig.outerCircleDiameter;
+  const radius = d / 2;
+  const centerOffset = radius - 5;
+  const ringR = radius - cursorConfig.ringRadiusInset;
+  const left = mousePosition.x - radius;
+  const top = mousePosition.y - radius;
 
   return (
     <>
-      {/* Outer circle with rotating text - follows cursor with delay */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed pointer-events-none z-[9999]"
+        initial={false}
         animate={{
-          x: mousePosition.x - radius,
-          y: mousePosition.y - radius,
-          scale: isHovering ? cursorConfig.hoverScale : 1,
+          left,
+          top,
         }}
         transition={{
           type: "spring",
@@ -93,36 +100,24 @@ const CustomCursor = () => {
           mass: 0.1,
         }}
         style={{
-          width: `${cursorConfig.outerCircleDiameter}px`,
-          height: `${cursorConfig.outerCircleDiameter}px`,
+          width: `${d}px`,
+          height: `${d}px`,
           borderRadius: "50%",
-          backgroundColor: cursorConfig.outerCircleColor,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          backgroundColor: "transparent",
+          border: "1.5px solid rgba(13, 148, 136, 0.4)",
+          boxShadow: "0 0 28px rgba(13, 148, 136, 0.22)",
         }}
       >
-        {/* Rotating text - hidden when hovering */}
-        <motion.svg
-          width={cursorConfig.outerCircleDiameter}
-          height={cursorConfig.outerCircleDiameter}
-          viewBox={`0 0 ${cursorConfig.outerCircleDiameter} ${cursorConfig.outerCircleDiameter}`}
-          style={{
-            position: "absolute",
-            overflow: "visible",
-          }}
-          animate={{
-            rotate: rotation,
-            opacity: isHovering ? 0 : 1,
-            scale: isHovering ? 0 : 1,
-          }}
-          transition={{
-            duration: 0.2,
-          }}
+        <svg
+          className="absolute inset-0 overflow-visible pointer-events-none"
+          width={d}
+          height={d}
+          viewBox={`0 0 ${d} ${d}`}
+          aria-hidden
         >
           <defs>
             <path
-              id="circle-path"
+              id="cursor-circle-path"
               d={`M ${radius}, ${radius} m -${centerOffset}, 0 a ${centerOffset},${centerOffset} 0 1,1 ${
                 centerOffset * 2
               },0 a ${centerOffset},${centerOffset} 0 1,1 -${
@@ -131,20 +126,53 @@ const CustomCursor = () => {
               fill="none"
             />
           </defs>
-          <text
-            fill={cursorConfig.textColor}
-            fontSize={cursorConfig.textSize}
-            fontWeight={cursorConfig.textFontWeight}
-            letterSpacing={cursorConfig.textLetterSpacing}
-          >
-            <textPath href="#circle-path" startOffset="0%">
-              {cursorConfig.text}
-            </textPath>
-          </text>
-        </motion.svg>
+          <circle
+            cx={radius}
+            cy={radius}
+            r={ringR}
+            fill="none"
+            stroke={cursorConfig.ringStroke}
+            strokeWidth={cursorConfig.ringStrokeWidth}
+          />
+        </svg>
+
+        <svg
+          className="absolute inset-0 overflow-visible pointer-events-none mix-blend-difference"
+          width={d}
+          height={d}
+          viewBox={`0 0 ${d} ${d}`}
+          aria-hidden
+          style={{
+            opacity: isHovering ? cursorConfig.hoverDimOpacity : 1,
+            transition: "opacity 0.2s ease-out",
+          }}
+        >
+          <defs>
+            <path
+              id="cursor-circle-path-blend"
+              d={`M ${radius}, ${radius} m -${centerOffset}, 0 a ${centerOffset},${centerOffset} 0 1,1 ${
+                centerOffset * 2
+              },0 a ${centerOffset},${centerOffset} 0 1,1 -${
+                centerOffset * 2
+              },0`}
+              fill="none"
+            />
+          </defs>
+          <g transform={`rotate(${rotation} ${radius} ${radius})`}>
+            <text
+              fill="#ffffff"
+              fontSize={cursorConfig.textSize}
+              fontWeight={cursorConfig.textFontWeight}
+              letterSpacing={cursorConfig.textLetterSpacing}
+            >
+              <textPath href="#cursor-circle-path-blend" startOffset="0%">
+                {cursorConfig.text}
+              </textPath>
+            </text>
+          </g>
+        </svg>
       </motion.div>
 
-      {/* Inner dot - follows cursor more closely */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         animate={{

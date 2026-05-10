@@ -6,7 +6,6 @@ import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
 import CalendlyButton from "../CalendlyButton/CalendlyButton";
 import HexagonGrid from "../HexagonGrid/HexagonGrid";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 type HeroProps = TReferenceProps & {
   onOpenCalendly: () => void;
@@ -28,21 +27,6 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
           backgroundColor="transparent"
         />
       </div>
-      {/* React Particles Background */}
-      {/* <div className="absolute inset-0 z-0">
-        <ReactParticles
-          particleCount={60}
-          repelStrength={150}
-          attractStrength={300}
-          connectionDistance={150}
-          particleSpeed={1.0}
-          particleSize={4}
-          enableRainbow={false}
-          primaryColor="#000000ff"
-          backgroundColor="transparent"
-          cursorRadius={400}
-        />
-      </div> */}
 
       <SectionWrapper
         containerClass="container-max relative z-10"

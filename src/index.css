@@ -8,17 +8,9 @@
   body {
     @apply bg-white text-slate-900;
     font-family: 'Inter', system-ui, sans-serif;
-    cursor: none;
   }
   html {
     scroll-behavior: smooth;
-  }
-  
-  /* Hide default cursor on desktop */
-  @media (hover: hover) and (pointer: fine) {
-    * {
-      cursor: none !important;
-    }
   }
 }
 

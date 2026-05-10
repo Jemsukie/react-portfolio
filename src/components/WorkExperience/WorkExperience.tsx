@@ -5,7 +5,6 @@ import { workExperience } from "../../lib/workExperience";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
-import ReactParticles from "../ReactParticles/ReactParticles";
 
 const WorkExperience = ({ reference }: TReferenceProps) => {
   const [showAll, setShowAll] = useState(false);
@@ -15,7 +14,7 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
 
   // Get the earliest start date and latest end date for each company
   const getCompanyDateRange = (
-    positions: (typeof workExperience)[0]["positions"]
+    positions: (typeof workExperience)[0]["positions"],
   ) => {
     return {
       start: positions[0].startDate,
@@ -127,7 +126,7 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                                         </span>
                                         <span>{responsibility}</span>
                                       </li>
-                                    )
+                                    ),
                                   )}
                                 </ul>
                               </div>

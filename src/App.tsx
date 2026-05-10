@@ -13,7 +13,6 @@ import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import ModalPortal from "./components/ModalPortal";
 import CalendlyModal from "./components/CalendlyModal/CalendlyModal";
-import CustomCursor from "./components/CustomCursor/CustomCursor";
 import InteractiveBackground from "./components/InteractiveBackground/InteractiveBackground";
 import type { TCards } from "./components/Projects/Projects";
 
@@ -55,7 +54,6 @@ function App() {
 
   return (
     <div className="App min-h-screen bg-white">
-      <CustomCursor />
       <InteractiveBackground />
       <main className="relative z-10">
         <Navbar
