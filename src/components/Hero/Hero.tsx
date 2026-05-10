@@ -64,7 +64,7 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
               </h1>
 
               <p className="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">
-                Fullstack Developer & Lead Software Engineer
+                Freelance Software Engineer
               </p>
 
               <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed mx-10 sm:mx-16">

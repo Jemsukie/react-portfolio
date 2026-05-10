@@ -130,7 +130,7 @@ const testimonials = [
   },
 ]
 
-const calendlyUrl = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/your-username'
+const calendlyUrl = 'https://calendly.com/jemuel-lupo/meeting-with-jemuel-software-engineer'
 
 export {
   socialLinks,
