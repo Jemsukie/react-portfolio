@@ -83,12 +83,7 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                         }`}
                       >
                         <div className="card p-6 md:p-8">
-                          <div className="flex flex-wrap items-center gap-2 mb-3">
-                            <span className="text-xs font-semibold text-accent bg-accent/10 px-2 py-1 rounded">
-                              {dateRange.start} - {dateRange.end}
-                            </span>
-                          </div>
-                          <h4 className="text-xl font-bold text-primary mb-2">
+                          <h4 className="text-xl font-bold text-primary mb-4">
                             {exp.company}
                           </h4>
 
@@ -103,6 +98,11 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                                     : ""
                                 }
                               >
+                                <div className="flex flex-wrap items-center gap-2 mb-2">
+                                  <span className="text-xs font-semibold text-accent bg-accent/10 px-2 py-1 rounded">
+                                    {position.startDate} - {position.endDate}
+                                  </span>
+                                </div>
                                 <div className="flex flex-wrap items-center gap-2 mb-2">
                                   <span className="text-sm font-semibold text-primary">
                                     {position.position}
