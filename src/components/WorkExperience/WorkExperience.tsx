@@ -12,16 +12,6 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
     ? workExperience
     : workExperience.slice(0, 3);
 
-  // Get the earliest start date and latest end date for each company
-  const getCompanyDateRange = (
-    positions: (typeof workExperience)[0]["positions"],
-  ) => {
-    return {
-      start: positions[0].startDate,
-      end: positions[positions.length - 1].endDate,
-    };
-  };
-
   return (
     <section
       ref={reference}
@@ -60,7 +50,6 @@ const WorkExperience = ({ reference }: TReferenceProps) => {
                 {displayedExperience.map((exp, idx) => {
                   const isEven = idx % 2 === 0;
                   const isLeft = isEven;
-                  const dateRange = getCompanyDateRange(exp.positions);
 
                   return (
                     <motion.div
