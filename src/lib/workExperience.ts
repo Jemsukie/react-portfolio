@@ -65,7 +65,7 @@ export const workExperience: WorkExperience[] = [
       {
         position: 'Lead Software Engineer',
         location: 'Remote',
-        startDate: 'Apr 2024',
+        startDate: 'July 2023',
         endDate: 'Apr 2025',
         type: 'Full-time',
         responsibilities: [
@@ -75,8 +75,8 @@ export const workExperience: WorkExperience[] = [
       {
         position: 'Webflow Developer',
         location: 'Remote',
-        startDate: 'Jul 2023',
-        endDate: 'Apr 2024',
+        startDate: 'July 2023',
+        endDate: 'Apr 2025',
         type: 'Part-time',
         responsibilities: [
           'Provided on-demand development support for complex API integrations and custom Webflow solutions, resolving critical feature gaps and accelerating delivery timelines for 8 months'
