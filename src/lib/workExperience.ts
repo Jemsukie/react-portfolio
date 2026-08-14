@@ -12,6 +12,22 @@ export type WorkExperience = {
 
 export const workExperience: WorkExperience[] = [
   {
+    company: 'Nimbus+',
+    positions: [
+      {
+        position: 'Founding Fullstack Engineer',
+        location: 'Remote',
+        startDate: 'Dec 2025',
+        endDate: 'Present',
+        type: 'Full-time',
+        responsibilities: [
+          'Built 8 core modules (RFI, drawings, design changes, planner, tasks, timesheets, files, messaging) into one AEC platform, shipping it to production in ~8 months as the primary engineer',
+          'Designed the 100+ table GraphQL/Prisma backend plus Stripe seats, drawing OCR, and external RFI access so consultants can coordinate without extra tools or full-priced seats'
+        ]
+      }
+    ]
+  },
+  {
     company: 'Ethical Hire',
     positions: [
       {
