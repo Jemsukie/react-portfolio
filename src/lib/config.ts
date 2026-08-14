@@ -1,4 +1,4 @@
-import { BrandFacebook, BrandGithub, BrandLinkedin, Mail, Phone, Code, Brain, Network, Bolt, ShieldCheck, Database } from 'tabler-icons-react'
+import { BrandFacebook, BrandGithub, BrandLinkedin, Mail, Phone, MapPin, Code, Brain, Network, Bolt, ShieldCheck, Database } from 'tabler-icons-react'
 
 const socialLinks = [
   {
@@ -25,6 +25,12 @@ const contactInfo = [
     title: 'Phone',
     link: 'tel:+639090511103',
     desc: '(+63) 909 051 1103',
+  },
+  {
+    Icon: MapPin,
+    title: 'Location',
+    link: 'https://maps.app.goo.gl/FqhVHNa6XU1wN3Fw8',
+    desc: 'Goa, Camarines Sur 4422, Philippines',
   },
 ]
 

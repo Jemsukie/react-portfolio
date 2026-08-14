@@ -64,6 +64,9 @@ const ContactCard = () => {
           <a
             key={title}
             href={link}
+            {...(link.startsWith("http")
+              ? { target: "_blank", rel: "noreferrer" }
+              : {})}
             className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
           >
             <motion.div

@@ -60,7 +60,7 @@ const Hero = ({ reference, onOpenCalendly }: HeroProps) => {
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-primary leading-tight">
                 <span className="block">Hi, I&apos;m</span>
-                <span className="block text-accent mt-2">Jemuel Lupo</span>
+                <span className="block text-accent mt-2">Jemuel M. Lupo</span>
               </h1>
 
               <p className="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">

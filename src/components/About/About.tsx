@@ -54,7 +54,7 @@ const About = ({ reference }: TReferenceProps) => {
                 <div className="relative w-full aspect-square lg:aspect-auto lg:h-64 xl:h-80 rounded-2xl overflow-hidden shadow-2xl">
                   <img
                     src={hero}
-                    alt="Jemuel Lupo"
+                    alt="Jemuel M. Lupo"
                     className="w-full h-full object-cover"
                     loading="eager"
                   />
@@ -98,11 +98,18 @@ const About = ({ reference }: TReferenceProps) => {
             <div className="w-full flex flex-col justify-center">
               <div className="space-y-6 text-center lg:text-left">
                 <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                  I&apos;m a Fullstack Developer and Lead Software Engineer from
-                  Sariaya Quezon, Philippines. With over 4 years of professional
-                  experience, I specialize in building scalable web
-                  applications, leading development teams, and delivering
-                  end-to-end product launches.
+                  I&apos;m a Fullstack Developer and Lead Software Engineer from{" "}
+                  <a
+                    href="https://maps.app.goo.gl/FqhVHNa6XU1wN3Fw8"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent-dark hover:decoration-accent"
+                  >
+                    Goa, Camarines Sur, Philippines
+                  </a>
+                  . With over 4 years of professional experience, I specialize
+                  in building scalable web applications, leading development
+                  teams, and delivering end-to-end product launches.
                 </p>
                 <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                   I earned my Bachelor of Science in Information Technology from
