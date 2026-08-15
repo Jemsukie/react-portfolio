@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { User } from "tabler-icons-react";
 import { assets } from "../../lib/asset-helper";
 import { expStats, socialLinks } from "../../lib/config";
+import { yearsOfExperience } from "../../lib/experience";
 import { TReferenceProps } from "../../lib/props-types";
 import SectionWrapper from "../../layout/SectionWrapper";
 import ScrollAnimationWrapper from "../../layout/ScrollAnimationWrapper";
@@ -107,9 +108,10 @@ const About = ({ reference }: TReferenceProps) => {
                   >
                     Goa, Camarines Sur, Philippines
                   </a>
-                  . With over 4 years of professional experience, I specialize
-                  in building scalable web applications, leading development
-                  teams, and delivering end-to-end product launches.
+                  . With over {yearsOfExperience} years of professional
+                  experience, I specialize in building scalable web
+                  applications, leading development teams, and delivering
+                  end-to-end product launches.
                 </p>
                 <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                   I earned my Bachelor of Science in Information Technology from

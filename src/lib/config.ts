@@ -1,4 +1,5 @@
 import { BrandFacebook, BrandGithub, BrandLinkedin, Mail, Phone, MapPin, Code, Brain, Network, Bolt, ShieldCheck, Database } from 'tabler-icons-react'
+import { yearsOfExperience } from './experience'
 
 const socialLinks = [
   {
@@ -37,7 +38,7 @@ const contactInfo = [
 const expStats = [
   {
     title: 'Professional Experience',
-    value: '5 years',
+    value: `${yearsOfExperience} years`,
     desc: 'Fullstack Development'
   },
   {
